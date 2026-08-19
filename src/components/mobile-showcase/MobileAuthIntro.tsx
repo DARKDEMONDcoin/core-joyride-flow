@@ -1,5 +1,4 @@
 /** @doc Mobile /auth intro — Screen 1 showcase design with inline email/password expansion. */
-import { useEffect, useRef, useState } from "react";
 import { m as motion, AnimatePresence } from "framer-motion";
 import { AlertCircle, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { useBrandLogo } from "@/hooks/useBrandLogo";
@@ -7,8 +6,6 @@ import { t as authT, useUserLang } from "@/lib/authI18n";
 
 const AUTH_MOBILE_VIDEO_URL =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260424_064411_9e9d7f84-9277-41f4-ab10-59172d89e6be.mp4";
-const AUTH_ASSET_BASE = "/route-assets/auth";
-
 interface Props {
   onGoogle: () => void;
   onEmail: () => void;
@@ -51,23 +48,6 @@ export default function MobileAuthIntro({
   const lang = useUserLang();
   const isAr = lang === "ar";
   const logo = useBrandLogo();
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setReady(true), 5000);
-    const v = videoRef.current;
-    if (!v) return () => clearTimeout(t);
-    const on = () => setReady(true);
-    v.addEventListener("loadeddata", on);
-    v.addEventListener("canplay", on);
-    return () => {
-      v.removeEventListener("loadeddata", on);
-      v.removeEventListener("canplay", on);
-      clearTimeout(t);
-    };
-  }, []);
-
   const t = isAr
     ? {
         title1: "منصة الذكاء",
@@ -122,22 +102,14 @@ export default function MobileAuthIntro({
       style={{ fontFamily: 'Inter, -apple-system, "SF Pro Text", system-ui, sans-serif', touchAction: "manipulation" }}
     >
       {/* Hero video */}
-      <img loading="lazy" decoding="async"
-        src={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center 48%", zIndex: 0, opacity: ready ? 0 : 1, transition: "opacity 1.2s ease-out" }}
-      />
       <video
-        ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
         preload="auto"
         className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center 48%", zIndex: 0, opacity: ready ? 1 : 0, transition: "opacity 1.2s ease-out" }}
+        style={{ objectPosition: "center 48%", zIndex: 0 }}
         src={AUTH_MOBILE_VIDEO_URL}
       />
 
