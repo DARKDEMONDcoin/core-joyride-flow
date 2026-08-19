@@ -157,7 +157,7 @@ const NotificationsInboxPage = () => {
           aria-label="Back"
           onClick={() => goBackOr(navigate, "/settings")}
         >
-          <ChevronLeft className="w-5 h-5" strokeWidth={2} />
+          <ChevronLeft className="w-4 h-4" strokeWidth={2} />
         </button>
         <h1 className="nti-title">Notifications</h1>
         <div className="nti-icon-btn nti-icon-btn-ghost" />
@@ -226,18 +226,18 @@ const ntiCss = `
 }
 .nti-topbar {
   position: sticky; top: 0; z-index: 5;
-  display: grid; grid-template-columns: 34px 1fr 34px;
+  display: grid; grid-template-columns: 30px 1fr 30px;
   align-items: center;
-  padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 8px;
+  padding: calc(env(safe-area-inset-top, 0px) + 6px) 12px 6px;
   background: var(--mn-bg);
 }
 .nti-title {
   margin: 0; text-align: center;
-  font-size: 16px; font-weight: 600;
+  font-size: 15px; font-weight: 600;
   letter-spacing: -0.01em; color: var(--mn-fg);
 }
 .nti-icon-btn {
-  width: 34px; height: 34px;
+  width: 30px; height: 30px;
   display: inline-grid; place-items: center;
   border-radius: 999px;
   background: transparent; border: 0;
@@ -249,18 +249,18 @@ const ntiCss = `
 
 .nti-tabs {
   display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
-  gap: 3px;
-  margin: 4px 14px 6px;
-  padding: 3px;
+  gap: 2px;
+  margin: 2px 12px 6px;
+  padding: 2px;
   background: var(--mn-seg);
-  border-radius: 12px;
+  border-radius: 10px;
 }
 .nti-tab {
-  padding: 7px 8px;
-  border: 0; border-radius: 9px;
+  padding: 5px 6px;
+  border: 0; border-radius: 8px;
   background: transparent;
   color: var(--mn-muted);
-  font: inherit; font-size: 13px; font-weight: 500;
+  font: inherit; font-size: 12px; font-weight: 500;
   cursor: pointer;
   transition: background 180ms ease, color 180ms ease;
 }
