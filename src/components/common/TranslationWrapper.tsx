@@ -35,11 +35,13 @@ const ROUTE_LANGS = new Set([
   "pl",
 ]);
 
-function applyLanguage(lang: string) {
+function applyLanguage(_lang: string) {
   if (typeof document === "undefined") return;
-  document.documentElement.lang = lang;
-  document.documentElement.dir = RTL_LANGUAGES.has(lang) ? "rtl" : "ltr";
+  // App is English/LTR only.
+  document.documentElement.lang = "en";
+  document.documentElement.dir = "ltr";
 }
+
 
 function ensureDetectedLanguage() {
   if (typeof window === "undefined") return;
