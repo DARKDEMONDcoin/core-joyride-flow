@@ -121,9 +121,11 @@
   [data-skin="claude"] .chat-surface-dark,
   [data-skin="claude"] .chat-surface-dark.bg-black,
   [data-skin="claude"] .chat-surface-dark[data-chat-main="true"],
-  [data-skin="claude"] .chat-surface-dark[data-chat-main="true"][data-chat-empty="true"] {
-    background: #000 !important;
-    background-color: #000 !important;
+  [data-skin="claude"] .chat-surface-dark[data-chat-main="true"][data-chat-empty="true"],
+  [data-skin="claude"] [role="log"].bg-black,
+  [data-skin="claude"] [role="log"] {
+    background: var(--chat-reference-bg, #1f1f1f) !important;
+    background-color: var(--chat-reference-bg, #1f1f1f) !important;
     background-image: none !important;
   }
 
