@@ -48,6 +48,7 @@ const MODELS = [
 
 interface FeatureRow {
   title: string;
+  icon: LucideIcon;
   value: "yes" | "limited" | "no";
   note?: string;
   freeValue: "yes" | "limited" | "no";
