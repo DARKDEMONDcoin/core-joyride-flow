@@ -32,10 +32,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { MobileSidebarButton } from "@/components/shared/MobileSidebarButton";
-import { BrandIcon } from "@/components/chat/media/BrandIcon";
 import { useUserLang } from "@/lib/authI18n";
 import { type PlanTier } from "@/data/pricingData";
-import megsyLogo from "@/assets/megsy-project-logo.png";
 
 interface Props {
   isYearly: boolean;
@@ -44,17 +42,6 @@ interface Props {
   loadingTier?: PlanTier | null;
   onMenuClick?: () => void;
 }
-
-const MODELS = [
-  { name: "Claude Opus 4.8", brand: "claude" },
-  { name: "GPT-5.5", brand: "openai" },
-  { name: "Gemini 3.5", brand: "gemini" },
-  { name: "Qwen 3 Max", brand: "qwen" },
-  { name: "Grok 4", brand: "grok" },
-  { name: "Seedance Pro", brand: "seedance" },
-  { name: "Sora 2", brand: "sora" },
-  { name: "Flux Pro", brand: "flux" },
-];
 
 interface FeatureRow {
   title: string;
