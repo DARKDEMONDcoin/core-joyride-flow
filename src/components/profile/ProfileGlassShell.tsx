@@ -26,29 +26,30 @@ const ProfileGlassShell = ({ title, subtitle, onBack, trailing, children }: Shel
     });
 
   return (
-    <div className="ng-root">
+    <div className="ng-root" dir="ltr">
       <style>{ngCss}</style>
-      <div className="ng-bg" aria-hidden />
-      <div className="ng-bg-glow" aria-hidden />
 
       <div className="ng-screen">
         <div className="ng-topbar ng-a1">
           <button onClick={back} aria-label="Back" className="ng-back">
-            <ArrowLeft className="w-[17px] h-[17px]" strokeWidth={2.2} />
+            <ArrowLeft className="w-[18px] h-[18px]" strokeWidth={2} />
           </button>
+          <span className="ng-topbar-title">{title}</span>
           <div className="ng-topbar-trail">{trailing}</div>
         </div>
 
-        <header className="ng-hero ng-a2">
-          <h1 className="ng-hero-title">{title}</h1>
-          {subtitle && <p className="ng-hero-sub">{subtitle}</p>}
-        </header>
+        {subtitle && (
+          <header className="ng-hero ng-a2">
+            <p className="ng-hero-sub">{subtitle}</p>
+          </header>
+        )}
 
         <div className="ng-content">{children}</div>
         <div className="ng-bottom-spacer" />
       </div>
     </div>
   );
+
 };
 
 /* ---------- Building blocks (API compatible) ---------- */
