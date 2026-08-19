@@ -333,6 +333,26 @@ const pepCss = `
 .pep-icon-btn:active { transform: scale(0.94); }
 
 .pep-main { padding: 8px 16px 24px; }
+.pep-avatar-wrap { display: grid; place-items: center; gap: 10px; padding: 26px 0 22px; }
+.pep-avatar {
+  width: 92px; height: 92px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: var(--mn-avatar); color: #fff;
+  font-size: 38px; font-weight: 500; line-height: 1;
+}
+.pep-avatar-hint { margin: 0; font-size: 14px; color: var(--mn-muted); }
+.pep-row-value { flex: 1; text-align: end; font-size: 15.5px; color: var(--mn-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pep-row-value-mono { font-variant-numeric: tabular-nums; }
+.pep-flat {
+  margin-top: 20px; width: 100%;
+  padding: 17px 18px; border: 0; border-radius: 18px;
+  background: var(--mn-card); color: var(--mn-fg);
+  font: inherit; font-size: 15.5px; font-weight: 500;
+  cursor: pointer; text-align: center;
+  transition: transform 160ms ease;
+}
+.pep-flat:active { transform: scale(0.99); }
+.pep-flat-danger { color: var(--mn-danger); }
 .pep-section-title {
   margin: 22px 4px 10px;
   font-size: 13px; font-weight: 500;
