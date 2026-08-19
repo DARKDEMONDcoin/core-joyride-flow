@@ -140,24 +140,13 @@ export function UpgradePlanButton({ variant = "full", className, hideCredits = f
       {/* Credits chip (full variant only) */}
       {variant === "full" && !hideCredits && credits != null && (
         <span
-          className="relative z-10 ms-0.5 inline-flex items-center rounded-full px-1.5 py-[2.5px] text-[10.5px] font-semibold tabular-nums text-white/85"
-          style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.09)" }}
+          className="relative z-10 ms-0.5 inline-flex items-center px-1 text-[10.5px] font-semibold tabular-nums text-white/70"
           aria-label={isAr ? "الرصيد" : "credits"}
         >
           {formatCredits(credits)} MC
         </span>
       )}
 
-      <style>{`
-        @keyframes upg-shimmer {
-          0%   { transform: translateX(-120%); }
-          50%  { transform: translateX(240%); }
-          100% { transform: translateX(240%); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .upgrade-plan-btn *[style*="upg-shimmer"] { animation: none !important; }
-        }
-      `}</style>
     </button>
   );
 }
