@@ -832,6 +832,7 @@ const AuthPage = () => {
             aria-hidden="true"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${mobileVideoLoaded ? "opacity-0" : "opacity-100"}`}
           />
+          {isMobile && (
           <video
             src={AUTH_MOBILE_VIDEO_URL}
             poster={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
@@ -844,6 +845,7 @@ const AuthPage = () => {
             onCanPlay={() => setMobileVideoLoaded(true)}
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${mobileVideoLoaded ? "opacity-100" : "opacity-0"}`}
           />
+          )}
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-background" />
         </div>
 
@@ -1347,6 +1349,7 @@ const AuthPage = () => {
           <div
             className={`absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent transition-opacity duration-700 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
           />
+          {!isMobile && (
           <video
             src={AUTH_MOBILE_VIDEO_URL}
             poster={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
@@ -1357,6 +1360,7 @@ const AuthPage = () => {
             onLoadedData={() => setVideoLoaded(true)}
             className="absolute inset-0 w-full h-full object-cover"
           />
+          )}
         </aside>
       </div>
     </>

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useIsMobile } from "@/hooks/use-mobile";
 import DesktopSettingsLayout from "@/components/settings/DesktopSettingsLayout";
 import DesktopSettingsHome from "@/components/settings/DesktopSettingsHome";
-import CoffeeProfileMobile from "@/components/settings/CoffeeProfileMobile";
+import ManusSettingsMobile from "@/components/settings/ManusSettingsMobile";
 
 import { supabase } from "@/integrations/supabase/client";
 
@@ -131,7 +131,7 @@ const SettingsPage = () => {
       </DesktopSettingsLayout>
     );
   }
-  return <CoffeeProfileMobile />;
+  return <ManusSettingsMobile />;
   // eslint-disable-next-line no-unreachable
 
 
