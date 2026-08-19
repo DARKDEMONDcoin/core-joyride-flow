@@ -500,6 +500,15 @@ html.settings-page-active,
 html.settings-page-active body,
 html.settings-page-active #root {
   background-color: var(--mn-bg, #1c1c1c) !important;
+  overscroll-behavior-y: none;
+}
+html.settings-page-active body::before {
+  content: "";
+  position: fixed;
+  inset: -50vh 0;
+  background: var(--mn-bg, #1c1c1c);
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* Desktop chat sidebar uses a glass surface — leave the background to the
