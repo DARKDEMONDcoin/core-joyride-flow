@@ -41,6 +41,7 @@ import {
   LanguagePage,
   NotificationsPage,
   NotificationsInboxPage,
+  UsagePage,
   McpSettingsPage,
   AIPersonalizationPage,
   MemoryPage,
@@ -147,6 +148,7 @@ export const AppRoutes = ({ currentUserId }: { currentUserId: string | null }) =
     <Route path="/settings/profile" element={<Navigate to="/settings/profile/edit" replace />} />
     <Route path="/settings/profile/edit" element={<ProtectedRoute><ProfileEditPage /></ProtectedRoute>} />
     <Route path="/settings/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
+    <Route path="/usage" element={<ProtectedRoute><UsagePage /></ProtectedRoute>} />
     <Route path="/notifications" element={<ProtectedRoute><NotificationsInboxPage /></ProtectedRoute>} />
     <Route path="/settings/security" element={<ProtectedRoute><SecuritySettingsPage /></ProtectedRoute>} />
     <Route path="/settings/language" element={<ProtectedRoute><LanguagePage /></ProtectedRoute>} />
