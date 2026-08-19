@@ -2,9 +2,9 @@
    Dark is the default (matches the chat surface); light mirrors the
    manus reference screenshots exactly (#f1f1f1 page, pure white cards). */
 :root {
-  --mn-bg: #1a1a1a;
-  --mn-card: #262626;
-  --mn-card-2: #2e2e2e;
+  --mn-bg: #1c1c1c;
+  --mn-card: #292929;
+  --mn-card-2: #303030;
   --mn-fg: #e8e8e8;
   --mn-fg-strong: #f4f4f4;
   --mn-muted: #8f8f8f;
