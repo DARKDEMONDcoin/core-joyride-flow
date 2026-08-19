@@ -88,46 +88,46 @@ export default function MobilePricingScreen({
   // short label on the left, quantitative value chip on the right.
   const proFeatures: FeatureRow[] = isAr
     ? [
-        { title: "محادثة · النماذج الرائدة",     value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
-        { title: "بحث معمّق",                     value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞",  freeValue: "no" },
-        { title: "مستندات وعروض",                 value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "تعليم · مهارات · MCP",          value: "yes", note: "∞",     freeValue: "yes" },
-        { title: "صور احترافية",                  value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
-        { title: "فيديو سينمائي",                 value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
-        { title: "أولوية وتكاملات",               value: "yes", note: "∞",     freeValue: "limited", freeNote: "قياسي" },
+        { title: "محادثة · النماذج الرائدة",     icon: Sparkles, value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
+        { title: "بحث معمّق",                     icon: SearchCheck, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞",  freeValue: "no" },
+        { title: "مستندات وعروض",                 icon: LayoutPanelTop, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "تعليم · مهارات · MCP",          icon: GraduationCap, value: "yes", note: "∞",     freeValue: "yes" },
+        { title: "صور احترافية",                  icon: ImageIcon, value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
+        { title: "فيديو سينمائي",                 icon: Clapperboard, value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
+        { title: "أولوية وتكاملات",               icon: ListChecks, value: "yes", note: "∞",     freeValue: "limited", freeNote: "قياسي" },
       ]
     : [
-        { title: "Chat · flagship models",         value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
-        { title: "Deep Research",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞", freeValue: "no" },
-        { title: "Docs & Slides",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Study · Skills · MCP",           value: "yes", note: "∞",  freeValue: "yes" },
-        { title: "Pro images",                     value: "yes", note: "240 / mo",  freeValue: "no" },
-        { title: "Cinematic video",                value: "yes", note: "240 / mo",  freeValue: "no" },
-        { title: "Priority & integrations",        value: "yes", note: "∞",  freeValue: "limited", freeNote: "Standard" },
+        { title: "Chat · flagship models",         icon: Sparkles, value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
+        { title: "Deep Research",                  icon: SearchCheck, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞", freeValue: "no" },
+        { title: "Docs & Slides",                  icon: LayoutPanelTop, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Study · Skills · MCP",           icon: GraduationCap, value: "yes", note: "∞",  freeValue: "yes" },
+        { title: "Pro images",                     icon: ImageIcon, value: "yes", note: "240 / mo",  freeValue: "no" },
+        { title: "Cinematic video",                icon: Clapperboard, value: "yes", note: "240 / mo",  freeValue: "no" },
+        { title: "Priority & integrations",        icon: ListChecks, value: "yes", note: "∞",  freeValue: "limited", freeNote: "Standard" },
       ];
 
   const maxFeatures: FeatureRow[] = isAr
     ? [
-        { title: "محادثة · النماذج الرائدة",     value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
-        { title: "بحث معمّق",                     value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞",  freeValue: "no" },
-        { title: "مستندات وعروض",                 value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "تعليم · مهارات · MCP",          value: "yes", note: "∞",     freeValue: "yes" },
-        { title: "صور احترافية",                  value: "yes", note: "∞",  freeValue: "no" },
-        { title: "فيديو سينمائي",                 value: "yes", note: "٥٠٠/شهر",   freeValue: "no" },
-        { title: "أولوية ×٣ وتكاملات",            value: "yes", note: "×٣ أسرع",   freeValue: "limited", freeNote: "قياسي" },
+        { title: "محادثة · النماذج الرائدة",     icon: Sparkles, value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
+        { title: "بحث معمّق",                     icon: SearchCheck, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞",  freeValue: "no" },
+        { title: "مستندات وعروض",                 icon: LayoutPanelTop, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "تعليم · مهارات · MCP",          icon: GraduationCap, value: "yes", note: "∞",     freeValue: "yes" },
+        { title: "صور احترافية",                  icon: ImageIcon, value: "yes", note: "∞",  freeValue: "no" },
+        { title: "فيديو سينمائي",                 icon: Clapperboard, value: "yes", note: "٥٠٠/شهر",   freeValue: "no" },
+        { title: "أولوية ×٣ وتكاملات",            icon: ListChecks, value: "yes", note: "×٣ أسرع",   freeValue: "limited", freeNote: "قياسي" },
       ]
     : [
-        { title: "Chat · flagship models",         value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
-        { title: "Deep Research",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞", freeValue: "no" },
-        { title: "Docs & Slides",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Study · Skills · MCP",           value: "yes", note: "∞",  freeValue: "yes" },
-        { title: "Pro images",                     value: "yes", note: "∞", freeValue: "no" },
-        { title: "Cinematic video",                value: "yes", note: "500 / mo",  freeValue: "no" },
-        { title: "3× priority & integrations",     value: "yes", note: "3× faster", freeValue: "limited", freeNote: "Standard" },
+        { title: "Chat · flagship models",         icon: Sparkles, value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
+        { title: "Deep Research",                  icon: SearchCheck, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞", freeValue: "no" },
+        { title: "Docs & Slides",                  icon: LayoutPanelTop, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Study · Skills · MCP",           icon: GraduationCap, value: "yes", note: "∞",  freeValue: "yes" },
+        { title: "Pro images",                     icon: ImageIcon, value: "yes", note: "∞", freeValue: "no" },
+        { title: "Cinematic video",                icon: Clapperboard, value: "yes", note: "500 / mo",  freeValue: "no" },
+        { title: "3× priority & integrations",     icon: ListChecks, value: "yes", note: "3× faster", freeValue: "limited", freeNote: "Standard" },
       ];
 
   const features = plan === "pro" ? proFeatures : maxFeatures;
