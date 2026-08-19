@@ -2471,6 +2471,24 @@ const ChatPage = () => {
 
   const hasConversation = messages.length > 0;
   const showDesktopEmptyVideo = messages.length === 0 && !loadingMessages;
+  // The desktop landing background is a 7 MB mp4. Mounting it during the first
+  // render makes the browser open that download while it is still painting the
+  // chat shell, which is the single biggest first-paint cost on this route.
+  // Mount it after the browser goes idle, and never on mobile (where it is
+  // display:none anyway but still fetched).
+  const [showLandingVideo, setShowLandingVideo] = useState(false);
+  useEffect(() => {
+    if (isMobileViewport) return;
+    const ric: typeof window.requestIdleCallback | undefined = window.requestIdleCallback;
+    let id = 0;
+    const start = () => setShowLandingVideo(true);
+    if (typeof ric === "function") id = ric(start, { timeout: 2500 }) as unknown as number;
+    else id = window.setTimeout(start, 800);
+    return () => {
+      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(id);
+      else window.clearTimeout(id);
+    };
+  }, [isMobileViewport]);
 
   const { integrationCategories, filteredIntegrations } = useIntegrationsFilter(
     integrationsQuery,
@@ -2732,18 +2750,20 @@ const ChatPage = () => {
         className="theme-fixed flex bg-background overflow-hidden relative"
         style={{ height: "calc(100dvh - var(--promo-banner-h, 0px))" }}
       >
-        {/* Desktop chat landing background video (hidden on mobile). */}
-        <video
-          src="/route-assets/videos/chat-landing-bg.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover hidden md:block"
-          style={{ filter: "grayscale(100%) brightness(0.22) contrast(1.1)" }}
-        />
+        {/* Desktop chat landing background video — mounted only after idle. */}
+        {showLandingVideo && (
+          <video
+            src="/route-assets/videos/chat-landing-bg.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            aria-hidden
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover hidden md:block"
+            style={{ filter: "grayscale(100%) brightness(0.22) contrast(1.1)" }}
+          />
+        )}
         {/* Dark veil keeps the overall background black while the moving video remains visible behind it. */}
         <div
           aria-hidden

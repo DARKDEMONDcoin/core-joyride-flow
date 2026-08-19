@@ -54,13 +54,14 @@ import { tryAutoLoginTelegram, isInsideTelegram, initTelegramWebApp } from "@/li
 initTelegramWebApp();
 import { initSentry, captureAppError } from "@/lib/sentry";
 
-// Boot Sentry as early as possible (no-op when VITE_SENTRY_DSN is not set)
-void initSentry();
-
 // Real-User Monitoring — Core Web Vitals (LCP/INP/CLS/TTFB/FCP) reported
 // after first paint via requestIdleCallback so it never competes with LCP.
 import { runOnIdle } from "@/lib/lazyOnIdle";
+// Sentry + web-vitals are observability, never render-critical: both wait for
+// idle so they can't delay the first paint on slow mobile devices. Errors that
+// happen before Sentry boots are still caught by the window handlers below.
 runOnIdle(() => {
+  void initSentry();
   void import("@/lib/webVitals").then((m) => m.initWebVitals());
 });
 
