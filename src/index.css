@@ -499,7 +499,7 @@ html[data-theme="light"] #root {
 html.settings-page-active,
 html.settings-page-active body,
 html.settings-page-active #root {
-  background-color: transparent !important;
+  background-color: var(--mn-bg, #1c1c1c) !important;
 }
 
 /* Desktop chat sidebar uses a glass surface — leave the background to the
