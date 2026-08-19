@@ -23,6 +23,13 @@ import {
   LogOut,
   ChevronsUpDown,
   Sparkles,
+  ShieldCheck,
+  Store,
+  KeyRound,
+  Gift,
+  Lock,
+  Activity,
+
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useActiveAccount } from "@/hooks/useActiveAccount";
