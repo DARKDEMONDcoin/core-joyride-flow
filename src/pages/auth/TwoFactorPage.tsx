@@ -129,7 +129,7 @@ const TwoFactorPage = () => {
       >
         {step === "loading" && (
           <GlassCard>
-            <div style={{ padding: 24, textAlign: "center", color: "rgba(235,220,205,0.6)", fontSize: 13.5 }}>Loading…</div>
+            <div style={{ padding: 24, textAlign: "center", color: "rgba(232,232,232,0.6)", fontSize: 13.5 }}>Loading…</div>
           </GlassCard>
         )}
 
@@ -144,17 +144,17 @@ const TwoFactorPage = () => {
                       display: "grid", placeItems: "center",
                       flexShrink: 0,
                       background: enabled ? "rgba(52,211,153,0.14)" : "var(--overlay-white-06)",
-                      color: enabled ? "#6ee7b7" : "rgba(235,220,205,0.7)",
+                      color: enabled ? "#6ee7b7" : "rgba(232,232,232,0.7)",
                       boxShadow: `inset 0 0 0 1px ${enabled ? "rgba(52,211,153,0.35)" : "var(--overlay-white-12)"}`,
                     }}
                   >
                     {enabled ? <ShieldCheck className="w-5 h-5" strokeWidth={1.8} /> : <Shield className="w-5 h-5" strokeWidth={1.8} />}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#ede4d8" }}>
+                    <p style={{ fontSize: 15, fontWeight: 600, color: "#e8e8e8" }}>
                       {enabled ? "Enabled" : "Disabled"}
                     </p>
-                    <p style={{ marginTop: 4, fontSize: 13, color: "rgba(235,220,205,0.6)", lineHeight: 1.5 }}>
+                    <p style={{ marginTop: 4, fontSize: 13, color: "rgba(232,232,232,0.6)", lineHeight: 1.5 }}>
                       {enabled
                         ? "You'll be asked for a 6-digit code from your authenticator app at sign in."
                         : "Turn on 2FA to require a code from your authenticator app at sign in."}
@@ -195,7 +195,7 @@ const TwoFactorPage = () => {
                       <img loading="lazy" decoding="async" src={qr} alt="2FA QR" width={200} height={200} />
                     </div>
                   )}
-                  <p style={{ marginTop: 14, fontSize: 12, fontWeight: 500, color: "rgba(235,220,205,0.6)" }}>
+                  <p style={{ marginTop: 14, fontSize: 12, fontWeight: 500, color: "rgba(232,232,232,0.6)" }}>
                     Or enter this key manually
                   </p>
                   <button
@@ -206,7 +206,7 @@ const TwoFactorPage = () => {
                       padding: "8px 12px", borderRadius: 12,
                       fontSize: 12, fontFamily: "ui-monospace, monospace",
                       background: "var(--overlay-white-05)",
-                      color: "#ede4d8", border: 0,
+                      color: "#e8e8e8", border: 0,
                       boxShadow: "inset 0 0 0 1px var(--overlay-white-12)",
                       cursor: "pointer", maxWidth: "100%",
                     }}
@@ -214,7 +214,7 @@ const TwoFactorPage = () => {
                     <span style={{ wordBreak: "break-all", textAlign: "left" }}>{secret}</span>
                     {copied
                       ? <Check className="w-3.5 h-3.5" style={{ color: "#6ee7b7", flexShrink: 0 }} />
-                      : <Copy className="w-3.5 h-3.5" style={{ color: "rgba(235,220,205,0.6)", flexShrink: 0 }} />}
+                      : <Copy className="w-3.5 h-3.5" style={{ color: "rgba(232,232,232,0.6)", flexShrink: 0 }} />}
                   </button>
                 </div>
               </GlassCard>
@@ -234,7 +234,7 @@ const TwoFactorPage = () => {
                     className="pgs-input"
                     style={{ textAlign: "center", fontSize: 22, letterSpacing: "0.4em" }}
                   />
-                  <p style={{ marginTop: 8, fontSize: 12, color: "rgba(235,220,205,0.55)" }}>
+                  <p style={{ marginTop: 8, fontSize: 12, color: "rgba(232,232,232,0.55)" }}>
                     Enter the 6-digit code from your authenticator app.
                   </p>
                 </div>

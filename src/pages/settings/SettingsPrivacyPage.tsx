@@ -214,8 +214,8 @@ export default function SettingsPrivacyPage() {
 const mobileCss = `
 .privacy-root {
   min-height: 100dvh;
-  background: #000;
-  color: #ede4d8;
+  background: #1a1a1a;
+  color: #e8e8e8;
   font-family: "Neue Haas Unica", "Helvetica Now Display", -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -231,7 +231,7 @@ const mobileCss = `
   text-align: center;
   font-size: 17px; font-weight: 600;
   letter-spacing: -0.01em;
-  color: #ede4d8;
+  color: #e8e8e8;
 }
 .privacy-icon-btn {
   width: 44px; height: 44px;
@@ -239,7 +239,7 @@ const mobileCss = `
   border-radius: 22px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.08);
-  color: #ede4d8;
+  color: #e8e8e8;
   cursor: pointer;
   transition: transform 160ms ease;
 }

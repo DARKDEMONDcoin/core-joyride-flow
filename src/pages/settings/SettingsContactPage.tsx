@@ -56,7 +56,7 @@ export default function SettingsContactPage() {
   const canSend = !!(name.trim() && email.trim() && message.trim() && !sending);
 
   const inputCls =
-    "w-full rounded-[16px] border border-[#1a1a1a] bg-[#0d0d0d] px-4 py-3 text-[14.5px] text-[#f5f5f5] outline-none transition-colors placeholder:text-[#6b6b6b] focus:border-[#333]";
+    "w-full rounded-[16px] border border-[#1a1a1a] bg-[#262626] px-4 py-3 text-[14.5px] text-[#f5f5f5] outline-none transition-colors placeholder:text-[#6b6b6b] focus:border-[#333]";
   const labelCls =
     "mb-2 block px-1 text-[11px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0]";
 
@@ -92,7 +92,7 @@ export default function SettingsContactPage() {
 
         {sent ? (
           <div className="rounded-[24px] border border-[#1a1a1a] bg-[#1a1a1a]/40 p-8 text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[#2a2a2a] bg-[#0d0d0d]">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full border border-[#2a2a2a] bg-[#262626]">
               <CheckCircle2 className="h-6 w-6 text-[#f5f5f5]" strokeWidth={1.8} />
             </div>
             <p className="text-[17px] font-semibold text-[#f5f5f5]">{tx("Message sent")}</p>
@@ -125,7 +125,7 @@ export default function SettingsContactPage() {
                     support@megsyai.com
                   </span>
                 </div>
-                <span className="rounded-full border border-[#2a2a2a] bg-[#0d0d0d] px-3 py-1 text-[11px] font-medium text-[#a0a0a0]">
+                <span className="rounded-full border border-[#2a2a2a] bg-[#262626] px-3 py-1 text-[11px] font-medium text-[#a0a0a0]">
                   ~24h
                 </span>
               </a>
