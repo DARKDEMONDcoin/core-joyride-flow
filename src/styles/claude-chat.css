@@ -121,9 +121,11 @@
   [data-skin="claude"] .chat-surface-dark,
   [data-skin="claude"] .chat-surface-dark.bg-black,
   [data-skin="claude"] .chat-surface-dark[data-chat-main="true"],
-  [data-skin="claude"] .chat-surface-dark[data-chat-main="true"][data-chat-empty="true"] {
-    background: #000 !important;
-    background-color: #000 !important;
+  [data-skin="claude"] .chat-surface-dark[data-chat-main="true"][data-chat-empty="true"],
+  [data-skin="claude"] [role="log"].bg-black,
+  [data-skin="claude"] [role="log"] {
+    background: var(--chat-reference-bg, #1f1f1f) !important;
+    background-color: var(--chat-reference-bg, #1f1f1f) !important;
     background-image: none !important;
   }
 
@@ -767,4 +769,27 @@ body:has([data-shell="manus"]) #root,
   backdrop-filter: none !important;
   box-shadow: none !important;
   max-height: none;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * Mobile: keep the exact same surface color before and after the
+ * first message is sent. The landing screen paints
+ * `--chat-reference-bg`, so every post-send layer (shell, log,
+ * message list) is pinned to that same variable instead of the
+ * separate `--chat-claude-bg` / pure-black fallbacks.
+ * ───────────────────────────────────────────────────────────── */
+@media (max-width: 767.98px) {
+  body:has([data-shell="manus"]),
+  body:has([data-shell="manus"]) #root,
+  [data-shell="manus"],
+  [data-shell="manus"] .chat-surface-dark,
+  [data-shell="manus"] [data-chat-main="true"],
+  [data-shell="manus"] [role="log"],
+  [data-shell="manus"] [role="log"].bg-black,
+  [data-shell="manus"] .bg-black,
+  [data-shell="manus"] .bg-background {
+    background: var(--chat-reference-bg, var(--chat-claude-bg, #1a1a1a)) !important;
+    background-color: var(--chat-reference-bg, var(--chat-claude-bg, #1a1a1a)) !important;
+    background-image: none !important;
+  }
 }
