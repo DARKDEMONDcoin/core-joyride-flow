@@ -14,41 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      ad_watch_progress: {
-        Row: {
-          ads_watched: number
-          ads_watched_b: number
-          total_claims: number
-          total_claims_b: number
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          ads_watched?: number
-          ads_watched_b?: number
-          total_claims?: number
-          total_claims_b?: number
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          ads_watched?: number
-          ads_watched_b?: number
-          total_claims?: number
-          total_claims_b?: number
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "ad_watch_progress_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: true
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       admin_error_log: {
         Row: {
           context: Json | null
@@ -4009,63 +3974,6 @@ export type Database = {
           provider_pool?: string
           used_count?: number
           user_id?: string
-        }
-        Relationships: []
-      }
-      game_bets: {
-        Row: {
-          created_at: string
-          game_slug: string
-          id: string
-          meta: Json
-          multiplier: number
-          payout: number
-          settled_at: string | null
-          stake: number
-          status: string
-          telegram_id: number
-        }
-        Insert: {
-          created_at?: string
-          game_slug: string
-          id?: string
-          meta?: Json
-          multiplier?: number
-          payout?: number
-          settled_at?: string | null
-          stake: number
-          status?: string
-          telegram_id: number
-        }
-        Update: {
-          created_at?: string
-          game_slug?: string
-          id?: string
-          meta?: Json
-          multiplier?: number
-          payout?: number
-          settled_at?: string | null
-          stake?: number
-          status?: string
-          telegram_id?: number
-        }
-        Relationships: []
-      }
-      game_crash_rounds: {
-        Row: {
-          crash_multiplier: number
-          created_at: string
-          round_id: number
-        }
-        Insert: {
-          crash_multiplier: number
-          created_at?: string
-          round_id: number
-        }
-        Update: {
-          crash_multiplier?: number
-          created_at?: string
-          round_id?: number
         }
         Relationships: []
       }
@@ -12594,13 +12502,6 @@ export type Database = {
           o_workspace_id: string
         }[]
       }
-      ad_watch_claim:
-        | { Args: { _telegram_id: number }; Returns: Json }
-        | { Args: { _telegram_id: number; _tier?: string }; Returns: Json }
-      ad_watch_get_progress: { Args: { _telegram_id: number }; Returns: Json }
-      ad_watch_increment:
-        | { Args: { _telegram_id: number }; Returns: Json }
-        | { Args: { _telegram_id: number; _tier?: string }; Returns: Json }
       add_credits: {
         Args: { p_amount: number; p_description?: string; p_user_id: string }
         Returns: Json
@@ -12908,10 +12809,6 @@ export type Database = {
         }
         Returns: string
       }
-      create_smart_offer_for_telegram: {
-        Args: { _surface?: string; _telegram_id: number }
-        Returns: Json
-      }
       create_workspace: {
         Args: { p_name: string; p_plan?: string }
         Returns: {
@@ -12943,31 +12840,6 @@ export type Database = {
         Returns: Json
       }
       expire_prize_rewards: { Args: never; Returns: number }
-      game_crash_cashout: {
-        Args: { _at: number; _bet_id: string; _telegram_id: number }
-        Returns: Json
-      }
-      game_crash_history: {
-        Args: { _limit?: number }
-        Returns: {
-          crash_multiplier: number
-          round_id: number
-        }[]
-      }
-      game_crash_players: {
-        Args: { _exclude?: number; _limit?: number; _round: number }
-        Returns: {
-          name: string
-          photo_url: string
-        }[]
-      }
-      game_crash_round_result: { Args: { _round_id: number }; Returns: number }
-      game_crash_start:
-        | { Args: { _stake: number; _telegram_id: number }; Returns: Json }
-        | {
-            Args: { _round_id?: number; _stake: number; _telegram_id: number }
-            Returns: Json
-          }
       game_create_own_profile: {
         Args: {
           _first_name: string
@@ -12999,19 +12871,6 @@ export type Database = {
         Args: { _telegram_id: number }
         Returns: boolean
       }
-      game_place_bet_for_telegram: {
-        Args: { _game_slug: string; _stake: number; _telegram_id: number }
-        Returns: Json
-      }
-      game_play_round: {
-        Args: {
-          _game_slug: string
-          _params?: Json
-          _stake: number
-          _telegram_id: number
-        }
-        Returns: Json
-      }
       game_profile_id: { Args: { _telegram_id: number }; Returns: string }
       game_public_profiles: {
         Args: { _ids: string[] }
@@ -13021,10 +12880,6 @@ export type Database = {
           photo_url: string
           username: string
         }[]
-      }
-      game_settle_bet_for_telegram: {
-        Args: { _bet_id: string; _telegram_id: number; _won: boolean }
-        Returns: Json
       }
       get_battle_inventory_for_telegram: {
         Args: { _telegram_id: number }
