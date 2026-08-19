@@ -1,7 +1,7 @@
 /** @doc Settings page for creating, viewing and revoking API keys. */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Key, ShieldAlert, Trash2 } from "lucide-react";
+import { ShieldAlert, Trash2 } from "lucide-react";
+import { SubShell } from "@/components/settings/SubShell";
 
 /**
  * Bring-Your-Own-Key settings page (BYOK).
@@ -46,12 +46,7 @@ export default function ApiKeysPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6 md:py-10">
-      <div className="mb-6 flex items-center gap-3">
-        <Link to="/settings" className="rounded-full p-2 hover:bg-muted"><ArrowLeft className="h-4 w-4" /></Link>
-        <h1 className="text-2xl font-semibold flex items-center gap-2"><Key className="h-5 w-5" /> Your API keys</h1>
-      </div>
-
+    <SubShell title="API keys" subtitle="Bring your own provider keys. They stay on this device.">
       <div className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 text-sm text-amber-200">
         <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0" />
         <div>
@@ -93,6 +88,6 @@ export default function ApiKeysPage() {
           </div>
         ))}
       </div>
-    </div>
+    </SubShell>
   );
 }

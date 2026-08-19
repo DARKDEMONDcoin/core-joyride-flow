@@ -1,7 +1,7 @@
 /** @doc Settings dashboard showing credit spend and cost breakdown. */
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Coins, Sparkles, Cpu, TrendingUp } from "lucide-react";
+import { Sparkles, Cpu, TrendingUp } from "lucide-react";
+import { SubShell } from "@/components/settings/SubShell";
 import { supabase } from "@/integrations/supabase/client";
 import { estimateCostUsd, formatCostUsd } from "@/lib/modelCosts";
 
@@ -84,18 +84,7 @@ export default function CostDashboardPage() {
     [windows]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground" dir="ltr">
-      <div className="mx-auto max-w-3xl px-4 py-6">
-        <Link to="/chat" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
-          <ArrowLeft className="h-4 w-4" /> Back
-        </Link>
-        <h1 className="text-2xl font-bold flex items-center gap-2 mb-1">
-          <Coins className="h-6 w-6 text-primary" /> Cost & usage dashboard
-        </h1>
-        <p className="text-sm text-muted-foreground mb-6">
-          Estimated cost of your usage over the last 30 days. Approximate, not an official bill.
-        </p>
-
+    <SubShell title="Cost dashboard" subtitle="Estimated cost of your usage over the last 30 days. Approximate, not an official bill.">
         {loading ? (
           <div className="text-sm text-muted-foreground">Loading…</div>
         ) : rows.length === 0 ? (
@@ -150,7 +139,6 @@ export default function CostDashboardPage() {
             </p>
           </>
         )}
-      </div>
-    </div>
+    </SubShell>
   );
 }
