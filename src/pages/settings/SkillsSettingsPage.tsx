@@ -278,8 +278,8 @@ export default function SkillsSettingsPage() {
 
   return (
     <SubShell
-      title="المهارات"
-      subtitle="صمّم خبراء يستدعيهم Megsy تلقائياً داخل الشات."
+      title="Skills"
+      subtitle="Design experts Megsy calls automatically inside chat."
       action={
         <SkillsAddMenu
           onCreateWithMegsy={() => navigate("/settings/skills/new")}

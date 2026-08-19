@@ -1,7 +1,7 @@
 /** @doc Settings page for creating, viewing and revoking API keys. */
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft, Key, ShieldAlert, Trash2 } from "lucide-react";
+import { ShieldAlert, Trash2 } from "lucide-react";
+import { SubShell } from "@/components/settings/SubShell";
 
 /**
  * Bring-Your-Own-Key settings page (BYOK).
@@ -46,17 +46,12 @@ export default function ApiKeysPage() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-6 md:py-10">
-      <div className="mb-6 flex items-center gap-3">
-        <Link to="/settings" className="rounded-full p-2 hover:bg-muted"><ArrowLeft className="h-4 w-4" /></Link>
-        <h1 className="text-2xl font-semibold flex items-center gap-2"><Key className="h-5 w-5" /> مفاتيح API الخاصة بك</h1>
-      </div>
-
+    <SubShell title="API keys" subtitle="Bring your own provider keys. They stay on this device.">
       <div className="mb-6 flex items-start gap-3 rounded-2xl border border-amber-400/30 bg-amber-400/10 p-4 text-sm text-amber-200">
         <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0" />
         <div>
-          <div className="font-medium">تنبيه أمني</div>
-          <div className="mt-1 text-amber-100/90">المفاتيح تُخزَّن محلياً في المتصفح فقط. لا ترسلها لأي جهة، ولا تستخدم هذه الميزة على جهاز مشترك. Megsy لن ترى مفاتيحك.</div>
+          <div className="font-medium">Security notice</div>
+          <div className="mt-1 text-amber-100/90">Keys are stored locally in your browser only. Never share them, and avoid this feature on a shared device. Megsy never sees your keys.</div>
         </div>
       </div>
 
@@ -66,7 +61,7 @@ export default function ApiKeysPage() {
             <div className="mb-2 flex items-center justify-between">
               <span className="font-medium">{p.label}</span>
               {values[p.id] && (
-                <button onClick={() => { writeKey(p.id, ""); setValues((v) => ({ ...v, [p.id]: "" })); }} className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-destructive" aria-label="حذف المفتاح">
+                <button onClick={() => { writeKey(p.id, ""); setValues((v) => ({ ...v, [p.id]: "" })); }} className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-destructive" aria-label="Delete key">
                   <Trash2 className="h-4 w-4" />
                 </button>
               )}
@@ -87,12 +82,12 @@ export default function ApiKeysPage() {
                 onClick={() => setReveal((r) => ({ ...r, [p.id]: !r[p.id] }))}
                 className="rounded-lg border border-border px-3 py-2 text-xs text-muted-foreground hover:bg-muted"
               >
-                {reveal[p.id] ? "إخفاء" : "إظهار"}
+                {reveal[p.id] ? "Hide" : "Show"}
               </button>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </SubShell>
   );
 }

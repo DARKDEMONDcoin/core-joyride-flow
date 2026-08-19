@@ -23,6 +23,13 @@ import {
   LogOut,
   ChevronsUpDown,
   Sparkles,
+  ShieldCheck,
+  Store,
+  KeyRound,
+  Gift,
+  Lock,
+  Activity,
+
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useActiveAccount } from "@/hooks/useActiveAccount";
@@ -116,7 +123,7 @@ const ManusSettingsMobile = () => {
   const mainRows: Row[] = [
     { icon: Clock, label: isAr ? "المهام المجدولة" : "Scheduled tasks", path: "/settings/tasks" },
     { icon: Lightbulb, label: isAr ? "معرفة" : "Knowledge", path: "/settings/memory" },
-    { icon: Mail, label: isAr ? "البريد" : "Mail", path: "/settings/notifications" },
+    { icon: Mail, label: isAr ? "الإشعارات" : "Notifications", path: "/settings/notifications" },
     { icon: Database, label: isAr ? "ضوابط البيانات" : "Data controls", path: "/settings/privacy" },
     { icon: PanelBottom, label: isAr ? "متصفح السحابة" : "Cloud browser", path: "/settings/capabilities" },
     { icon: Puzzle, label: isAr ? "المهارات" : "Skills", path: "/settings/skills" },
@@ -124,8 +131,17 @@ const ManusSettingsMobile = () => {
     { icon: Plug, label: isAr ? "التكاملات" : "Integrations", path: "/chat?integrations=1" },
   ];
 
+  const advancedRows: Row[] = [
+    { icon: Sparkles, label: isAr ? "لوحة التكاليف" : "Cost dashboard", path: "/settings/costs" },
+    { icon: ShieldCheck, label: isAr ? "الموافقات" : "Approvals", path: "/settings/approvals" },
+    { icon: Store, label: isAr ? "المتجر" : "Marketplace", path: "/settings/marketplace" },
+    { icon: KeyRound, label: isAr ? "مفاتيح API" : "API keys", path: "/settings/api-keys" },
+    { icon: Gift, label: isAr ? "الإحالات" : "Referrals", path: "/settings/referrals" },
+  ];
+
   const accountRows: Row[] = [
     { icon: UserRound, label: isAr ? "الحساب" : "Account", path: "/settings/profile/edit" },
+    { icon: Lock, label: isAr ? "الأمان" : "Security", path: "/settings/security" },
     { icon: Globe, label: isAr ? "اللغة" : "Language", trailing: langLabel, path: "/settings/language" },
     {
       icon: Moon,
@@ -138,10 +154,12 @@ const ManusSettingsMobile = () => {
   ];
 
   const linkRows: Row[] = [
-    { icon: Heart, label: isAr ? "قيّم هذا التطبيق" : "Rate this app", external: true, onClick: () => navigate("/settings/support") },
-    { icon: HelpCircle, label: isAr ? "الحصول على مساعدة" : "Get help", external: true, onClick: () => navigate("/settings/support") },
+    { icon: Heart, label: isAr ? "قيّم هذا التطبيق" : "Rate this app", external: true, onClick: () => window.open("https://megsyai.com", "_blank", "noopener") },
+    { icon: HelpCircle, label: isAr ? "الحصول على مساعدة" : "Get help", path: "/settings/support" },
+    { icon: Activity, label: isAr ? "حالة النظام" : "System status", path: "/settings/system-status" },
     { icon: Asterisk, label: isAr ? "الإصدار" : "Version", trailing: APP_VERSION, chevron: "none" },
   ];
+
 
   const renderRow = (row: Row, idx: number) => {
     const Icon = row.icon;
@@ -214,6 +232,8 @@ const ManusSettingsMobile = () => {
           </section>
 
           <section className="ms-card">{mainRows.map(renderRow)}</section>
+          <section className="ms-card">{advancedRows.map(renderRow)}</section>
+
           <section className="ms-card">{accountRows.map(renderRow)}</section>
           <section className="ms-card">{linkRows.map(renderRow)}</section>
 

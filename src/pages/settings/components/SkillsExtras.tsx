@@ -37,7 +37,7 @@ export function SkillsHeroGlassCard({ onTry }: { onTry: () => void }) {
           Doc2Skill
         </p>
         <p className="mt-2 text-[13.5px] text-center max-w-[290px] leading-relaxed text-muted-foreground">
-          أعد مزج الأنماط بسهولة عن طريق تحويل المستندات إلى مهارات.
+          Remix styles easily by turning documents into skills.
         </p>
 
         <button
@@ -48,7 +48,7 @@ export function SkillsHeroGlassCard({ onTry }: { onTry: () => void }) {
             color: "hsl(var(--background))",
           }}
         >
-          جرّب الآن
+          Try now
         </button>
       </div>
     </div>
@@ -82,7 +82,7 @@ export function SkillsAddMenu({
       <Drawer.Root open={open} onOpenChange={setOpen}>
         <Drawer.Trigger asChild>
           <button
-            aria-label="إضافة مهارة"
+            aria-label="Add skill"
             className="inline-flex items-center gap-1.5 h-9 px-4 rounded-full text-[13px] font-semibold transition-colors"
             style={{
               background: "hsl(var(--foreground))",
@@ -90,7 +90,7 @@ export function SkillsAddMenu({
             }}
           >
             <Plus className="w-3.5 h-3.5" strokeWidth={2.4} />
-            إضافة
+            Add
           </button>
         </Drawer.Trigger>
         <Drawer.Portal>
@@ -102,9 +102,9 @@ export function SkillsAddMenu({
             }}
             dir="rtl"
           >
-            <Drawer.Title className="sr-only">إضافة مهارة</Drawer.Title>
+            <Drawer.Title className="sr-only">Add skill</Drawer.Title>
             <Drawer.Description className="sr-only">
-              اختر طريقة إنشاء المهارة
+              Choose how to create the skill
             </Drawer.Description>
             <Drawer.Handle
               preventCycle
@@ -112,7 +112,7 @@ export function SkillsAddMenu({
             />
             <div className="px-4 pt-3 pb-[calc(env(safe-area-inset-bottom,0px)+20px)]">
               <p className="text-[15px] font-semibold mb-3 text-right">
-                إضافة مهارة
+                Add skill
               </p>
 
               <button
@@ -127,10 +127,10 @@ export function SkillsAddMenu({
                 </span>
                 <span className="flex-1 min-w-0 flex flex-col gap-1 text-right">
                   <span className="text-[15px] font-semibold leading-tight">
-                    إنشاء مهارة باستخدام Megsy
+                    Create a skill with Megsy
                   </span>
                   <span className="text-[12.5px] text-muted-foreground leading-snug">
-                    اطلب من Megsy مساعدتك في إنشاء مهارة عبر الشات
+                    Ask Megsy to help you build a skill in chat
                   </span>
                 </span>
                 <ChevronLeft className="w-4 h-4 text-muted-foreground shrink-0" />
@@ -148,10 +148,10 @@ export function SkillsAddMenu({
                 </span>
                 <span className="flex-1 min-w-0 flex flex-col gap-1 text-right">
                   <span className="text-[15px] font-semibold leading-tight">
-                    إنشاء من ملفات
+                    Create from files
                   </span>
                   <span className="text-[12.5px] text-muted-foreground leading-snug">
-                    ارفع ملفاتك وسينشئ الذكاء الاصطناعي مهارة منها
+                    Upload files and AI will build a skill from them
                   </span>
                 </span>
                 <ChevronLeft className="w-4 h-4 text-muted-foreground shrink-0" />

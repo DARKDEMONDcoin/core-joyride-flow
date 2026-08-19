@@ -30,12 +30,12 @@ const SwitchAccountPage = () => {
 
   return (
     <div className="amber-settings">
-      <GlassPage title="Signet" back="/settings">
+      <GlassPage title="Switch account" back="/settings">
         <div className="amb-hero">
           <div className="amb-hero-inner flex items-start gap-4">
             <div className="amb-emblem shrink-0"><UserCircle2 className="w-6 h-6" /></div>
             <div className="min-w-0">
-              <p className="amb-eyebrow text-[13px]">Currently bearing the signet</p>
+              <p className="amb-eyebrow text-[13px]">Currently signed in</p>
               <h2 className="amb-display text-[28px] leading-[1.05] font-semibold mt-1 truncate">
                 {account.name || "Personal"}
               </h2>

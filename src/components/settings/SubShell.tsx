@@ -109,11 +109,11 @@ export function SubSection({ title, description, children }: SubSectionProps) {
     return (
       <section>
         <div className="px-1 mb-2.5">
-          <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-muted-foreground/80">
+          <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[color:var(--mn-muted)]">
             {title}
           </h2>
           {description && (
-            <p className="mt-1 text-[12.5px] text-muted-foreground/70 leading-relaxed">
+            <p className="mt-1 text-[12.5px] text-[color:var(--mn-muted)] leading-relaxed">
               {description}
             </p>
           )}
@@ -150,7 +150,7 @@ export function SubCard({
   return (
     <div
       className={cn(
-        "rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl overflow-hidden",
+        "rounded-[18px] overflow-hidden bg-[var(--mn-card)] text-[color:var(--mn-fg)]",
         !flush && "p-5",
         className
       )}
@@ -165,7 +165,7 @@ export function SubCard({
 // ============================================================================
 export function SubRowList({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/[0.05] backdrop-blur-xl overflow-hidden divide-y divide-white/[0.06]">
+    <div className="rounded-[18px] overflow-hidden bg-[var(--mn-card)] text-[color:var(--mn-fg)] divide-y divide-[color:var(--mn-sep)]">
       {children}
     </div>
   );
@@ -193,7 +193,7 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
       disabled={disabled}
       className={cn(
         "w-full flex items-center gap-3 px-4 py-3.5 text-left transition-colors",
-        isClickable && "hover:bg-white/[0.05] active:bg-white/[0.08]",
+        isClickable && "hover:bg-[color:var(--mn-press)] active:bg-[color:var(--mn-press)]",
         disabled && "opacity-50 cursor-not-allowed"
       )}
     >
@@ -201,7 +201,7 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
         <Icon
           className={cn(
             "w-[18px] h-[18px] shrink-0",
-            danger ? "text-rose-400" : "text-white/75"
+            danger ? "text-[color:var(--mn-danger)]" : "text-[color:var(--mn-fg)]"
           )}
           strokeWidth={1.8}
         />
@@ -210,21 +210,21 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
         <p
           className={cn(
             "text-[14.5px] font-medium truncate",
-            danger ? "text-rose-400" : "text-white"
+            danger ? "text-[color:var(--mn-danger)]" : "text-[color:var(--mn-fg)]"
           )}
         >
           {label}
         </p>
         {hint && (
-          <p className="text-[12.5px] text-white/55 truncate mt-0.5">{hint}</p>
+          <p className="text-[12.5px] text-[color:var(--mn-muted)] truncate mt-0.5">{hint}</p>
         )}
       </div>
       {trailing !== undefined ? (
-        <div className="shrink-0 flex items-center gap-2 text-white/60">
+        <div className="shrink-0 flex items-center gap-2 text-[color:var(--mn-muted)]">
           {trailing}
         </div>
       ) : isClickable ? (
-        <ChevronRight className="w-4 h-4 text-white/45 shrink-0" />
+        <ChevronRight className="w-4 h-4 text-[color:var(--mn-faint)] shrink-0" />
       ) : null}
     </Comp>
   );
@@ -239,16 +239,16 @@ export function SubStatStrip({ items }: { items: { label: string; value: string;
       {items.map((it) => (
         <div
           key={it.label}
-          className="rounded-xl border border-white/10 bg-white/[0.05] backdrop-blur-xl px-4 py-3.5"
+          className="rounded-[14px] bg-[var(--mn-card)] px-4 py-3.5"
         >
-          <p className="text-[10.5px] uppercase tracking-[0.14em] text-white/60 font-medium">
+          <p className="text-[10.5px] uppercase tracking-[0.14em] text-[color:var(--mn-muted)] font-medium">
             {it.label}
           </p>
-          <p className="mt-1.5 text-[18px] font-semibold tabular-nums text-white leading-none">
+          <p className="mt-1.5 text-[18px] font-semibold tabular-nums text-[color:var(--mn-fg-strong)] leading-none">
             {it.value}
           </p>
           {it.sub && (
-            <p className="mt-1 text-[11.5px] text-white/55">{it.sub}</p>
+            <p className="mt-1 text-[11.5px] text-[color:var(--mn-muted)]">{it.sub}</p>
           )}
         </div>
       ))}
@@ -265,9 +265,9 @@ export function DangerCallout({
   action,
 }: { title: string; description?: string; action: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-rose-500/25 bg-rose-500/[0.04] p-5 flex items-start gap-4">
+    <div className="rounded-[18px] bg-[var(--mn-card)] p-5 flex items-start gap-4">
       <div className="flex-1 min-w-0">
-        <p className="text-[14.5px] font-semibold text-rose-300">{title}</p>
+        <p className="text-[14.5px] font-semibold text-[color:var(--mn-danger)]">{title}</p>
         {description && (
           <p className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">
             {description}
