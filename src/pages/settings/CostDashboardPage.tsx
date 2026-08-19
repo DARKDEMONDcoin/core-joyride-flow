@@ -84,34 +84,34 @@ export default function CostDashboardPage() {
     [windows]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground" dir="rtl">
+    <div className="min-h-screen bg-background text-foreground" dir="ltr">
       <div className="mx-auto max-w-3xl px-4 py-6">
         <Link to="/chat" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-4">
-          <ArrowLeft className="h-4 w-4" /> رجوع
+          <ArrowLeft className="h-4 w-4" /> Back
         </Link>
         <h1 className="text-2xl font-bold flex items-center gap-2 mb-1">
-          <Coins className="h-6 w-6 text-primary" /> لوحة التكلفة والاستهلاك
+          <Coins className="h-6 w-6 text-primary" /> Cost & usage dashboard
         </h1>
         <p className="text-sm text-muted-foreground mb-6">
-          تقدير تكلفة استخدامك خلال آخر 30 يوم. تقديري وليس رسمياً للفوترة.
+          Estimated cost of your usage over the last 30 days. Approximate, not an official bill.
         </p>
 
         {loading ? (
-          <div className="text-sm text-muted-foreground">جارٍ التحميل…</div>
+          <div className="text-sm text-muted-foreground">Loading…</div>
         ) : rows.length === 0 ? (
-          <div className="text-sm text-muted-foreground">لا توجد بيانات استخدام بعد.</div>
+          <div className="text-sm text-muted-foreground">No usage data yet.</div>
         ) : (
           <>
             <div className="grid grid-cols-3 gap-3 mb-6">
               {(["today","week","month"] as const).map((k) => {
                 const w = windows[k];
-                const label = k === "today" ? "اليوم" : k === "week" ? "٧ أيام" : "٣٠ يوم";
+                const label = k === "today" ? "Today" : k === "week" ? "7 days" : "30 days";
                 return (
                   <div key={k} className="rounded-xl border border-border bg-card p-4">
                     <div className="text-xs text-muted-foreground mb-1">{label}</div>
                     <div className="text-lg font-semibold">{formatCostUsd(w.totalCost) || "$0"}</div>
                     <div className="mt-1 text-[11px] text-muted-foreground flex items-center gap-1">
-                      <Sparkles className="h-3 w-3" /> {w.totalTokens.toLocaleString()} tok · {w.messages} رد
+                      <Sparkles className="h-3 w-3" /> {w.totalTokens.toLocaleString()} tok · {w.messages} replies
                     </div>
                   </div>
                 );
@@ -121,10 +121,10 @@ export default function CostDashboardPage() {
             <div className="rounded-xl border border-border bg-card">
               <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
                 <TrendingUp className="h-4 w-4 text-primary" />
-                <h2 className="text-sm font-semibold">التكلفة حسب النموذج (٣٠ يوم)</h2>
+                <h2 className="text-sm font-semibold">Cost by model (30 days)</h2>
               </div>
               {models.length === 0 ? (
-                <div className="p-4 text-sm text-muted-foreground">لا يوجد استهلاك مسجّل.</div>
+                <div className="p-4 text-sm text-muted-foreground">No recorded usage.</div>
               ) : (
                 <ul className="divide-y divide-border">
                   {models.map(([model, m]) => (
@@ -135,7 +135,7 @@ export default function CostDashboardPage() {
                           {model}
                         </div>
                         <div className="text-[11px] text-muted-foreground">
-                          {m.tokens.toLocaleString()} tok · {m.count} رد
+                          {m.tokens.toLocaleString()} tok · {m.count} replies
                         </div>
                       </div>
                       <div className="text-sm font-semibold text-primary">{formatCostUsd(m.cost) || "$0"}</div>
@@ -146,7 +146,7 @@ export default function CostDashboardPage() {
             </div>
 
             <p className="mt-4 text-[11px] text-muted-foreground">
-              الأسعار مبنية على متوسط أسعار المزوّدين ولا تشمل خصومات BYOK أو خصوماتك الخاصة.
+              Prices are based on average provider rates and exclude BYOK or account-specific discounts.
             </p>
           </>
         )}

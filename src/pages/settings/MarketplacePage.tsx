@@ -69,7 +69,7 @@ export default function MarketplacePage() {
           <div className="flex items-center gap-2 p-3">
             <Search className="h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="ابحث عن مهارة أو وكيل..."
+              placeholder="Search skills and agents..."
               value={q}
               onChange={(e) => setQ(e.target.value)}
               className="border-0 bg-transparent focus-visible:ring-0"
@@ -80,10 +80,10 @@ export default function MarketplacePage() {
         <GlassCard>
           <div className="divide-y divide-border/50">
             {loading && (
-              <div className="p-6 text-center text-sm text-muted-foreground">جارِ التحميل...</div>
+              <div className="p-6 text-center text-sm text-muted-foreground">Loading…</div>
             )}
             {!loading && filtered.length === 0 && (
-              <div className="p-6 text-center text-sm text-muted-foreground">لا نتائج.</div>
+              <div className="p-6 text-center text-sm text-muted-foreground">No results.</div>
             )}
             {filtered.map((s) => (
               <div key={s.id} className="flex items-start gap-3 p-4">
@@ -103,7 +103,7 @@ export default function MarketplacePage() {
                   onClick={() => install(s)}
                 >
                   <Download className="mr-1 h-3 w-3" />
-                  {installing === s.id ? "..." : "تثبيت"}
+                  {installing === s.id ? "..." : "Install"}
                 </Button>
               </div>
             ))}
