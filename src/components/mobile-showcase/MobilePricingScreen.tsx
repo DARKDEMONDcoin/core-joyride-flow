@@ -20,7 +20,17 @@ function useIsLightTheme() {
   }, []);
   return light;
 }
-import { Check, Minus } from "lucide-react";
+import {
+  Sparkles,
+  SearchCheck,
+  Code2,
+  LayoutPanelTop,
+  GraduationCap,
+  Image as ImageIcon,
+  Clapperboard,
+  ListChecks,
+  type LucideIcon,
+} from "lucide-react";
 import { MobileSidebarButton } from "@/components/shared/MobileSidebarButton";
 import { BrandIcon } from "@/components/chat/media/BrandIcon";
 import { useUserLang } from "@/lib/authI18n";
