@@ -218,15 +218,15 @@ export default function MobilePricingScreen({
         divider: "rgba(255,255,255,0.07)",
         rowDivider: "rgba(255,255,255,0.07)",
         toggleBg: "rgba(255,255,255,0.08)",
-        toggleActiveBg: "#2DDBA0",
-        toggleActiveText: "#05100b",
+        toggleActiveBg: "#f5f5f5",
+        toggleActiveText: "#0a0a0a",
         toggleIdleText: "#f5f5f5",
-        cardBg: "rgba(255,255,255,0.04)",
-        selectedBg: "rgba(255,255,255,0.07)",
-        selectedBorder: "rgba(45,219,160,0.65)",
+        cardBg: "rgba(255,255,255,0.05)",
+        selectedBg: "rgba(255,255,255,0.06)",
+        selectedBorder: "rgba(255,255,255,0.92)",
         marqueeEdge: "#000000",
-        ctaBg: "#2DDBA0",
-        ctaText: "#05100b",
+        ctaBg: "#f5f5f5",
+        ctaText: "#0a0a0a",
         logoFilter: "brightness(0) invert(1) saturate(100%)",
         heroItalic: "#d4d4d4",
       };
@@ -254,7 +254,7 @@ export default function MobilePricingScreen({
       </header>
 
       {/* Hero copy with Megsy logo */}
-      <div className="px-6 pt-8 text-center">
+      <div className="px-6 pt-5 text-center">
         <h1
           className="mx-auto font-normal leading-[1.02]"
           style={{
@@ -283,7 +283,7 @@ export default function MobilePricingScreen({
       </div>
 
       {/* Models marquee */}
-      <div className="relative mt-6 overflow-hidden">
+      <div className="relative mt-5 overflow-hidden">
         <div
           className="pointer-events-none absolute inset-y-0 start-0 z-10 w-10"
           style={{ background: `linear-gradient(to right, ${c.marqueeEdge}, transparent)` }}
@@ -312,7 +312,7 @@ export default function MobilePricingScreen({
       </div>
 
       {/* Max / Pro toggle */}
-      <div className="mt-6 flex justify-center">
+      <div className="mt-5 flex justify-center">
         <div
           className="relative flex items-center rounded-full p-1"
           style={{ background: c.toggleBg }}
@@ -343,7 +343,7 @@ export default function MobilePricingScreen({
       </div>
 
       {/* Benefits card — clean neutral list, icon + label (reference design) */}
-      <div className="mx-4 mt-6 flex-1 min-h-0">
+      <div className="mx-4 mt-5 flex-1 min-h-0 overflow-hidden">
         <div
           className="h-full rounded-[22px] px-4 py-3"
           style={{ background: c.cardBg, border: `1px solid ${c.border}` }}
@@ -382,7 +382,7 @@ export default function MobilePricingScreen({
       </div>
 
       {/* Billing options — stacked rows with radio (reference design) */}
-      <div className="px-4 pt-5">
+      <div className="px-4 pt-4">
         {([
           { yearly: false, label: t.monthly, block: currentPrices.monthly, unit: t.month },
           { yearly: true, label: t.yearly, block: currentPrices.yearly, unit: t.year },
