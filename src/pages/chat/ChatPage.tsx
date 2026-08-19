@@ -2750,18 +2750,20 @@ const ChatPage = () => {
         className="theme-fixed flex bg-background overflow-hidden relative"
         style={{ height: "calc(100dvh - var(--promo-banner-h, 0px))" }}
       >
-        {/* Desktop chat landing background video (hidden on mobile). */}
-        <video
-          src="/route-assets/videos/chat-landing-bg.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          aria-hidden
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover hidden md:block"
-          style={{ filter: "grayscale(100%) brightness(0.22) contrast(1.1)" }}
-        />
+        {/* Desktop chat landing background video — mounted only after idle. */}
+        {showLandingVideo && (
+          <video
+            src="/route-assets/videos/chat-landing-bg.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="none"
+            aria-hidden
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover hidden md:block"
+            style={{ filter: "grayscale(100%) brightness(0.22) contrast(1.1)" }}
+          />
+        )}
         {/* Dark veil keeps the overall background black while the moving video remains visible behind it. */}
         <div
           aria-hidden
