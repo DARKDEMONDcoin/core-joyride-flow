@@ -44,7 +44,7 @@ import {
   UsagePage,
   McpSettingsPage,
   AIPersonalizationPage,
-  MemoryPage,
+  KnowledgePage,
   ApiKeysPage,
   CostDashboardPage,
   ApprovalsPage,
@@ -153,7 +153,8 @@ export const AppRoutes = ({ currentUserId }: { currentUserId: string | null }) =
     <Route path="/settings/security" element={<ProtectedRoute><SecuritySettingsPage /></ProtectedRoute>} />
     <Route path="/settings/language" element={<ProtectedRoute><LanguagePage /></ProtectedRoute>} />
     <Route path="/settings/mcp" element={<ProtectedRoute><McpSettingsPage /></ProtectedRoute>} />
-    <Route path="/settings/memory" element={<ProtectedRoute><MemoryPage /></ProtectedRoute>} />
+    <Route path="/settings/knowledge" element={<ProtectedRoute><KnowledgePage /></ProtectedRoute>} />
+    <Route path="/settings/memory" element={<ProtectedRoute><KnowledgePage /></ProtectedRoute>} />
     <Route path="/settings/api-keys" element={<ProtectedRoute><ApiKeysPage /></ProtectedRoute>} />
     <Route path="/settings/costs" element={<ProtectedRoute><CostDashboardPage /></ProtectedRoute>} />
     <Route path="/settings/approvals" element={<ProtectedRoute><ApprovalsPage /></ProtectedRoute>} />

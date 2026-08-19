@@ -12398,6 +12398,39 @@ export type Database = {
         }
         Relationships: []
       }
+      user_knowledge: {
+        Row: {
+          content: string
+          created_at: string
+          enabled: boolean
+          id: string
+          name: string
+          updated_at: string
+          use_when: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          name?: string
+          updated_at?: string
+          use_when: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          name?: string
+          updated_at?: string
+          use_when?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_knowledge_graph: {
         Row: {
           confidence: number
