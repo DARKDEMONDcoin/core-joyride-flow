@@ -777,37 +777,38 @@ button[data-slides-preview-button] svg,
     --font-arabic-ui-stack: "Readex Pro", "Cairo", "Tajawal", "Noto Naskh Arabic", system-ui, sans-serif;
   }
 
-  /* Onyx & Mint — pure black with a fresh mint-green accent */
+  /* Onyx & Bone — pure black with a neutral bone-white accent (unified brand) */
   [data-theme="dark"] {
     --background: 0 0% 3%;              /* #080808 */
-    --foreground: 160 8% 95%;           /* cool off-white */
+    --foreground: 0 0% 96%;             /* off-white */
     --card: 0 0% 7%;                    /* #121212 */
-    --card-foreground: 160 8% 95%;
+    --card-foreground: 0 0% 96%;
     --popover: 0 0% 8%;                 /* #141414 */
-    --popover-foreground: 160 8% 95%;
-    --primary: 162 72% 52%;             /* #2ddba0 mint */
-    --primary-foreground: 0 0% 5%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 98%;                /* bone white */
+    --primary-foreground: 0 0% 6%;
     --secondary: 0 0% 10%;              /* #1a1a1a */
-    --secondary-foreground: 160 8% 92%;
+    --secondary-foreground: 0 0% 94%;
     --muted: 0 0% 10%;
-    --muted-foreground: 160 5% 63%;     /* readable cool grey */
-    --accent: 162 62% 70%;              /* soft mint */
-    --accent-foreground: 0 0% 5%;
+    --muted-foreground: 0 0% 64%;       /* readable grey */
+    --accent: 0 0% 88%;                 /* soft bone */
+    --accent-foreground: 0 0% 6%;
     --destructive: 0 65% 52%;
     --destructive-foreground: 0 0% 98%;
-    --border: 162 10% 17%;              /* subtle cool border */
+    --border: 0 0% 17%;                 /* subtle neutral border */
     --input: 0 0% 12%;
-    --ring: 162 72% 52%;                /* mint focus ring */
+    --ring: 0 0% 80%;                   /* neutral focus ring */
     --glass: 0 0% 6% / 0.78;
-    --glass-border: 162 14% 22%;
+    --glass-border: 0 0% 22%;
     --glass-blur: 24px;
-    --silver: 162 20% 72%;
-    --silver-bright: 162 40% 82%;
-    --silver-dark: 162 12% 46%;
-    --success: 152 60% 48%;
-    --warning: 43 85% 60%;
-    --value-yellow: 162 72% 52%;
+    --silver: 0 0% 72%;
+    --silver-bright: 0 0% 88%;
+    --silver-dark: 0 0% 46%;
+    --success: 152 40% 55%;
+    --warning: 43 60% 66%;
+    --value-yellow: 0 0% 96%;
     --value-ink: 0 0% 0%;
+
     --sidebar-background: 0 0% 3%;
     --sidebar-foreground: 160 6% 88%;
     --sidebar-primary: 162 72% 52%;
