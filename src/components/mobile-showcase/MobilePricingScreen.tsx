@@ -248,11 +248,11 @@ export default function MobilePricingScreen({
           />
         </div>
         <h1
-          className="px-12 pt-6 text-center font-normal leading-tight"
+          className="px-12 pt-4 text-center font-normal leading-tight"
           style={{
             color: c.text,
             fontFamily: '"Instrument Serif", "Fraunces", Georgia, serif',
-            fontSize: "clamp(26px, 8vw, 34px)",
+            fontSize: "clamp(21px, 6.2vw, 26px)",
             letterSpacing: "-0.01em",
           }}
         >
@@ -266,7 +266,7 @@ export default function MobilePricingScreen({
                 key={p}
                 type="button"
                 onClick={() => setPlan(p)}
-                className="h-7 min-w-[68px] rounded-full px-4 text-[12.5px] font-medium transition-colors"
+                className="h-7 min-w-[62px] rounded-full px-3.5 text-[12px] font-medium transition-colors"
                 style={{
                   background: plan === p ? c.toggleActiveBg : "transparent",
                   color: plan === p ? c.toggleActiveText : c.toggleIdleText,
@@ -280,18 +280,18 @@ export default function MobilePricingScreen({
       </div>
 
       {/* Features card */}
-      <div className="mt-5 px-4">
+      <div className="mt-4 px-4">
         <div
-          className="rounded-[22px] px-6 py-6"
+          className="rounded-[20px] px-5 py-4"
           style={{ background: isLight ? "rgba(0,0,0,0.04)" : "#262626" }}
         >
-          <ul className="flex flex-col gap-[22px]">
+          <ul className="flex flex-col gap-[14px]">
             {visibleFeatures.map((f, i) => {
               const Icon = f.icon;
               return (
                 <li key={i} className="flex items-center gap-4">
-                  <Icon className="h-[22px] w-[22px] shrink-0" style={{ color: c.text }} strokeWidth={1.5} />
-                  <span className="min-w-0 flex-1 truncate text-[15.5px]" style={{ color: c.text }}>
+                  <Icon className="h-[19px] w-[19px] shrink-0" style={{ color: c.text }} strokeWidth={1.5} />
+                  <span className="min-w-0 flex-1 truncate text-[14px]" style={{ color: c.text }}>
                     {f.title}
                   </span>
                 </li>
@@ -315,17 +315,17 @@ export default function MobilePricingScreen({
               key={opt.label}
               type="button"
               onClick={() => onToggleYearly(opt.yearly)}
-              className="mb-3 flex w-full items-center gap-4 rounded-[18px] px-5 py-4 text-start transition-all duration-200"
+              className="mb-2.5 flex w-full items-center gap-3.5 rounded-[16px] px-4 py-3 text-start transition-all duration-200"
               style={{
                 background: isLight ? "rgba(0,0,0,0.04)" : "#1c1c1c",
                 border: `2px solid ${selected ? c.selectedBorder : "transparent"}`,
               }}
             >
               <span
-                className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full"
+                className="flex h-[21px] w-[21px] shrink-0 items-center justify-center rounded-full"
                 style={{ border: `2px solid ${selected ? c.text : c.textFaint}` }}
               >
-                {selected && <span className="h-[11px] w-[11px] rounded-full" style={{ background: c.text }} />}
+                {selected && <span className="h-[9px] w-[9px] rounded-full" style={{ background: c.text }} />}
               </span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center gap-2">
@@ -334,7 +334,7 @@ export default function MobilePricingScreen({
                   </span>
                   {!opt.yearly && (
                     <span
-                      className="rounded-lg px-2 py-[2px] text-[11.5px] font-medium"
+                      className="rounded-md px-2 py-[1.5px] text-[11px] font-medium"
                       style={{ background: "#2c4a72", color: "#dbe8f8" }}
                     >
                       {isAr ? "خصم 50% على الشهر الأول" : "50% off first month"}
@@ -342,7 +342,7 @@ export default function MobilePricingScreen({
                   )}
                 </span>
                 <span className="mt-[3px] flex items-baseline gap-2 tabular-nums" dir="ltr">
-                  <span className="text-[19px] font-semibold" style={{ color: c.text }}>
+                  <span className="text-[17px] font-semibold" style={{ color: c.text }}>
                     ${opt.block.price}
                   </span>
                   <span className="text-[13px] line-through" style={{ color: c.textFaint }}>
@@ -363,7 +363,7 @@ export default function MobilePricingScreen({
         className="shrink-0 px-4 pt-1"
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
       >
-        <p className="mb-3 text-center text-[12px] leading-snug" style={{ color: c.textFaint }}>
+        <p className="mb-2.5 text-center text-[11.5px] leading-snug" style={{ color: c.textFaint }}>
           {isAr
             ? `‏$${currentPrices.monthly.price} للشهر الأول، ثم $${currentPrices.monthly.strike}/شهر. يمكن الإلغاء في أي وقت.`
             : `$${currentPrices.monthly.price} for the first month, then $${currentPrices.monthly.strike}/mo. Cancel anytime.`}
@@ -372,7 +372,7 @@ export default function MobilePricingScreen({
           type="button"
           onClick={() => onSubscribe(activeTier)}
           disabled={isLoading}
-          className="flex h-[54px] w-full items-center justify-center rounded-[14px] text-[16px] font-medium transition active:scale-[0.99] disabled:opacity-60"
+          className="flex h-[48px] w-full items-center justify-center rounded-[14px] text-[15px] font-medium transition active:scale-[0.99] disabled:opacity-60"
           style={{ background: c.ctaBg, color: c.ctaText }}
         >
           {isLoading ? (
@@ -381,7 +381,7 @@ export default function MobilePricingScreen({
             <span style={{ color: c.ctaText }}>{isAr ? "قم بالترقية الآن" : "Upgrade now"}</span>
           )}
         </button>
-        <div className="mt-3 flex items-center justify-center gap-6 text-[12.5px]" style={{ color: c.textFaint }}>
+        <div className="mt-2.5 flex items-center justify-center gap-6 text-[12px]" style={{ color: c.textFaint }}>
           <a href="/terms">{isAr ? "الشروط" : "Terms"}</a>
           <a href="/privacy">{isAr ? "الخصوصية" : "Privacy"}</a>
           <button type="button" onClick={() => onSubscribe(activeTier)}>
