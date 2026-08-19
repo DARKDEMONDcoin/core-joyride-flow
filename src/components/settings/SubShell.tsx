@@ -45,12 +45,12 @@ export function SubShell({ title, subtitle, backTo = "/settings", action, childr
             }}
           >
             <header
-              className="flex items-start justify-between gap-6 px-8 pt-8 pb-6"
+              className="flex items-start justify-between gap-6 px-6 pt-6 pb-5"
               style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}
             >
               <div className="min-w-0">
                 <h1
-                  className="text-[28px] leading-[1.1] font-semibold tracking-tight"
+                  className="text-[24px] leading-[1.1] font-semibold tracking-tight"
                   style={{
                     color: "#faf7ee",
                     letterSpacing: "-0.025em",
@@ -64,7 +64,7 @@ export function SubShell({ title, subtitle, backTo = "/settings", action, childr
                 </h1>
                 {subtitle && (
                   <p
-                    className="mt-2 text-[13.5px] max-w-xl leading-relaxed"
+                    className="mt-2 text-[12.5px] max-w-xl leading-relaxed"
                     style={{ color: "rgba(245,242,234,0.55)" }}
                   >
                     {subtitle}
