@@ -22,8 +22,6 @@ import { useUserLang } from "@/lib/authI18n";
 import { cn } from "@/lib/utils";
 
 const EMERALD = "#50C878";
-const EMERALD_GLOW = "rgba(80, 200, 120, 0.55)";
-const EMERALD_GLOW_SOFT = "rgba(80, 200, 120, 0.22)";
 
 type Tier = "free" | "pro" | "max";
 
