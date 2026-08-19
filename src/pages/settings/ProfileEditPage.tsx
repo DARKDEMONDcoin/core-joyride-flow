@@ -14,6 +14,7 @@ const ProfileEditPage = () => {
   const isMobile = useIsMobile();
 
   const [userId, setUserId] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
 
   const [fullName, setFullName] = useState("");
@@ -34,6 +35,7 @@ const ProfileEditPage = () => {
         return;
       }
       setUserId(user.id);
+      setEmail(user.email ?? "");
 
       const [profileRes, persRes] = await Promise.all([
         supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
@@ -115,6 +117,11 @@ const ProfileEditPage = () => {
   }, [fullName, nickname, instructions, loading, userId]);
 
   const goBack = useSmartBack("/settings");
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/auth");
+  };
 
   const openDelete = () => setConfirmOpen(true);
   const confirmDelete = () => {
