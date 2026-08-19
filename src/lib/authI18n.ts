@@ -974,14 +974,13 @@ export function getUserLang(): AuthLang {
   return "en";
 }
 
-function applyHtmlLang(lang: AuthLang) {
+function applyHtmlLang(_lang: AuthLang) {
   if (typeof document === "undefined") return;
-  document.documentElement.setAttribute("lang", lang);
-  document.documentElement.setAttribute(
-    "dir",
-    RTL_LANGS.includes(lang) ? "rtl" : "ltr",
-  );
+  // English-only app: always LTR.
+  document.documentElement.setAttribute("lang", "en");
+  document.documentElement.setAttribute("dir", "ltr");
 }
+
 
 function persistLangLocally(lang: AuthLang) {
   try {
