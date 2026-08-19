@@ -55,8 +55,8 @@ const useAppChrome = () => {
     };
     applyDarkTheme();
 
-    document.documentElement.setAttribute("dir", "rtl");
-    document.documentElement.setAttribute("lang", "ar");
+    document.documentElement.setAttribute("dir", "ltr");
+    document.documentElement.setAttribute("lang", "en");
 
     const savedAccent = localStorage.getItem("accent");
     if (savedAccent) document.documentElement.style.setProperty("--primary", savedAccent);

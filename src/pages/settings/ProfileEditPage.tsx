@@ -310,8 +310,8 @@ const ProfileEditPage = () => {
 const pepCss = `
 .pep-root {
   min-height: 100dvh;
-  background: #000;
-  color: #ede4d8;
+  background: #1a1a1a;
+  color: #e8e8e8;
   font-family: "Neue Haas Unica", "Helvetica Now Display", -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -320,22 +320,22 @@ const pepCss = `
   display: grid; grid-template-columns: 44px 1fr 44px;
   align-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 12px;
-  background: linear-gradient(to bottom, #000 82%, transparent);
+  background: #1a1a1a;
 }
 .pep-title {
   margin: 0;
   text-align: center;
   font-size: 17px; font-weight: 600;
   letter-spacing: -0.01em;
-  color: #ede4d8;
+  color: #e8e8e8;
 }
 .pep-icon-btn {
-  width: 44px; height: 44px;
+  width: 40px; height: 40px;
   display: inline-grid; place-items: center;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #ede4d8;
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
+  color: #e8e8e8;
   cursor: pointer;
   transition: transform 160ms ease;
 }
@@ -345,13 +345,13 @@ const pepCss = `
 .pep-section-title {
   margin: 22px 4px 10px;
   font-size: 13px; font-weight: 500;
-  color: rgba(235,220,205,0.55);
+  color: rgba(232,232,232,0.55);
   letter-spacing: -0.005em;
 }
 
 .pep-card {
-  background: #0d0d0d;
-  border: 1px solid rgba(255,255,255,0.07);
+  background: #262626;
+  border: 0;
   border-radius: 18px;
   overflow: hidden;
 }
@@ -365,32 +365,32 @@ const pepCss = `
 }
 .pep-row-label {
   font-size: 15.5px; font-weight: 400;
-  color: rgba(235,220,205,0.55);
+  color: rgba(232,232,232,0.55);
   flex-shrink: 0;
 }
 .pep-root .pep-row-input {
   flex: 1;
-  background-color: #0d0d0d !important;
+  background-color: #262626 !important;
   background-image: none !important;
   border: 0 !important; outline: none;
-  color: #ede4d8 !important;
+  color: #e8e8e8 !important;
   font: inherit;
   font-size: 15.5px; font-weight: 500;
-  text-align: right;
+  text-align: end;
   min-width: 0;
   -webkit-appearance: none;
   appearance: none;
   color-scheme: dark;
   box-shadow: none !important;
-  caret-color: #ede4d8;
+  caret-color: #e8e8e8;
 }
-.pep-root .pep-row-input::placeholder { color: rgba(235,220,205,0.28) !important; }
+.pep-root .pep-row-input::placeholder { color: rgba(232,232,232,0.28) !important; }
 .pep-root .pep-row-input:-webkit-autofill,
 .pep-root .pep-row-input:-webkit-autofill:hover,
 .pep-root .pep-row-input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #0d0d0d inset;
-  -webkit-text-fill-color: #ede4d8;
-  caret-color: #ede4d8;
+  -webkit-box-shadow: 0 0 0 1000px #262626 inset;
+  -webkit-text-fill-color: #e8e8e8;
+  caret-color: #e8e8e8;
 }
 .pep-divider {
   height: 1px;
@@ -400,7 +400,7 @@ const pepCss = `
 .pep-hint {
   margin: 10px 6px 0;
   font-size: 13px;
-  color: rgba(235,220,205,0.5);
+  color: rgba(232,232,232,0.5);
   line-height: 1.45;
 }
 
@@ -410,11 +410,11 @@ const pepCss = `
 .pep-root .pep-textarea {
   width: 100%;
   min-height: 92px;
-  background-color: #0d0d0d !important;
+  background-color: #262626 !important;
   background-image: none !important;
   border: 0; outline: none;
   padding: 14px 16px;
-  color: #ede4d8;
+  color: #e8e8e8;
   font: inherit;
   font-size: 15.5px; font-weight: 400;
   resize: none;
@@ -423,13 +423,13 @@ const pepCss = `
   color-scheme: dark;
   box-shadow: none;
 }
-.pep-root .pep-textarea::placeholder { color: rgba(235,220,205,0.35); }
+.pep-root .pep-textarea::placeholder { color: rgba(232,232,232,0.35); }
 .pep-root .pep-textarea:-webkit-autofill,
 .pep-root .pep-textarea:-webkit-autofill:hover,
 .pep-root .pep-textarea:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #0d0d0d inset;
-  -webkit-text-fill-color: #ede4d8;
-  caret-color: #ede4d8;
+  -webkit-box-shadow: 0 0 0 1000px #262626 inset;
+  -webkit-text-fill-color: #e8e8e8;
+  caret-color: #e8e8e8;
 }
 
 .pep-danger {
@@ -461,9 +461,8 @@ const pepCss = `
 }
 .pep-modal {
   width: 100%; max-width: 340px;
-  background: rgba(20,20,20,0.55);
-  backdrop-filter: blur(28px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.14);
+  background: #262626;
+  border: 0;
   border-radius: 22px;
   padding: 22px 22px 14px;
   box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
@@ -472,12 +471,12 @@ const pepCss = `
 .pep-modal-title {
   margin: 0 0 6px;
   font-size: 17px; font-weight: 600;
-  color: #ede4d8;
+  color: #e8e8e8;
 }
 .pep-modal-body {
   margin: 0 0 18px;
   font-size: 14.5px; line-height: 1.4;
-  color: rgba(235,220,205,0.65);
+  color: rgba(232,232,232,0.65);
 }
 .pep-modal-actions {
   display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
@@ -485,9 +484,9 @@ const pepCss = `
 .pep-modal-btn {
   padding: 12px;
   border-radius: 14px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #ede4d8;
+  background: #303030;
+  border: 0;
+  color: #e8e8e8;
   font: inherit;
   font-size: 15px; font-weight: 500;
   cursor: pointer;

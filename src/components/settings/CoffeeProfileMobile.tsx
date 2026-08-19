@@ -23,7 +23,7 @@ const Laurel = ({ flip = false }: { flip?: boolean }) => (
       transform: flip ? "scaleX(-1)" : undefined,
     }}
     fill="none"
-    stroke="#ede4d8"
+    stroke="#e8e8e8"
     strokeWidth="1.2"
     strokeLinecap="round"
   >
@@ -39,7 +39,7 @@ const Laurel = ({ flip = false }: { flip?: boolean }) => (
           cy={cy}
           rx="8"
           ry="3.2"
-          fill="#ede4d8"
+          fill="#e8e8e8"
           fillOpacity="0.85"
           stroke="none"
           transform={`rotate(${-45 + t * 20} ${cx} ${cy})`}
@@ -169,7 +169,7 @@ const CoffeeProfileMobile = () => {
                 aria-label="Back"
                 onClick={() => goBackOr(navigate, "/chat")}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ede4d8" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8e8e8" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 12H5" />
                   <path d="M12 19l-7-7 7-7" />
                 </svg>
@@ -276,7 +276,7 @@ const cpmCss = `
 .cpm-root {
   min-height: 100dvh;
   background: hsl(var(--background));
-  color: #ede4d8;
+  color: #e8e8e8;
   font-family: "Neue Haas Unica", "Helvetica Now Display", -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
   display: flex;
   justify-content: center;
@@ -317,7 +317,7 @@ const cpmCss = `
 .cpm-glass {
   border: 0;
   background: var(--overlay-white-05);
-  color: #ede4d8;
+  color: #e8e8e8;
   backdrop-filter: blur(2px) saturate(1.3);
   -webkit-tap-highlight-color: transparent;
   box-shadow: none;
@@ -356,7 +356,7 @@ const cpmCss = `
 }
 .cpm-subtitle {
   margin: 4px 0 0; font-size: 14px;
-  color: rgba(235,220,205,0.55);
+  color: rgba(232,232,232,0.55);
 }
 .cpm-laurel { position: absolute; top: 0; pointer-events: none; }
 .cpm-laurel-l { right: calc(50% + 66px); }
@@ -367,7 +367,7 @@ const cpmCss = `
 .cpm-groups { padding: 28px 16px 0; display: flex; flex-direction: column; gap: 22px; }
 .cpm-group-title {
   font-size: 12px; font-weight: 500;
-  color: rgba(235,220,205,0.5);
+  color: rgba(232,232,232,0.5);
   margin: 0 4px 8px;
   text-transform: uppercase; letter-spacing: 0.06em;
 }
@@ -384,7 +384,7 @@ const cpmCss = `
   padding: 14px 16px;
   background: transparent;
   border: 0;
-  color: #ede4d8;
+  color: #e8e8e8;
   text-align: left;
   cursor: pointer;
   font: inherit;
@@ -394,7 +394,7 @@ const cpmCss = `
 .cpm-row-b { border-top: 0; }
 .cpm-row-icon {
   width: 32px; height: 32px; flex-shrink: 0;
-  color: rgba(235,220,205,0.85);
+  color: rgba(232,232,232,0.85);
   background: transparent;
   border: 0;
   border-radius: 7px;
@@ -408,7 +408,7 @@ const cpmCss = `
 }
 .cpm-row-label { flex: 1; font-size: 15px; font-weight: 500; }
 .cpm-row-trailing {
-  font-size: 13px; color: rgba(235,220,205,0.5);
+  font-size: 13px; color: rgba(232,232,232,0.5);
   flex-shrink: 0;
 }
 .cpm-row-danger { color: #f87171; }

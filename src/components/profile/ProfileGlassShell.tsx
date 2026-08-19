@@ -26,29 +26,30 @@ const ProfileGlassShell = ({ title, subtitle, onBack, trailing, children }: Shel
     });
 
   return (
-    <div className="ng-root">
+    <div className="ng-root" dir="ltr">
       <style>{ngCss}</style>
-      <div className="ng-bg" aria-hidden />
-      <div className="ng-bg-glow" aria-hidden />
 
       <div className="ng-screen">
         <div className="ng-topbar ng-a1">
           <button onClick={back} aria-label="Back" className="ng-back">
-            <ArrowLeft className="w-[17px] h-[17px]" strokeWidth={2.2} />
+            <ArrowLeft className="w-[18px] h-[18px]" strokeWidth={2} />
           </button>
+          <span className="ng-topbar-title">{title}</span>
           <div className="ng-topbar-trail">{trailing}</div>
         </div>
 
-        <header className="ng-hero ng-a2">
-          <h1 className="ng-hero-title">{title}</h1>
-          {subtitle && <p className="ng-hero-sub">{subtitle}</p>}
-        </header>
+        {subtitle && (
+          <header className="ng-hero ng-a2">
+            <p className="ng-hero-sub">{subtitle}</p>
+          </header>
+        )}
 
         <div className="ng-content">{children}</div>
         <div className="ng-bottom-spacer" />
       </div>
     </div>
   );
+
 };
 
 /* ---------- Building blocks (API compatible) ---------- */
@@ -158,9 +159,19 @@ const ngCss = `
   position: sticky;
   top: 0;
   z-index: 30;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 38px 1fr 38px;
+  align-items: center;
+  padding: 8px 0 10px;
   background: #1a1a1a;
+}
+.ng-topbar-title {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #f2f2f2;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .ng-back {
   width: 38px; height: 38px; padding: 0;
@@ -174,20 +185,13 @@ const ngCss = `
   transition: background-color 160ms ease;
 }
 .ng-back:active { background: rgba(255,255,255,0.06); }
-.ng-topbar-trail { display: flex; align-items: center; gap: 8px; }
+.ng-topbar-trail { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
 
 /* --- Hero --- */
 .ng-hero {
-  padding: 6px 4px 18px;
+  padding: 2px 4px 14px;
   display: flex; flex-direction: column; align-items: flex-start;
   gap: 6px;
-}
-.ng-hero-title {
-  margin: 0;
-  font-size: 28px; font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: #f2f2f2;
 }
 .ng-hero-sub {
   margin: 0;
@@ -195,6 +199,7 @@ const ngCss = `
   color: rgba(232,232,232,0.45);
   max-width: 56ch;
 }
+
 
 .ng-content { display: flex; flex-direction: column; gap: 22px; }
 

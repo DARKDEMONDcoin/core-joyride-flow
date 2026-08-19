@@ -110,7 +110,7 @@ const NotificationsPage = () => {
     setPrefs((p) => ({ ...p, [k]: v }));
 
   const StatusBadge = () => (
-    <span className="inline-flex items-center gap-1.5 text-[12px] text-[rgba(235,220,205,0.55)]">
+    <span className="inline-flex items-center gap-1.5 text-[12px] text-[rgba(232,232,232,0.55)]">
       {saveState === "saving" && (<><Loader2 className="w-3.5 h-3.5 animate-spin" /> Saving…</>)}
       {saveState === "saved" && (<><Check className="w-3.5 h-3.5" /> Saved</>)}
     </span>
@@ -243,8 +243,8 @@ const Switch = ({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 const npgCss = `
 .npg-root {
   min-height: 100dvh;
-  background: #000;
-  color: #ede4d8;
+  background: #1a1a1a;
+  color: #e8e8e8;
   font-family: "Neue Haas Unica", "Helvetica Now Display", -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -253,21 +253,21 @@ const npgCss = `
   display: grid; grid-template-columns: 44px 1fr 44px;
   align-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 12px;
-  background: linear-gradient(to bottom, #000 82%, transparent);
+  background: #1a1a1a;
 }
 .npg-title {
   margin: 0; text-align: center;
   font-size: 17px; font-weight: 600;
-  letter-spacing: -0.01em; color: #ede4d8;
+  letter-spacing: -0.01em; color: #e8e8e8;
 }
 .npg-status { display: flex; justify-content: flex-end; padding-right: 4px; }
 .npg-icon-btn {
-  width: 44px; height: 44px;
+  width: 40px; height: 40px;
   display: inline-grid; place-items: center;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: #ede4d8; cursor: pointer;
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
+  color: #e8e8e8; cursor: pointer;
   transition: transform 160ms ease;
 }
 .npg-icon-btn:active { transform: scale(0.94); }
@@ -276,11 +276,11 @@ const npgCss = `
 .npg-section-title {
   margin: 18px 6px 10px;
   font-size: 13px; font-weight: 500;
-  color: rgba(235,220,205,0.5);
+  color: rgba(232,232,232,0.5);
   letter-spacing: -0.005em;
 }
 .npg-card {
-  background: #0d0d0d;
+  background: #262626;
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 18px;
   overflow: hidden;
@@ -293,12 +293,12 @@ const npgCss = `
 .npg-row-text { flex: 1; min-width: 0; }
 .npg-row-title {
   font-size: 15.5px; font-weight: 600;
-  color: #ede4d8;
+  color: #e8e8e8;
   letter-spacing: -0.005em;
 }
 .npg-row-desc {
   font-size: 13px;
-  color: rgba(235,220,205,0.5);
+  color: rgba(232,232,232,0.5);
   margin-top: 3px;
   line-height: 1.35;
 }
@@ -319,7 +319,7 @@ const npgCss = `
   cursor: pointer;
   transition: background 180ms ease;
 }
-.npg-switch.is-on { background: #34a3ff; }
+.npg-switch.is-on { background: #e8e8e8; }
 .npg-switch-thumb {
   position: absolute;
   top: 2px; left: 2px;
@@ -329,7 +329,7 @@ const npgCss = `
   box-shadow: 0 2px 4px rgba(0,0,0,0.35);
   transition: transform 180ms ease;
 }
-.npg-switch.is-on .npg-switch-thumb { transform: translateX(20px); }
+.npg-switch.is-on .npg-switch-thumb { transform: translateX(20px); background: #1a1a1a; }
 `;
 
 export default NotificationsPage;

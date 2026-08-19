@@ -113,7 +113,7 @@ export default function SettingsHelpPage() {
         </header>
 
         {/* Search */}
-        <div className="mb-8 flex items-center gap-3 rounded-[18px] border border-[#1a1a1a] bg-[#0d0d0d] px-4 py-3">
+        <div className="mb-8 flex items-center gap-3 rounded-[18px] border border-[#1a1a1a] bg-[#262626] px-4 py-3">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[#a0a0a0]">
             <circle cx="11" cy="11" r="7" />
             <path strokeLinecap="round" d="m20 20-3.5-3.5" />
