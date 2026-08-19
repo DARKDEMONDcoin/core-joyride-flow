@@ -22,14 +22,13 @@ import {
   Asterisk,
   LogOut,
   ChevronsUpDown,
-  Sparkles,
+  Coins,
   ShieldCheck,
   Store,
   KeyRound,
   Gift,
   Lock,
   Activity,
-
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useActiveAccount } from "@/hooks/useActiveAccount";
@@ -193,7 +192,6 @@ const ManusSettingsMobile = () => {
         <header className="ms-header">
           <button type="button" className="ms-hbtn" aria-label={isAr ? "الإشعارات" : "Notifications"} onClick={() => navigate("/notifications")}>
             <Bell className="ms-hicon" />
-            <span className="ms-dot" />
           </button>
           <h1 className="ms-brand">megsy</h1>
           <button type="button" className="ms-hbtn" aria-label={authT("back")} onClick={() => goBackOr(navigate, "/chat")}>
@@ -224,7 +222,7 @@ const ManusSettingsMobile = () => {
               </button>
             </div>
             <button type="button" className="ms-row ms-row-div" onClick={() => navigate("/usage")}>
-              <Sparkles className="ms-row-icon" />
+              <Coins className="ms-row-icon" />
               <span className="ms-row-label">{isAr ? "رصيد" : "Credits"}</span>
               <span className="ms-row-trailing">{credits ?? 0}</span>
               {isAr ? <ChevronLeft className="ms-row-chev" /> : <ChevronRight className="ms-row-chev" />}
@@ -274,10 +272,6 @@ const manusCss = `
   -webkit-tap-highlight-color: transparent;
 }
 .ms-hicon { width: 20px; height: 20px; }
-.ms-dot {
-  position: absolute; top: 6px; inset-inline-start: 6px;
-  width: 7px; height: 7px; border-radius: 999px; background: var(--mn-danger);
-}
 .ms-brand {
   margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -0.01em;
   font-family: "Times New Roman", Georgia, serif;
