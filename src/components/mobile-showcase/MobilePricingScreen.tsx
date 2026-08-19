@@ -345,16 +345,16 @@ export default function MobilePricingScreen({
       {/* Benefits card — clean neutral list, icon + label (reference design) */}
       <div className="mx-4 mt-5 flex-1 min-h-0 overflow-hidden">
         <div
-          className="h-full rounded-[22px] px-4 py-3"
+          className="h-full overflow-hidden rounded-[22px] px-4 py-2"
           style={{ background: c.cardBg, border: `1px solid ${c.border}` }}
         >
-          <ul key={plan} className="flex h-full flex-col justify-around">
+          <ul key={plan} className="flex h-full flex-col justify-between">
             {features.map((f, i) => {
               const Icon = f.icon;
               return (
                 <li
                   key={i}
-                  className="flex items-center gap-3 py-[7px]"
+                  className="flex items-center gap-3 py-[5px]"
                   style={{
                     opacity: 0,
                     animation: "pricing-row-in 340ms cubic-bezier(0.22,1,0.36,1) forwards",
@@ -393,7 +393,7 @@ export default function MobilePricingScreen({
               key={opt.label}
               type="button"
               onClick={() => onToggleYearly(opt.yearly)}
-              className="mb-2.5 flex w-full items-center gap-3 rounded-[16px] px-3.5 py-3 text-start transition-all duration-200"
+              className="mb-2 flex w-full items-center gap-3 rounded-[16px] px-3.5 py-2.5 text-start transition-all duration-200"
               style={{
                 background: selected ? c.selectedBg : c.cardBg,
                 border: `2px solid ${selected ? c.selectedBorder : "transparent"}`,
