@@ -205,7 +205,7 @@ const ManusSettingsMobile = () => {
                 {isAr ? "ترقية" : "Upgrade"}
               </button>
             </div>
-            <button type="button" className="ms-row ms-row-div" onClick={() => navigate("/settings/billing")}>
+            <button type="button" className="ms-row ms-row-div" onClick={() => navigate("/usage")}>
               <Sparkles className="ms-row-icon" />
               <span className="ms-row-label">{isAr ? "رصيد" : "Credits"}</span>
               <span className="ms-row-trailing">{credits ?? 0}</span>
