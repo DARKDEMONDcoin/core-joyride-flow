@@ -137,8 +137,8 @@ const ngCss = `
 .ng-root {
   position: relative;
   min-height: 100dvh;
-  color: #e8e8e8;
-  background: #1a1a1a;
+  color: var(--mn-fg);
+  background: var(--mn-bg);
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   display: flex; justify-content: center;
@@ -163,14 +163,14 @@ const ngCss = `
   grid-template-columns: 38px 1fr 38px;
   align-items: center;
   padding: 8px 0 10px;
-  background: #1a1a1a;
+  background: var(--mn-bg);
 }
 .ng-topbar-title {
   text-align: center;
   font-size: 17px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  color: #f2f2f2;
+  color: var(--mn-fg-strong);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .ng-back {
@@ -178,13 +178,13 @@ const ngCss = `
   border-radius: 999px;
   border: 0;
   background: transparent;
-  color: #e8e8e8;
+  color: var(--mn-fg);
   display: inline-flex; align-items: center; justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background-color 160ms ease;
 }
-.ng-back:active { background: rgba(255,255,255,0.06); }
+.ng-back:active { background: var(--mn-sep); }
 .ng-topbar-trail { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
 
 /* --- Hero --- */
@@ -196,7 +196,7 @@ const ngCss = `
 .ng-hero-sub {
   margin: 0;
   font-size: 13.5px; line-height: 1.5;
-  color: rgba(232,232,232,0.45);
+  color: var(--mn-muted);
   max-width: 56ch;
 }
 
@@ -208,14 +208,14 @@ const ngCss = `
 .ng-section-title {
   margin: 0 6px 4px;
   font-size: 12px; font-weight: 500;
-  color: rgba(232,232,232,0.42);
+  color: var(--mn-muted);
   letter-spacing: 0.02em;
 }
 
 /* --- Card --- */
 .ng-card {
   position: relative;
-  background: #262626;
+  background: var(--mn-card);
   border: 0;
   border-radius: 18px;
   overflow: hidden;
@@ -232,7 +232,7 @@ const ngCss = `
   padding: 15px 16px;
   background: transparent;
   border: 0;
-  color: #e8e8e8;
+  color: var(--mn-fg);
   text-align: start;
   cursor: pointer;
   font: inherit;
@@ -242,15 +242,15 @@ const ngCss = `
 .ng-row + .ng-row::before {
   content: "";
   position: absolute; top: 0; inset-inline-start: 16px; inset-inline-end: 16px;
-  height: 1px; background: rgba(255,255,255,0.07);
+  height: 1px; background: var(--mn-sep);
 }
-.ng-row:active { background: rgba(255,255,255,0.04); }
+.ng-row:active { background: var(--mn-sep); }
 
 .ng-row-icon {
   width: 24px; height: 24px;
   display: inline-flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  color: #e8e8e8;
+  color: var(--mn-fg);
   background: transparent;
   border: 0;
 }
@@ -258,32 +258,32 @@ const ngCss = `
 .ng-row-icon img { width: 20px; height: 20px; object-fit: contain; display: block; }
 
 .ng-row-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.ng-row-label { font-size: 16px; font-weight: 500; color: #e8e8e8; }
-.ng-row-hint { font-size: 12.5px; color: rgba(232,232,232,0.42); line-height: 1.4; }
+.ng-row-label { font-size: 16px; font-weight: 500; color: var(--mn-fg); }
+.ng-row-hint { font-size: 12.5px; color: var(--mn-muted); line-height: 1.4; }
 .ng-row-trailing {
   font-size: 15px;
-  color: rgba(232,232,232,0.45);
+  color: var(--mn-muted);
   flex-shrink: 0; max-width: 55%;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   display: flex; align-items: center; gap: 6px;
 }
 .ng-row-arrow {
-  font-size: 20px; color: rgba(232,232,232,0.35);
+  font-size: 20px; color: var(--mn-muted);
   flex-shrink: 0; line-height: 1; font-weight: 300;
 }
 .ng-row-danger .ng-row-label,
-.ng-row-danger .ng-row-icon { color: #f87171; }
+.ng-row-danger .ng-row-icon { color: var(--mn-danger); }
 
 /* --- Fields --- */
 .ng-field { display: flex; flex-direction: column; gap: 7px; }
 .ng-field-label { padding-inline-start: 2px; font-size: 12.5px; font-weight: 500; color: rgba(232,232,232,0.6); }
 .ng-input {
   width: 100%;
-  background: #1f1f1f;
-  border: 1px solid rgba(255,255,255,0.09);
+  background: var(--mn-sheet);
+  border: 1px solid var(--mn-sep);
   border-radius: 12px;
   padding: 12px 14px;
-  color: #e8e8e8;
+  color: var(--mn-fg);
   font: inherit;
   font-size: 15px;
   outline: none;
@@ -291,7 +291,7 @@ const ngCss = `
 }
 .ng-input:focus { border-color: rgba(255,255,255,0.35); }
 .ng-input::placeholder { color: rgba(232,232,232,0.3); }
-.ng-field-hint { padding-inline-start: 2px; font-size: 12px; color: rgba(232,232,232,0.42); line-height: 1.5; }
+.ng-field-hint { padding-inline-start: 2px; font-size: 12px; color: var(--mn-muted); line-height: 1.5; }
 
 /* --- Buttons --- */
 .ng-btn {
@@ -307,8 +307,8 @@ const ngCss = `
 }
 .ng-btn:active { transform: scale(0.98); }
 .ng-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.ng-btn-primary { background: #ffffff; color: #111111; }
-.ng-btn-secondary { background: #303030; color: #e8e8e8; }
+.ng-btn-primary { background: var(--mn-cta-bg); color: var(--mn-cta-fg); }
+.ng-btn-secondary { background: var(--mn-card-2); color: var(--mn-fg); }
 
 .ng-bottom-spacer { height: calc(env(safe-area-inset-bottom, 0px) + 48px); }
 
@@ -340,18 +340,8 @@ const ngCss = `
 .pgs-anim-rise4 { animation-delay: 0.24s; }
 .pgs-anim-rise5 { animation-delay: 0.28s; }
 
-.liquid-glass, .liquid-glass-selected { border-radius: 18px; background: #262626; border: 0; }
+.liquid-glass, .liquid-glass-selected { border-radius: 18px; background: var(--mn-card); border: 0; }
 
-html[data-theme="light"] .ng-root { background: hsl(var(--background)); color: hsl(var(--foreground)); }
-html[data-theme="light"] .ng-topbar { background: hsl(var(--background)); }
-html[data-theme="light"] .ng-card, html[data-theme="light"] .liquid-glass { background: hsl(var(--card)); }
-html[data-theme="light"] .ng-hero-title, html[data-theme="light"] .ng-row-label,
-html[data-theme="light"] .ng-back, html[data-theme="light"] .ng-row-icon { color: hsl(var(--foreground)); }
-html[data-theme="light"] .ng-hero-sub, html[data-theme="light"] .ng-row-hint,
-html[data-theme="light"] .ng-row-trailing, html[data-theme="light"] .ng-section-title { color: hsl(var(--muted-foreground)); }
-html[data-theme="light"] .ng-btn-primary { background: hsl(var(--foreground)); color: hsl(var(--background)); }
-html[data-theme="light"] .ng-btn-secondary { background: hsl(var(--muted)); color: hsl(var(--foreground)); }
-html[data-theme="light"] .ng-input { background: hsl(var(--muted)); color: hsl(var(--foreground)); }
 `;
 
 export default ProfileGlassShell;

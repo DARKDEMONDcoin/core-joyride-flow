@@ -14,6 +14,7 @@ const ProfileEditPage = () => {
   const isMobile = useIsMobile();
 
   const [userId, setUserId] = useState<string | null>(null);
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
 
   const [fullName, setFullName] = useState("");
@@ -34,6 +35,7 @@ const ProfileEditPage = () => {
         return;
       }
       setUserId(user.id);
+      setEmail(user.email ?? "");
 
       const [profileRes, persRes] = await Promise.all([
         supabase.from("profiles").select("display_name").eq("id", user.id).maybeSingle(),
@@ -116,6 +118,11 @@ const ProfileEditPage = () => {
 
   const goBack = useSmartBack("/settings");
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/auth");
+  };
+
   const openDelete = () => setConfirmOpen(true);
   const confirmDelete = () => {
     setConfirmOpen(false);
@@ -131,6 +138,7 @@ const ProfileEditPage = () => {
 
   // ============================== MOBILE ==============================
   if (isMobile) {
+    const initial = (nickname || fullName || email || "U").trim().charAt(0).toUpperCase();
     return (
       <div className="pep-root">
         <style>{pepCss}</style>
@@ -142,21 +150,19 @@ const ProfileEditPage = () => {
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <h1 className="pep-title">Profile</h1>
-          <button className="pep-icon-btn" aria-label="Done" onClick={goBack}>
-            {statusIcon || (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-            )}
-          </button>
+          <h1 className="pep-title">Account</h1>
+          <span className="pep-icon-btn" aria-live="polite">{statusIcon}</span>
         </header>
 
         <main className="pep-main">
-          {/* Names group */}
+          <div className="pep-avatar-wrap">
+            <span className="pep-avatar">{initial}</span>
+            <p className="pep-avatar-hint">Tap to change avatar</p>
+          </div>
+
           <section className="pep-card">
             <div className="pep-row">
-              <label htmlFor="pep-full" className="pep-row-label">Full name</label>
+              <label htmlFor="pep-full" className="pep-row-label">Name</label>
               <input
                 id="pep-full"
                 className="pep-row-input"
@@ -168,38 +174,22 @@ const ProfileEditPage = () => {
             </div>
             <div className="pep-divider" />
             <div className="pep-row">
-              <label htmlFor="pep-nick" className="pep-row-label">Nickname</label>
-              <input
-                id="pep-nick"
-                className="pep-row-input"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder="Nickname"
-                autoComplete="nickname"
-              />
+              <span className="pep-row-label">Email</span>
+              <span className="pep-row-value">{email || "—"}</span>
+            </div>
+            <div className="pep-divider" />
+            <div className="pep-row">
+              <span className="pep-row-label">User ID</span>
+              <span className="pep-row-value pep-row-value-mono">{userId ?? "—"}</span>
             </div>
           </section>
-          <p className="pep-hint">Megsy calls you by your nickname in chat.</p>
 
-          {/* Instructions */}
-          <h2 className="pep-section-title">Instructions</h2>
-          <section className="pep-card pep-card-tight">
-            <textarea
-              className="pep-textarea"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              placeholder="How you'd like Megsy to respond"
-              rows={4}
-            />
-          </section>
-          <p className="pep-hint">
-            Your instructions will apply to all conversations.
-          </p>
+          <button className="pep-flat" type="button" onClick={handleLogout}>
+            Log out
+          </button>
 
-          {/* Delete account */}
-          <button className="pep-danger" onClick={openDelete} type="button">
-            <Trash2 className="w-[18px] h-[18px]" />
-            <span>Delete account</span>
+          <button className="pep-flat pep-flat-danger" onClick={openDelete} type="button">
+            Delete account
           </button>
 
           <div className="pep-spacer" />
@@ -231,6 +221,7 @@ const ProfileEditPage = () => {
       </div>
     );
   }
+
 
   // ============================== DESKTOP ==============================
   return (
@@ -310,8 +301,8 @@ const ProfileEditPage = () => {
 const pepCss = `
 .pep-root {
   min-height: 100dvh;
-  background: #1a1a1a;
-  color: #e8e8e8;
+  background: var(--mn-bg);
+  color: var(--mn-fg);
   font-family: "Neue Haas Unica", "Helvetica Now Display", -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -320,14 +311,14 @@ const pepCss = `
   display: grid; grid-template-columns: 44px 1fr 44px;
   align-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 12px;
-  background: #1a1a1a;
+  background: var(--mn-bg);
 }
 .pep-title {
   margin: 0;
   text-align: center;
   font-size: 17px; font-weight: 600;
   letter-spacing: -0.01em;
-  color: #e8e8e8;
+  color: var(--mn-fg);
 }
 .pep-icon-btn {
   width: 40px; height: 40px;
@@ -335,22 +326,42 @@ const pepCss = `
   border-radius: 999px;
   background: transparent;
   border: 0;
-  color: #e8e8e8;
+  color: var(--mn-fg);
   cursor: pointer;
   transition: transform 160ms ease;
 }
 .pep-icon-btn:active { transform: scale(0.94); }
 
 .pep-main { padding: 8px 16px 24px; }
+.pep-avatar-wrap { display: grid; place-items: center; gap: 10px; padding: 26px 0 22px; }
+.pep-avatar {
+  width: 92px; height: 92px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: var(--mn-avatar); color: #fff;
+  font-size: 38px; font-weight: 500; line-height: 1;
+}
+.pep-avatar-hint { margin: 0; font-size: 14px; color: var(--mn-muted); }
+.pep-row-value { flex: 1; text-align: end; font-size: 15.5px; color: var(--mn-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pep-row-value-mono { font-variant-numeric: tabular-nums; }
+.pep-flat {
+  margin-top: 20px; width: 100%;
+  padding: 17px 18px; border: 0; border-radius: 18px;
+  background: var(--mn-card); color: var(--mn-fg);
+  font: inherit; font-size: 15.5px; font-weight: 500;
+  cursor: pointer; text-align: center;
+  transition: transform 160ms ease;
+}
+.pep-flat:active { transform: scale(0.99); }
+.pep-flat-danger { color: var(--mn-danger); }
 .pep-section-title {
   margin: 22px 4px 10px;
   font-size: 13px; font-weight: 500;
-  color: rgba(232,232,232,0.55);
+  color: var(--mn-muted);
   letter-spacing: -0.005em;
 }
 
 .pep-card {
-  background: #262626;
+  background: var(--mn-card);
   border: 0;
   border-radius: 18px;
   overflow: hidden;
@@ -365,15 +376,15 @@ const pepCss = `
 }
 .pep-row-label {
   font-size: 15.5px; font-weight: 400;
-  color: rgba(232,232,232,0.55);
+  color: var(--mn-muted);
   flex-shrink: 0;
 }
 .pep-root .pep-row-input {
   flex: 1;
-  background-color: #262626 !important;
+  background-color: var(--mn-card) !important;
   background-image: none !important;
   border: 0 !important; outline: none;
-  color: #e8e8e8 !important;
+  color: var(--mn-fg) !important;
   font: inherit;
   font-size: 15.5px; font-weight: 500;
   text-align: end;
@@ -382,19 +393,19 @@ const pepCss = `
   appearance: none;
   color-scheme: dark;
   box-shadow: none !important;
-  caret-color: #e8e8e8;
+  caret-color: var(--mn-fg);
 }
-.pep-root .pep-row-input::placeholder { color: rgba(232,232,232,0.28) !important; }
+.pep-root .pep-row-input::placeholder { color: var(--mn-faint) !important; }
 .pep-root .pep-row-input:-webkit-autofill,
 .pep-root .pep-row-input:-webkit-autofill:hover,
 .pep-root .pep-row-input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #262626 inset;
-  -webkit-text-fill-color: #e8e8e8;
-  caret-color: #e8e8e8;
+  -webkit-box-shadow: 0 0 0 1000px var(--mn-card) inset;
+  -webkit-text-fill-color: var(--mn-fg);
+  caret-color: var(--mn-fg);
 }
 .pep-divider {
   height: 1px;
-  background: rgba(255,255,255,0.06);
+  background: var(--mn-sep);
   margin-left: 18px;
 }
 .pep-hint {
@@ -410,11 +421,11 @@ const pepCss = `
 .pep-root .pep-textarea {
   width: 100%;
   min-height: 92px;
-  background-color: #262626 !important;
+  background-color: var(--mn-card) !important;
   background-image: none !important;
   border: 0; outline: none;
   padding: 14px 16px;
-  color: #e8e8e8;
+  color: var(--mn-fg);
   font: inherit;
   font-size: 15.5px; font-weight: 400;
   resize: none;
@@ -423,13 +434,13 @@ const pepCss = `
   color-scheme: dark;
   box-shadow: none;
 }
-.pep-root .pep-textarea::placeholder { color: rgba(232,232,232,0.35); }
+.pep-root .pep-textarea::placeholder { color: var(--mn-muted); }
 .pep-root .pep-textarea:-webkit-autofill,
 .pep-root .pep-textarea:-webkit-autofill:hover,
 .pep-root .pep-textarea:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #262626 inset;
-  -webkit-text-fill-color: #e8e8e8;
-  caret-color: #e8e8e8;
+  -webkit-box-shadow: 0 0 0 1000px var(--mn-card) inset;
+  -webkit-text-fill-color: var(--mn-fg);
+  caret-color: var(--mn-fg);
 }
 
 .pep-danger {
@@ -440,7 +451,7 @@ const pepCss = `
   background: rgba(255,90,90,0.06);
   border: 1px solid rgba(255,90,90,0.12);
   border-radius: 18px;
-  color: #f87171;
+  color: var(--mn-danger);
   font: inherit;
   font-size: 15.5px; font-weight: 500;
   cursor: pointer;
@@ -461,22 +472,22 @@ const pepCss = `
 }
 .pep-modal {
   width: 100%; max-width: 340px;
-  background: #262626;
+  background: var(--mn-card);
   border: 0;
   border-radius: 22px;
   padding: 22px 22px 14px;
-  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.06);
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,0.7), inset 0 1px 0 var(--mn-sep);
   animation: pep-pop 220ms cubic-bezier(0.16,1,0.3,1) both;
 }
 .pep-modal-title {
   margin: 0 0 6px;
   font-size: 17px; font-weight: 600;
-  color: #e8e8e8;
+  color: var(--mn-fg);
 }
 .pep-modal-body {
   margin: 0 0 18px;
   font-size: 14.5px; line-height: 1.4;
-  color: rgba(232,232,232,0.65);
+  color: var(--mn-muted);
 }
 .pep-modal-actions {
   display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
@@ -484,9 +495,9 @@ const pepCss = `
 .pep-modal-btn {
   padding: 12px;
   border-radius: 14px;
-  background: #303030;
+  background: var(--mn-card-2);
   border: 0;
-  color: #e8e8e8;
+  color: var(--mn-fg);
   font: inherit;
   font-size: 15px; font-weight: 500;
   cursor: pointer;
@@ -494,7 +505,7 @@ const pepCss = `
 }
 .pep-modal-btn:active { transform: scale(0.97); }
 .pep-modal-btn-danger {
-  color: #f87171;
+  color: var(--mn-danger);
   background: rgba(255,90,90,0.08);
   border-color: rgba(255,90,90,0.16);
 }

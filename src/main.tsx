@@ -18,6 +18,7 @@ import "./styles/pwa-safe-area.css";
 import "./styles/pwa-responsive.css";
 import "./styles/font-fallback.css";
 import "./styles/view-transitions.css";
+import "./styles/manus-tokens.css";
 // Non-critical CSS (extracted from index.css) — loaded lazily after first paint
 // to shrink the render-blocking critical bundle. Contains editorial renderer,
 // glass effects, promo helpers, and other rarely-visible-on-first-frame rules.

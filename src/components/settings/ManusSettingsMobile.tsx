@@ -234,8 +234,8 @@ const ManusSettingsMobile = () => {
 const manusCss = `
 .ms-root {
   min-height: 100dvh;
-  background: #1a1a1a;
-  color: #e8e8e8;
+  background: var(--mn-bg);
+  color: var(--mn-fg);
   display: flex;
   justify-content: center;
   font-family: -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
@@ -245,18 +245,18 @@ const manusCss = `
   position: sticky; top: 0; z-index: 5;
   display: flex; align-items: center; justify-content: space-between;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px 10px;
-  background: #1a1a1a;
+  background: var(--mn-bg);
 }
 .ms-hbtn {
   position: relative; width: 40px; height: 40px;
   display: inline-flex; align-items: center; justify-content: center;
-  background: transparent; border: 0; color: #e8e8e8; cursor: pointer;
+  background: transparent; border: 0; color: var(--mn-fg); cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
 .ms-hicon { width: 24px; height: 24px; }
 .ms-dot {
   position: absolute; top: 7px; inset-inline-start: 7px;
-  width: 8px; height: 8px; border-radius: 999px; background: #ef4444;
+  width: 8px; height: 8px; border-radius: 999px; background: var(--mn-danger);
 }
 .ms-brand {
   margin: 0; font-size: 26px; font-weight: 600; letter-spacing: -0.01em;
@@ -265,7 +265,7 @@ const manusCss = `
 .ms-body { padding: 6px 14px 0; display: flex; flex-direction: column; gap: 22px; }
 .ms-card {
   width: 100%;
-  background: #262626;
+  background: var(--mn-card);
   border-radius: 18px;
   overflow: hidden;
   border: 0;
@@ -280,48 +280,38 @@ button.ms-card { cursor: pointer; }
 }
 .ms-avatar-fallback {
   display: inline-flex; align-items: center; justify-content: center;
-  background: #f0700a; color: #fff; font-size: 20px; font-weight: 600;
+  background: var(--mn-avatar); color: #fff; font-size: 20px; font-weight: 600;
 }
 .ms-profile-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .ms-profile-name { font-size: 19px; font-weight: 600; }
-.ms-profile-sub { font-size: 13px; color: rgba(232,232,232,0.45); }
+.ms-profile-sub { font-size: 13px; color: var(--mn-muted); }
 .ms-plan-row {
   display: flex; align-items: center; justify-content: space-between;
   padding: 16px 16px;
 }
 .ms-plan-name { font-size: 22px; font-weight: 700; font-family: "Times New Roman", Georgia, serif; }
 .ms-plan-cta {
-  background: #fff; color: #111; border: 0; cursor: pointer;
+  background: var(--mn-cta-bg); color: var(--mn-cta-fg); border: 0; cursor: pointer;
   border-radius: 10px; padding: 8px 16px; font-size: 14px; font-weight: 600;
 }
 .ms-row {
   width: 100%;
   display: flex; align-items: center; gap: 14px;
   padding: 15px 16px;
-  background: transparent; border: 0; color: #e8e8e8;
+  background: transparent; border: 0; color: var(--mn-fg);
   text-align: start; font: inherit; cursor: pointer;
   transition: background-color 160ms ease;
 }
 .ms-row:disabled { cursor: default; }
-.ms-row:active:not(:disabled) { background: rgba(255,255,255,0.04); }
-.ms-row-div { box-shadow: inset 0 1px 0 rgba(255,255,255,0.07); }
-.ms-row-icon { width: 22px; height: 22px; flex-shrink: 0; color: #e8e8e8; opacity: 0.95; }
+.ms-row:active:not(:disabled) { background: var(--mn-sep); }
+.ms-row-div { box-shadow: inset 0 1px 0 var(--mn-sep); }
+.ms-row-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--mn-fg); opacity: 0.95; }
 .ms-row-label { flex: 1; font-size: 16px; font-weight: 500; }
-.ms-row-trailing { font-size: 15px; color: rgba(232,232,232,0.45); flex-shrink: 0; }
+.ms-row-trailing { font-size: 15px; color: var(--mn-muted); flex-shrink: 0; }
 .ms-row-chev { width: 18px; height: 18px; flex-shrink: 0; color: rgba(232,232,232,0.4); }
 .ms-row-ext { font-size: 15px; line-height: 1; }
 .ms-spacer { height: calc(env(safe-area-inset-bottom, 0px) + 32px); }
 
-html[data-theme="light"] .ms-root { background: hsl(var(--background)); color: hsl(var(--foreground)); }
-html[data-theme="light"] .ms-header { background: hsl(var(--background)); }
-html[data-theme="light"] .ms-card { background: hsl(var(--card)); }
-html[data-theme="light"] .ms-row,
-html[data-theme="light"] .ms-hbtn,
-html[data-theme="light"] .ms-row-icon { color: hsl(var(--foreground)); }
-html[data-theme="light"] .ms-row-trailing,
-html[data-theme="light"] .ms-profile-sub,
-html[data-theme="light"] .ms-row-chev { color: hsl(var(--muted-foreground)); }
-html[data-theme="light"] .ms-plan-cta { background: hsl(var(--foreground)); color: hsl(var(--background)); }
 `;
 
 export default ManusSettingsMobile;
