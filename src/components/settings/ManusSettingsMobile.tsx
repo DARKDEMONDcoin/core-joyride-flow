@@ -30,7 +30,6 @@ import { useCredits } from "@/hooks/useCredits";
 import { t as authT, useUserLang, AVAILABLE_LANGS } from "@/lib/authI18n";
 import { goBackOr } from "@/lib/navigation";
 import { getThemeMode } from "@/lib/appTheme";
-import { APP_VERSION } from "@/lib/appVersion";
 
 type Row = {
   icon: React.ComponentType<{ className?: string }>;
@@ -42,6 +41,8 @@ type Row = {
   chevron?: "arrow" | "stepper" | "none";
   danger?: boolean;
 };
+
+const APP_VERSION = "v1.0.0";
 
 const initialsOf = (name: string) =>
   name
@@ -139,7 +140,7 @@ const ManusSettingsMobile = () => {
   const linkRows: Row[] = [
     { icon: Heart, label: isAr ? "قيّم هذا التطبيق" : "Rate this app", external: true, onClick: () => navigate("/settings/support") },
     { icon: HelpCircle, label: isAr ? "الحصول على مساعدة" : "Get help", external: true, onClick: () => navigate("/settings/support") },
-    { icon: Asterisk, label: isAr ? "الإصدار" : "Version", trailing: `v${APP_VERSION}`, chevron: "none" },
+    { icon: Asterisk, label: isAr ? "الإصدار" : "Version", trailing: APP_VERSION, chevron: "none" },
   ];
 
   const renderRow = (row: Row, idx: number) => {
