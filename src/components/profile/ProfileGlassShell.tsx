@@ -307,7 +307,7 @@ const ngCss = `
 }
 .ng-btn:active { transform: scale(0.98); }
 .ng-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.ng-btn-primary { background: #ffffff; color: #111111; }
+.ng-btn-primary { background: var(--mn-cta-bg); color: var(--mn-cta-fg); }
 .ng-btn-secondary { background: var(--mn-card-2); color: var(--mn-fg); }
 
 .ng-bottom-spacer { height: calc(env(safe-area-inset-bottom, 0px) + 48px); }

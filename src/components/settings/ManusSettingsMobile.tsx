@@ -291,7 +291,7 @@ button.ms-card { cursor: pointer; }
 }
 .ms-plan-name { font-size: 22px; font-weight: 700; font-family: "Times New Roman", Georgia, serif; }
 .ms-plan-cta {
-  background: #fff; color: #111; border: 0; cursor: pointer;
+  background: var(--mn-cta-bg); color: var(--mn-cta-fg); border: 0; cursor: pointer;
   border-radius: 10px; padding: 8px 16px; font-size: 14px; font-weight: 600;
 }
 .ms-row {

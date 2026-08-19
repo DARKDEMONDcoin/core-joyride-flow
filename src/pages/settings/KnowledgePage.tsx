@@ -233,7 +233,7 @@ const knCss = `
 .kn-cta {
   display: inline-flex; align-items: center; gap: 8px;
   padding: 12px 20px; border: 0; border-radius: 14px;
-  background: #f5f5f5; color: #111;
+  background: var(--mn-cta-bg); color: var(--mn-cta-fg);
   font: inherit; font-size: 15px; font-weight: 600;
   cursor: pointer; transition: transform 160ms ease, opacity 160ms ease;
 }

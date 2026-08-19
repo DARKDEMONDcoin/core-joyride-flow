@@ -154,12 +154,12 @@ const usageCss = `
 .usg-plan { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px dashed var(--mn-sep); }
 .usg-plan-name { font-size: 22px; font-weight: 700; letter-spacing: -.01em; }
 .usg-cta {
-  background: #fff; color: #111; border: 0; border-radius: 10px;
+  background: var(--mn-cta-bg); color: var(--mn-cta-fg); border: 0; border-radius: 10px;
   font-size: 14px; font-weight: 600; padding: 8px 16px; cursor: pointer;
 }
 .usg-banner {
   width: 100%; margin: 12px 0 6px; display: flex; align-items: center; justify-content: space-between;
-  gap: 10px; background: rgba(59,130,246,.14); color: #7fb0ff; border: 0; border-radius: 12px;
+  gap: 10px; background: color-mix(in srgb, var(--mn-accent) 14%, transparent); color: var(--mn-accent); border: 0; border-radius: 12px;
   padding: 12px 14px; font-size: 13.5px; font-weight: 500; cursor: pointer; text-align: left;
 }
 .usg-line { display: flex; align-items: center; gap: 10px; padding: 12px 2px; }
