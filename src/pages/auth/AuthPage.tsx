@@ -85,7 +85,6 @@ const AuthPage = () => {
   const [userExists, setUserExists] = useState(false);
   const [has2FA, setHas2FA] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [mobileVideoLoaded, setMobileVideoLoaded] = useState(false);
   const [mobileImgIndex, setMobileImgIndex] = useState(0);
   const mobileImages = [
     `${AUTH_ASSET_BASE}/mobile-1.webp`,
@@ -822,33 +821,6 @@ const AuthPage = () => {
       <div className="auth-desktop-split relative min-h-dvh w-full overflow-hidden bg-black text-foreground flex flex-col lg:flex-row">
         {/* Plain black backdrop */}
         <div className="absolute inset-0 -z-10 bg-black" />
-
-        {/* Mobile top video with image fallback (hidden on desktop) */}
-        <div className="lg:hidden relative w-full h-[38vh] shrink-0 overflow-hidden z-0">
-          {/* Static fallback image behind the video — no intro flash before playback */}
-          <img loading="lazy" decoding="async"
-            src={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
-            alt=""
-            aria-hidden="true"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${mobileVideoLoaded ? "opacity-0" : "opacity-100"}`}
-          />
-          {isMobile && (
-          <video
-            src={AUTH_MOBILE_VIDEO_URL}
-            poster={`${AUTH_ASSET_BASE}/auth-mobile-fallback.webp`}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            onLoadedData={() => setMobileVideoLoaded(true)}
-            onCanPlay={() => setMobileVideoLoaded(true)}
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${mobileVideoLoaded ? "opacity-100" : "opacity-0"}`}
-          />
-          )}
-          <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-b from-transparent to-background" />
-        </div>
-
 
         {/* Left half wrapper (desktop) / bottom panel (mobile) */}
         <div className="relative w-full lg:w-1/2 lg:min-h-dvh flex-1 flex flex-col">
