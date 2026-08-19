@@ -970,7 +970,8 @@ export function detectLang(): AuthLang {
 
 /** Current effective language: stored → detected → 'en'. */
 export function getUserLang(): AuthLang {
-  return readStoredLang() ?? detectLang();
+  // Product decision: the whole app is English-only.
+  return "en";
 }
 
 function applyHtmlLang(lang: AuthLang) {
