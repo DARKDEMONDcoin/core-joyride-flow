@@ -226,154 +226,153 @@ export default function MobilePricingScreen({
       dir={isAr ? "rtl" : "ltr"}
       className="relative flex h-[100dvh] w-full flex-col overflow-hidden"
       style={{
-        background: isLight ? "#ffffff" : "#0b0b0b",
+        background: isLight ? "#ffffff" : "#0d0d0d",
+        backgroundImage: isLight
+          ? "radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px)"
+          : "radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px)",
+        backgroundSize: "22px 22px",
         color: c.text,
         fontFamily: 'Inter, -apple-system, "SF Pro Text", system-ui, sans-serif',
       }}
     >
-      {/* Header */}
-      <header
-        className="flex shrink-0 items-center px-3 pb-1"
-        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)" }}
+      {/* Header: sidebar button + serif title */}
+      <div
+        className="relative shrink-0 px-3"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 10px)" }}
       >
-        <MobileSidebarButton
-          onClick={() => onMenuClick?.()}
-          ariaLabel="Menu"
-          className={isLight ? "!text-black" : "!text-white"}
-        />
-      </header>
+        <div className="absolute start-2 top-[calc(env(safe-area-inset-top,0px)+8px)]">
+          <MobileSidebarButton
+            onClick={() => onMenuClick?.()}
+            ariaLabel="Menu"
+            className={isLight ? "!text-black" : "!text-white"}
+          />
+        </div>
+        <h1
+          className="px-12 pt-6 text-center font-normal leading-tight"
+          style={{
+            color: c.text,
+            fontFamily: '"Instrument Serif", "Fraunces", Georgia, serif',
+            fontSize: "clamp(26px, 8vw, 34px)",
+            letterSpacing: "-0.01em",
+          }}
+        >
+          {isAr ? `قم بالترقية إلى Megsy ${planLabel}` : `Upgrade to Megsy ${planLabel}`}
+        </h1>
 
-      {/* Scrollable content */}
-      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        <div className="text-center">
-          <h1
-            className="font-normal leading-[1.1]"
-            style={{
-              color: c.text,
-              fontFamily: '"Instrument Serif", "Fraunces", Georgia, serif',
-              fontSize: "clamp(24px, 7vw, 30px)",
-              letterSpacing: "-0.015em",
-            }}
-          >
-            Upgrade to Megsy {planLabel}
-          </h1>
-          <p className="mt-1 text-[12.5px]" style={{ color: c.textMuted }}>
-            Unlock flagship models, deep research and pro media.
-          </p>
-
-          <div className="mt-3 flex justify-center">
-            <div className="flex items-center rounded-full p-1" style={{ background: c.toggleBg }}>
-              {(["pro", "max"] as const).map((p) => (
-                <button
-                  key={p}
-                  type="button"
-                  onClick={() => setPlan(p)}
-                  className="h-8 min-w-[80px] rounded-full px-4 text-[13px] font-medium transition-colors"
-                  style={{
-                    background: plan === p ? c.toggleActiveBg : "transparent",
-                    color: plan === p ? c.toggleActiveText : c.toggleIdleText,
-                  }}
-                >
-                  {p === "pro" ? t.pro : t.max}
-                </button>
-              ))}
-            </div>
+        <div className="mt-3 flex justify-center">
+          <div className="flex items-center rounded-full p-[3px]" style={{ background: c.toggleBg }}>
+            {(["pro", "max"] as const).map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setPlan(p)}
+                className="h-7 min-w-[68px] rounded-full px-4 text-[12.5px] font-medium transition-colors"
+                style={{
+                  background: plan === p ? c.toggleActiveBg : "transparent",
+                  color: plan === p ? c.toggleActiveText : c.toggleIdleText,
+                }}
+              >
+                {p === "pro" ? t.pro : t.max}
+              </button>
+            ))}
           </div>
         </div>
+      </div>
 
-        {/* Benefits */}
+      {/* Features card */}
+      <div className="mt-5 px-4">
         <div
-          className="mt-4 rounded-[18px] px-4 py-3"
-          style={{ background: isLight ? "rgba(0,0,0,0.035)" : "#161616" }}
+          className="rounded-[22px] px-6 py-6"
+          style={{ background: isLight ? "rgba(0,0,0,0.04)" : "#262626" }}
         >
-          <ul className="flex flex-col gap-[11px]">
+          <ul className="flex flex-col gap-[22px]">
             {visibleFeatures.map((f, i) => {
               const Icon = f.icon;
               return (
-                <li key={i} className="flex items-center gap-3">
-                  <Icon className="h-[19px] w-[19px] shrink-0" style={{ color: c.textMuted }} strokeWidth={1.5} />
-                  <span className="min-w-0 flex-1 truncate text-[14px] leading-tight" style={{ color: c.text }}>
+                <li key={i} className="flex items-center gap-4">
+                  <Icon className="h-[22px] w-[22px] shrink-0" style={{ color: c.text }} strokeWidth={1.5} />
+                  <span className="min-w-0 flex-1 truncate text-[15.5px]" style={{ color: c.text }}>
                     {f.title}
                   </span>
-                  {f.note && (
-                    <span className="shrink-0 text-[12px] tabular-nums" style={{ color: c.textFaint }}>
-                      {f.note}
-                    </span>
-                  )}
                 </li>
               );
             })}
           </ul>
         </div>
-
-        {/* Billing options */}
-        <div className="mt-3">
-          {([
-            { yearly: false, label: t.monthly, block: currentPrices.monthly, unit: t.month },
-            { yearly: true, label: t.yearly, block: currentPrices.yearly, unit: t.year },
-          ] as const).map((opt) => {
-            const selected = isYearly === opt.yearly;
-            return (
-              <button
-                key={opt.label}
-                type="button"
-                onClick={() => onToggleYearly(opt.yearly)}
-                className="mb-2 flex w-full items-center gap-3 rounded-[16px] px-4 py-3 text-start transition-all duration-200"
-                style={{
-                  background: isLight ? "rgba(0,0,0,0.035)" : "#161616",
-                  border: `1.5px solid ${selected ? c.selectedBorder : "transparent"}`,
-                }}
-              >
-                <span
-                  className="flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full"
-                  style={{ border: `2px solid ${selected ? c.text : c.textFaint}` }}
-                >
-                  {selected && <span className="h-[9px] w-[9px] rounded-full" style={{ background: c.text }} />}
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="flex items-center gap-2">
-                    <span className="text-[12px] uppercase tracking-wide" style={{ color: c.textMuted }}>
-                      {opt.label}
-                    </span>
-                    {!opt.yearly && (
-                      <span
-                        className="rounded-md px-2 py-[1px] text-[10.5px] font-medium"
-                        style={{ background: "rgba(255,255,255,0.10)", color: c.text }}
-                      >
-                        {isAr ? "خصم 50%" : "50% off"}
-                      </span>
-                    )}
-                  </span>
-                  <span className="mt-[2px] flex items-baseline gap-2 tabular-nums" dir="ltr">
-                    <span className="text-[17px] font-semibold" style={{ color: c.text }}>
-                      ${opt.block.price}
-                    </span>
-                    <span className="text-[12px] line-through" style={{ color: c.textFaint }}>
-                      ${opt.block.strike}
-                    </span>
-                    <span className="text-[12px]" style={{ color: c.textMuted }}>/{opt.unit}</span>
-                  </span>
-                </span>
-              </button>
-            );
-          })}
-        </div>
       </div>
 
-      {/* Sticky CTA */}
+      <div className="min-h-[10px] flex-1" />
+
+      {/* Plan rows */}
+      <div className="shrink-0 px-4">
+        {([
+          { yearly: false, label: t.monthly, block: currentPrices.monthly, unit: t.month },
+          { yearly: true, label: t.yearly, block: currentPrices.yearly, unit: t.year },
+        ] as const).map((opt) => {
+          const selected = isYearly === opt.yearly;
+          return (
+            <button
+              key={opt.label}
+              type="button"
+              onClick={() => onToggleYearly(opt.yearly)}
+              className="mb-3 flex w-full items-center gap-4 rounded-[18px] px-5 py-4 text-start transition-all duration-200"
+              style={{
+                background: isLight ? "rgba(0,0,0,0.04)" : "#1c1c1c",
+                border: `2px solid ${selected ? c.selectedBorder : "transparent"}`,
+              }}
+            >
+              <span
+                className="flex h-[24px] w-[24px] shrink-0 items-center justify-center rounded-full"
+                style={{ border: `2px solid ${selected ? c.text : c.textFaint}` }}
+              >
+                {selected && <span className="h-[11px] w-[11px] rounded-full" style={{ background: c.text }} />}
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="flex items-center gap-2">
+                  <span className="text-[13px]" style={{ color: c.textMuted }}>
+                    {opt.label}
+                  </span>
+                  {!opt.yearly && (
+                    <span
+                      className="rounded-lg px-2 py-[2px] text-[11.5px] font-medium"
+                      style={{ background: "#2c4a72", color: "#dbe8f8" }}
+                    >
+                      {isAr ? "خصم 50% على الشهر الأول" : "50% off first month"}
+                    </span>
+                  )}
+                </span>
+                <span className="mt-[3px] flex items-baseline gap-2 tabular-nums" dir="ltr">
+                  <span className="text-[19px] font-semibold" style={{ color: c.text }}>
+                    ${opt.block.price}
+                  </span>
+                  <span className="text-[13px] line-through" style={{ color: c.textFaint }}>
+                    ${opt.block.strike}
+                  </span>
+                  <span className="text-[13px]" style={{ color: c.textMuted }}>
+                    /{opt.unit}
+                  </span>
+                </span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Footnote + CTA */}
       <div
-        className="shrink-0 px-4 pt-2"
-        style={{
-          paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 10px)",
-          background: isLight ? "#ffffff" : "#0b0b0b",
-          borderTop: `1px solid ${c.divider}`,
-        }}
+        className="shrink-0 px-4 pt-1"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
       >
+        <p className="mb-3 text-center text-[12px] leading-snug" style={{ color: c.textFaint }}>
+          {isAr
+            ? `‏$${currentPrices.monthly.price} للشهر الأول، ثم $${currentPrices.monthly.strike}/شهر. يمكن الإلغاء في أي وقت.`
+            : `$${currentPrices.monthly.price} for the first month, then $${currentPrices.monthly.strike}/mo. Cancel anytime.`}
+        </p>
         <button
           type="button"
           onClick={() => onSubscribe(activeTier)}
           disabled={isLoading}
-          className="flex h-[50px] w-full items-center justify-center rounded-[14px] text-[16px] font-semibold transition active:scale-[0.99] disabled:opacity-60"
+          className="flex h-[54px] w-full items-center justify-center rounded-[14px] text-[16px] font-medium transition active:scale-[0.99] disabled:opacity-60"
           style={{ background: c.ctaBg, color: c.ctaText }}
         >
           {isLoading ? (
@@ -382,7 +381,7 @@ export default function MobilePricingScreen({
             <span style={{ color: c.ctaText }}>{isAr ? "قم بالترقية الآن" : "Upgrade now"}</span>
           )}
         </button>
-        <div className="mt-2 flex items-center justify-center gap-6 text-[11.5px]" style={{ color: c.textFaint }}>
+        <div className="mt-3 flex items-center justify-center gap-6 text-[12.5px]" style={{ color: c.textFaint }}>
           <a href="/terms">{isAr ? "الشروط" : "Terms"}</a>
           <a href="/privacy">{isAr ? "الخصوصية" : "Privacy"}</a>
           <button type="button" onClick={() => onSubscribe(activeTier)}>
