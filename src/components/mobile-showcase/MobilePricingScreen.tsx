@@ -248,55 +248,65 @@ export default function MobilePricingScreen({
         fontFamily: 'Inter, -apple-system, "SF Pro Text", system-ui, sans-serif',
       }}
     >
-      {/* Close */}
+      {/* Sidebar menu */}
       <header
-        className="flex items-center px-4"
+        className="flex items-center px-3"
         style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 10px)" }}
       >
-        <button
-          type="button"
-          aria-label={isAr ? "إغلاق" : "Close"}
-          onClick={() => (onMenuClick ? onMenuClick() : window.history.back())}
-          className="flex h-9 w-9 items-center justify-center rounded-full"
-          style={{ background: c.subtle, color: c.text }}
-        >
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M6 6l12 12M18 6L6 18" />
-          </svg>
-        </button>
+        <MobileSidebarButton
+          onClick={() => onMenuClick?.()}
+          ariaLabel="Menu"
+          className={isLight ? "!text-black" : "!text-white"}
+        />
       </header>
 
-      {/* Sparkle + title */}
-      <div className="px-6 pt-6 text-center">
-        <Sparkles className="mx-auto h-9 w-9" style={{ color: c.text }} strokeWidth={1.4} />
+      {/* Logo + title */}
+      <div className="px-6 pt-5 text-center">
+        <img
+          loading="lazy"
+          decoding="async"
+          src={megsyLogo}
+          alt="Megsy"
+          draggable={false}
+          className="mx-auto h-8 w-auto select-none"
+          style={{ filter: c.logoFilter }}
+        />
         <h1
-          className="mt-4 font-normal leading-tight"
+          className="mt-4 font-normal leading-[1.1]"
           style={{
             color: c.text,
             fontFamily: '"Instrument Serif", "Fraunces", Georgia, serif',
-            fontSize: "clamp(26px, 7.4vw, 34px)",
-            letterSpacing: "-0.01em",
+            fontSize: "clamp(28px, 8vw, 36px)",
+            letterSpacing: "-0.015em",
           }}
         >
-          {isAr ? `قم بالترقية إلى Megsy ${planLabel}` : `Upgrade to Megsy ${planLabel}`}
+          Upgrade to Megsy {planLabel}
         </h1>
-        <div className="mt-3 flex items-center justify-center gap-4 text-[12.5px] font-medium">
-          {(["pro", "max"] as const).map((p) => (
-            <button
-              key={p}
-              type="button"
-              onClick={() => setPlan(p)}
-              style={{
-                color: plan === p ? c.text : c.textFaint,
-                borderBottom: `1.5px solid ${plan === p ? c.text : "transparent"}`,
-                paddingBottom: 2,
-              }}
-            >
-              {p === "pro" ? t.pro : t.max}
-            </button>
-          ))}
+        <p className="mt-2 text-[13px]" style={{ color: c.textMuted }}>
+          Unlock flagship models, deep research and pro media.
+        </p>
+
+        {/* Plan segmented control */}
+        <div className="mt-5 flex justify-center">
+          <div className="flex items-center rounded-full p-1" style={{ background: c.toggleBg }}>
+            {(["pro", "max"] as const).map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setPlan(p)}
+                className="h-8 min-w-[76px] rounded-full px-4 text-[13px] font-medium transition-colors"
+                style={{
+                  background: plan === p ? c.toggleActiveBg : "transparent",
+                  color: plan === p ? c.toggleActiveText : c.toggleIdleText,
+                }}
+              >
+                {p === "pro" ? t.pro : t.max}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
+
 
       {/* Benefits card */}
       <div className="mx-4 mt-6">
