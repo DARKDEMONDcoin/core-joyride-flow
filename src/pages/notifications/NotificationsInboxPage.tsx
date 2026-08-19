@@ -219,8 +219,8 @@ const NotificationsInboxPage = () => {
 const ntiCss = `
 .nti-root {
   min-height: 100dvh;
-  background: #1a1a1a;
-  color: #e8e8e8;
+  background: var(--mn-bg);
+  color: var(--mn-fg);
   font-family: "Neue Haas Unica", "Helvetica Now Display", -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -229,19 +229,19 @@ const ntiCss = `
   display: grid; grid-template-columns: 40px 1fr 40px;
   align-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 10px;
-  background: #1a1a1a;
+  background: var(--mn-bg);
 }
 .nti-title {
   margin: 0; text-align: center;
   font-size: 17px; font-weight: 600;
-  letter-spacing: -0.01em; color: #e8e8e8;
+  letter-spacing: -0.01em; color: var(--mn-fg);
 }
 .nti-icon-btn {
   width: 40px; height: 40px;
   display: inline-grid; place-items: center;
   border-radius: 999px;
   background: transparent; border: 0;
-  color: #e8e8e8; cursor: pointer;
+  color: var(--mn-fg); cursor: pointer;
   transition: transform 160ms ease;
 }
 .nti-icon-btn:active { transform: scale(0.94); }
@@ -252,36 +252,36 @@ const ntiCss = `
   gap: 4px;
   margin: 4px 16px 8px;
   padding: 4px;
-  background: #131313;
+  background: var(--mn-seg);
   border-radius: 14px;
 }
 .nti-tab {
   padding: 9px 10px;
   border: 0; border-radius: 11px;
   background: transparent;
-  color: rgba(232,232,232,0.55);
+  color: var(--mn-muted);
   font: inherit; font-size: 14px; font-weight: 500;
   cursor: pointer;
   transition: background 180ms ease, color 180ms ease;
 }
-.nti-tab.is-active { background: #2e2e2e; color: #e8e8e8; }
+.nti-tab.is-active { background: var(--mn-seg-active); color: var(--mn-fg); }
 
 .nti-main { padding: 4px 16px 24px; }
 .nti-group { animation: nti-rise 320ms cubic-bezier(0.16,1,0.3,1) both; }
 .nti-day {
   margin: 18px 4px 10px;
   font-size: 13px; font-weight: 500;
-  color: rgba(232,232,232,0.45);
+  color: var(--mn-muted);
 }
 .nti-card {
-  background: #262626;
+  background: var(--mn-card);
   border-radius: 18px;
   padding: 12px 14px 16px;
   margin-bottom: 12px;
 }
 .nti-media {
   border-radius: 12px; overflow: hidden;
-  margin-bottom: 12px; background: #1a1a1a;
+  margin-bottom: 12px; background: var(--mn-bg);
   aspect-ratio: 16 / 10;
 }
 .nti-media img,
@@ -289,12 +289,12 @@ const ntiCss = `
 .nti-card-title {
   margin: 0 0 6px;
   font-size: 15.5px; font-weight: 600;
-  color: #e8e8e8; letter-spacing: -0.01em;
+  color: var(--mn-fg); letter-spacing: -0.01em;
 }
 .nti-card-body {
   margin: 0;
   font-size: 14px; line-height: 1.5;
-  color: rgba(232,232,232,0.55);
+  color: var(--mn-muted);
 }
 
 .nti-state {
@@ -303,7 +303,7 @@ const ntiCss = `
   color: rgba(232,232,232,0.5);
 }
 .nti-empty { gap: 6px; text-align: center; }
-.nti-empty-title { margin: 0; font-size: 15.5px; font-weight: 600; color: #e8e8e8; }
+.nti-empty-title { margin: 0; font-size: 15.5px; font-weight: 600; color: var(--mn-fg); }
 .nti-empty-sub { margin: 0; font-size: 14px; color: rgba(232,232,232,0.5); }
 
 .nti-spacer { height: 32px; }
