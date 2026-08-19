@@ -253,7 +253,7 @@ const npgCss = `
   display: grid; grid-template-columns: 44px 1fr 44px;
   align-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 12px;
-  background: linear-gradient(to bottom, #000 82%, transparent);
+  background: #1a1a1a;
 }
 .npg-title {
   margin: 0; text-align: center;
@@ -262,11 +262,11 @@ const npgCss = `
 }
 .npg-status { display: flex; justify-content: flex-end; padding-right: 4px; }
 .npg-icon-btn {
-  width: 44px; height: 44px;
+  width: 40px; height: 40px;
   display: inline-grid; place-items: center;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
   color: #e8e8e8; cursor: pointer;
   transition: transform 160ms ease;
 }
@@ -319,7 +319,7 @@ const npgCss = `
   cursor: pointer;
   transition: background 180ms ease;
 }
-.npg-switch.is-on { background: #34a3ff; }
+.npg-switch.is-on { background: #e8e8e8; }
 .npg-switch-thumb {
   position: absolute;
   top: 2px; left: 2px;

@@ -224,7 +224,7 @@ const mobileCss = `
   display: grid; grid-template-columns: 44px 1fr 44px;
   align-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 12px;
-  background: linear-gradient(to bottom, #000 82%, transparent);
+  background: #1a1a1a;
 }
 .privacy-title {
   margin: 0;
@@ -234,11 +234,11 @@ const mobileCss = `
   color: #e8e8e8;
 }
 .privacy-icon-btn {
-  width: 44px; height: 44px;
+  width: 40px; height: 40px;
   display: inline-grid; place-items: center;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
   color: #e8e8e8;
   cursor: pointer;
   transition: transform 160ms ease;
