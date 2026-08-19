@@ -44,7 +44,6 @@ import {
   UsagePage,
   McpSettingsPage,
   AIPersonalizationPage,
-  MemoryPage,
   KnowledgePage,
   ApiKeysPage,
   CostDashboardPage,
