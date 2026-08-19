@@ -20,7 +20,17 @@ function useIsLightTheme() {
   }, []);
   return light;
 }
-import { Check, Minus } from "lucide-react";
+import {
+  Sparkles,
+  SearchCheck,
+  Code2,
+  LayoutPanelTop,
+  GraduationCap,
+  Image as ImageIcon,
+  Clapperboard,
+  ListChecks,
+  type LucideIcon,
+} from "lucide-react";
 import { MobileSidebarButton } from "@/components/shared/MobileSidebarButton";
 import { BrandIcon } from "@/components/chat/media/BrandIcon";
 import { useUserLang } from "@/lib/authI18n";
@@ -48,6 +58,7 @@ const MODELS = [
 
 interface FeatureRow {
   title: string;
+  icon: LucideIcon;
   value: "yes" | "limited" | "no";
   note?: string;
   freeValue: "yes" | "limited" | "no";
@@ -77,46 +88,46 @@ export default function MobilePricingScreen({
   // short label on the left, quantitative value chip on the right.
   const proFeatures: FeatureRow[] = isAr
     ? [
-        { title: "محادثة · النماذج الرائدة",     value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
-        { title: "بحث معمّق",                     value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞",  freeValue: "no" },
-        { title: "مستندات وعروض",                 value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "تعليم · مهارات · MCP",          value: "yes", note: "∞",     freeValue: "yes" },
-        { title: "صور احترافية",                  value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
-        { title: "فيديو سينمائي",                 value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
-        { title: "أولوية وتكاملات",               value: "yes", note: "∞",     freeValue: "limited", freeNote: "قياسي" },
+        { title: "محادثة · النماذج الرائدة",     icon: Sparkles, value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
+        { title: "بحث معمّق",                     icon: SearchCheck, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞",  freeValue: "no" },
+        { title: "مستندات وعروض",                 icon: LayoutPanelTop, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "تعليم · مهارات · MCP",          icon: GraduationCap, value: "yes", note: "∞",     freeValue: "yes" },
+        { title: "صور احترافية",                  icon: ImageIcon, value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
+        { title: "فيديو سينمائي",                 icon: Clapperboard, value: "yes", note: "٢٤٠/شهر",   freeValue: "no" },
+        { title: "أولوية وتكاملات",               icon: ListChecks, value: "yes", note: "∞",     freeValue: "limited", freeNote: "قياسي" },
       ]
     : [
-        { title: "Chat · flagship models",         value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
-        { title: "Deep Research",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞", freeValue: "no" },
-        { title: "Docs & Slides",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Study · Skills · MCP",           value: "yes", note: "∞",  freeValue: "yes" },
-        { title: "Pro images",                     value: "yes", note: "240 / mo",  freeValue: "no" },
-        { title: "Cinematic video",                value: "yes", note: "240 / mo",  freeValue: "no" },
-        { title: "Priority & integrations",        value: "yes", note: "∞",  freeValue: "limited", freeNote: "Standard" },
+        { title: "Chat · flagship models",         icon: Sparkles, value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
+        { title: "Deep Research",                  icon: SearchCheck, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞", freeValue: "no" },
+        { title: "Docs & Slides",                  icon: LayoutPanelTop, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Study · Skills · MCP",           icon: GraduationCap, value: "yes", note: "∞",  freeValue: "yes" },
+        { title: "Pro images",                     icon: ImageIcon, value: "yes", note: "240 / mo",  freeValue: "no" },
+        { title: "Cinematic video",                icon: Clapperboard, value: "yes", note: "240 / mo",  freeValue: "no" },
+        { title: "Priority & integrations",        icon: ListChecks, value: "yes", note: "∞",  freeValue: "limited", freeNote: "Standard" },
       ];
 
   const maxFeatures: FeatureRow[] = isAr
     ? [
-        { title: "محادثة · النماذج الرائدة",     value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
-        { title: "بحث معمّق",                     value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞",  freeValue: "no" },
-        { title: "مستندات وعروض",                 value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
-        { title: "تعليم · مهارات · MCP",          value: "yes", note: "∞",     freeValue: "yes" },
-        { title: "صور احترافية",                  value: "yes", note: "∞",  freeValue: "no" },
-        { title: "فيديو سينمائي",                 value: "yes", note: "٥٠٠/شهر",   freeValue: "no" },
-        { title: "أولوية ×٣ وتكاملات",            value: "yes", note: "×٣ أسرع",   freeValue: "limited", freeNote: "قياسي" },
+        { title: "محادثة · النماذج الرائدة",     icon: Sparkles, value: "yes", note: "∞",  freeValue: "limited", freeNote: "محدود" },
+        { title: "بحث معمّق",                     icon: SearchCheck, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞",  freeValue: "no" },
+        { title: "مستندات وعروض",                 icon: LayoutPanelTop, value: "yes", note: "∞",  freeValue: "limited", freeNote: "٣/يوم" },
+        { title: "تعليم · مهارات · MCP",          icon: GraduationCap, value: "yes", note: "∞",     freeValue: "yes" },
+        { title: "صور احترافية",                  icon: ImageIcon, value: "yes", note: "∞",  freeValue: "no" },
+        { title: "فيديو سينمائي",                 icon: Clapperboard, value: "yes", note: "٥٠٠/شهر",   freeValue: "no" },
+        { title: "أولوية ×٣ وتكاملات",            icon: ListChecks, value: "yes", note: "×٣ أسرع",   freeValue: "limited", freeNote: "قياسي" },
       ]
     : [
-        { title: "Chat · flagship models",         value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
-        { title: "Deep Research",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Megsy Coder",                    value: "yes", note: "∞", freeValue: "no" },
-        { title: "Docs & Slides",                  value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
-        { title: "Study · Skills · MCP",           value: "yes", note: "∞",  freeValue: "yes" },
-        { title: "Pro images",                     value: "yes", note: "∞", freeValue: "no" },
-        { title: "Cinematic video",                value: "yes", note: "500 / mo",  freeValue: "no" },
-        { title: "3× priority & integrations",     value: "yes", note: "3× faster", freeValue: "limited", freeNote: "Standard" },
+        { title: "Chat · flagship models",         icon: Sparkles, value: "yes", note: "∞", freeValue: "limited", freeNote: "Lite" },
+        { title: "Deep Research",                  icon: SearchCheck, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Megsy Coder",                    icon: Code2, value: "yes", note: "∞", freeValue: "no" },
+        { title: "Docs & Slides",                  icon: LayoutPanelTop, value: "yes", note: "∞", freeValue: "limited", freeNote: "3/day" },
+        { title: "Study · Skills · MCP",           icon: GraduationCap, value: "yes", note: "∞",  freeValue: "yes" },
+        { title: "Pro images",                     icon: ImageIcon, value: "yes", note: "∞", freeValue: "no" },
+        { title: "Cinematic video",                icon: Clapperboard, value: "yes", note: "500 / mo",  freeValue: "no" },
+        { title: "3× priority & integrations",     icon: ListChecks, value: "yes", note: "3× faster", freeValue: "limited", freeNote: "Standard" },
       ];
 
   const features = plan === "pro" ? proFeatures : maxFeatures;
@@ -207,15 +218,15 @@ export default function MobilePricingScreen({
         divider: "rgba(255,255,255,0.07)",
         rowDivider: "rgba(255,255,255,0.07)",
         toggleBg: "rgba(255,255,255,0.08)",
-        toggleActiveBg: "#2DDBA0",
-        toggleActiveText: "#05100b",
+        toggleActiveBg: "#f5f5f5",
+        toggleActiveText: "#0a0a0a",
         toggleIdleText: "#f5f5f5",
-        cardBg: "rgba(255,255,255,0.04)",
-        selectedBg: "rgba(255,255,255,0.07)",
-        selectedBorder: "rgba(45,219,160,0.65)",
+        cardBg: "rgba(255,255,255,0.05)",
+        selectedBg: "rgba(255,255,255,0.06)",
+        selectedBorder: "rgba(255,255,255,0.92)",
         marqueeEdge: "#000000",
-        ctaBg: "#2DDBA0",
-        ctaText: "#05100b",
+        ctaBg: "#f5f5f5",
+        ctaText: "#0a0a0a",
         logoFilter: "brightness(0) invert(1) saturate(100%)",
         heroItalic: "#d4d4d4",
       };
@@ -243,7 +254,7 @@ export default function MobilePricingScreen({
       </header>
 
       {/* Hero copy with Megsy logo */}
-      <div className="px-6 pt-8 text-center">
+      <div className="px-6 pt-5 text-center">
         <h1
           className="mx-auto font-normal leading-[1.02]"
           style={{
@@ -272,7 +283,7 @@ export default function MobilePricingScreen({
       </div>
 
       {/* Models marquee */}
-      <div className="relative mt-6 overflow-hidden">
+      <div className="relative mt-5 overflow-hidden">
         <div
           className="pointer-events-none absolute inset-y-0 start-0 z-10 w-10"
           style={{ background: `linear-gradient(to right, ${c.marqueeEdge}, transparent)` }}
@@ -301,7 +312,7 @@ export default function MobilePricingScreen({
       </div>
 
       {/* Max / Pro toggle */}
-      <div className="mt-6 flex justify-center">
+      <div className="mt-5 flex justify-center">
         <div
           className="relative flex items-center rounded-full p-1"
           style={{ background: c.toggleBg }}
@@ -331,191 +342,133 @@ export default function MobilePricingScreen({
         </div>
       </div>
 
-      {/* Comparison card — no icons, real features */}
-      <div className="mx-4 mt-6 flex-1 min-h-0">
+      {/* Benefits card — clean neutral list, icon + label (reference design) */}
+      <div className="mx-4 mt-5 flex-1 min-h-0 overflow-hidden">
         <div
-          className="h-full rounded-[20px] px-3.5 py-2.5"
-          style={{
-            background: c.cardBg,
-            border: `1px solid ${c.border}`,
-          }}
+          className="h-full overflow-hidden rounded-[22px] px-4 py-2"
+          style={{ background: c.cardBg, border: `1px solid ${c.border}` }}
         >
-          <div
-            key={plan}
-            className="pricing-plan-switch"
-            style={{ animation: "pricing-plan-in 360ms cubic-bezier(0.22,1,0.36,1) both" }}
-          >
-            {/* Header row */}
-            <div className="grid grid-cols-[minmax(0,1fr)_84px_66px] items-center pb-1.5 text-[11px] font-semibold uppercase tracking-wide">
-              <span style={{ color: c.textMuted }}>{isAr ? "المميزات" : "Features"}</span>
-              <span className="text-center text-teal-500 dark:text-teal-300">{plan === "pro" ? t.pro : t.max}</span>
-              <span className="text-center" style={{ color: c.textFaint }}>{t.free}</span>
-            </div>
-            <div className="h-px w-full" style={{ background: c.rowDivider }} />
-            <ul>
-              {features.map((f, i) => (
+          <ul key={plan} className="flex h-full flex-col justify-between">
+            {features.map((f, i) => {
+              const Icon = f.icon;
+              return (
                 <li
                   key={i}
-                  className="grid grid-cols-[minmax(0,1fr)_84px_66px] items-center gap-2 py-[6px]"
+                  className="flex items-center gap-3 py-[5px]"
                   style={{
-                    borderTop: i === 0 ? "none" : `1px solid ${c.rowDivider}`,
                     opacity: 0,
-                    animation: "pricing-row-in 360ms cubic-bezier(0.22,1,0.36,1) forwards",
-                    animationDelay: `${60 + i * 35}ms`,
+                    animation: "pricing-row-in 340ms cubic-bezier(0.22,1,0.36,1) forwards",
+                    animationDelay: `${50 + i * 32}ms`,
                   }}
                 >
-                  <div className="min-w-0">
-                    <span className="block truncate whitespace-nowrap text-[12.5px] font-medium leading-tight" style={{ color: c.text }}>
-                      {f.title}
-                    </span>
-                  </div>
-                  <span className="flex justify-center">
-                    {f.note ? (
-                      <span className="whitespace-nowrap text-[11px] font-semibold" style={{ color: isLight ? "#0d9488" : "#5eead4" }}>
-                        {f.note}
-                      </span>
-                    ) : f.value === "yes" ? (
-                      <span className="flex h-5 w-5 items-center justify-center rounded-full" style={{ background: isLight ? "rgba(13,148,136,0.15)" : "rgba(45,212,191,0.15)" }}>
-                        <Check className="h-3.5 w-3.5" style={{ color: isLight ? "#0d9488" : "#5eead4" }} strokeWidth={2.6} />
-                      </span>
-                    ) : (
-                      <Minus className="h-4 w-4" style={{ color: c.textFaint }} strokeWidth={2.2} />
-                    )}
-                  </span>
-                  <span className="flex justify-center">
-                    {f.freeValue === "yes" ? (
-                      <Check className="h-4 w-4" style={{ color: c.textMuted }} strokeWidth={2.2} />
-                    ) : f.freeValue === "limited" ? (
-                      <span className="whitespace-nowrap text-[10.5px] font-medium" style={{ color: c.textMuted }}>
-                        {f.freeNote}
-                      </span>
-                    ) : (
-                      <Minus className="h-4 w-4" style={{ color: c.textFaint }} strokeWidth={2.2} />
-                    )}
+                  <Icon className="h-[18px] w-[18px] shrink-0" style={{ color: c.text }} strokeWidth={1.6} />
+                  <span
+                    className="min-w-0 truncate text-[13.5px] font-medium leading-tight"
+                    style={{ color: c.text }}
+                  >
+                    {f.title}
                   </span>
                 </li>
-              ))}
-            </ul>
-          </div>
+              );
+            })}
+          </ul>
           <style>{`
-            @keyframes pricing-plan-in {
-              from { opacity: 0; transform: translateY(6px) scale(0.985); }
-              to   { opacity: 1; transform: translateY(0) scale(1); }
-            }
             @keyframes pricing-row-in {
-              from { opacity: 0; transform: translateX(${isAr ? "8px" : "-8px"}); }
-              to   { opacity: 1; transform: translateX(0); }
+              from { opacity: 0; transform: translateY(6px); }
+              to   { opacity: 1; transform: translateY(0); }
             }
           `}</style>
         </div>
       </div>
 
-      {/* Billing cards */}
-      <div className="px-4 pt-6">
-        <div className="relative grid grid-cols-2 gap-2.5">
-          {/* Animated selection background */}
-          <div
-            className="pointer-events-none absolute inset-y-0 rounded-[16px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={{
-              insetInlineStart: isYearly ? 0 : "calc(50% + 5px)",
-              width: "calc(50% - 5px)",
-              background: c.selectedBg,
-              border: `1px solid ${c.selectedBorder}`,
-            }}
-          />
-
-          {/* Yearly */}
-          <button
-            type="button"
-            onClick={() => onToggleYearly(true)}
-            className="relative rounded-[16px] p-3 text-start transition-colors duration-300"
-            style={{
-              background: "transparent",
-              border: "1px solid transparent",
-            }}
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-[12.5px] font-medium" style={{ color: c.textMuted }}>{t.yearly}</span>
+      {/* Billing options — stacked rows with radio (reference design) */}
+      <div className="px-4 pt-4">
+        {([
+          { yearly: false, label: t.monthly, block: currentPrices.monthly, unit: t.month },
+          { yearly: true, label: t.yearly, block: currentPrices.yearly, unit: t.year },
+        ] as const).map((opt) => {
+          const selected = isYearly === opt.yearly;
+          return (
+            <button
+              key={opt.label}
+              type="button"
+              onClick={() => onToggleYearly(opt.yearly)}
+              className="mb-2 flex w-full items-center gap-3 rounded-[16px] px-3.5 py-2.5 text-start transition-all duration-200"
+              style={{
+                background: selected ? c.selectedBg : c.cardBg,
+                border: `2px solid ${selected ? c.selectedBorder : "transparent"}`,
+              }}
+            >
               <span
-                className="rounded-full px-1.5 py-[1px] text-[10px] font-semibold transition-transform duration-300"
-                style={{ background: isLight ? "rgba(13,148,136,0.15)" : "rgba(45,212,191,0.18)", color: isLight ? "#0d9488" : "#5eead4" }}
+                className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full"
+                style={{ border: `2px solid ${selected ? c.text : c.textFaint}` }}
               >
-                {currentPrices.yearly.discount}
+                {selected && (
+                  <span className="h-[10px] w-[10px] rounded-full" style={{ background: c.text }} />
+                )}
               </span>
-            </div>
-            <div className="mt-2 flex items-baseline gap-1.5 tabular-nums overflow-hidden" dir="ltr">
-              <span
-                key={currentPrices.yearly.price + plan}
-                className="text-[15px] font-semibold animate-fade-in"
-                style={{ color: c.text }}
-              >
-                ${currentPrices.yearly.price}
+              <span className="min-w-0 flex-1">
+                <span className="flex items-center gap-2">
+                  <span className="text-[12.5px] font-medium" style={{ color: c.textMuted }}>
+                    {opt.label}
+                  </span>
+                  <span
+                    className="rounded-full px-2 py-[1px] text-[10.5px] font-semibold"
+                    style={{ background: c.subtle, color: c.textMuted }}
+                  >
+                    {opt.block.discount}
+                  </span>
+                </span>
+                <span className="mt-1 flex items-baseline gap-2 tabular-nums" dir="ltr">
+                  <span className="text-[15px] font-semibold" style={{ color: c.text }}>
+                    ${opt.block.price}
+                  </span>
+                  <span className="text-[12px] line-through" style={{ color: c.textFaint }}>
+                    ${opt.block.strike}
+                  </span>
+                  <span className="text-[11px]" style={{ color: c.textMuted }}>/{opt.unit}</span>
+                </span>
               </span>
-              <span className="text-[11px]" style={{ color: c.textMuted }}>/{t.year}</span>
-            </div>
-            <div className="mt-0.5 text-[11px] line-through tabular-nums" dir="ltr" style={{ color: c.textFaint }}>
-              ${currentPrices.yearly.strike}/{t.year}
-            </div>
-          </button>
-
-          {/* Monthly */}
-          <button
-            type="button"
-            onClick={() => onToggleYearly(false)}
-            className="relative rounded-[16px] p-3 text-start transition-colors duration-300"
-            style={{
-              background: "transparent",
-              border: "1px solid transparent",
-            }}
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-[12.5px] font-medium" style={{ color: c.textMuted }}>{t.monthly}</span>
-              <span
-                className="rounded-full px-1.5 py-[1px] text-[10px] font-semibold transition-transform duration-300"
-                style={{ background: isLight ? "rgba(13,148,136,0.15)" : "rgba(45,212,191,0.18)", color: isLight ? "#0d9488" : "#5eead4" }}
-              >
-                {currentPrices.monthly.discount}
-              </span>
-            </div>
-            <div className="mt-2 flex items-baseline gap-1.5 tabular-nums overflow-hidden" dir="ltr">
-              <span
-                key={currentPrices.monthly.price + plan}
-                className="text-[15px] font-semibold animate-fade-in"
-                style={{ color: c.text }}
-              >
-                ${currentPrices.monthly.price}
-              </span>
-              <span className="text-[11px]" style={{ color: c.textMuted }}>/{t.month}</span>
-            </div>
-            <div className="mt-0.5 text-[11px] line-through tabular-nums" dir="ltr" style={{ color: c.textFaint }}>
-              ${currentPrices.monthly.strike}/{t.month}
-            </div>
-          </button>
-        </div>
+            </button>
+          );
+        })}
       </div>
 
-      {/* Fixed subscribe button */}
+      {/* Footnote + CTA + legal links */}
       <div
-        className="px-4 pt-3"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 14px)" }}
+        className="px-4 pt-1"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
       >
+        <p className="mb-2.5 text-center text-[11px] leading-snug" style={{ color: c.textFaint }}>
+          {isAr
+            ? `‏$${currentPrices.monthly.price} للشهر الأول، ثم $${currentPrices.monthly.strike}/شهر. يمكن الإلغاء في أي وقت.`
+            : `$${currentPrices.monthly.price} for the first month, then $${currentPrices.monthly.strike}/mo. Cancel anytime.`}
+        </p>
         <button
           key={plan}
           type="button"
           onClick={() => onSubscribe(activeTier)}
           disabled={isLoading}
-          className="flex h-[54px] w-full items-center justify-center rounded-full text-[15px] font-semibold transition active:scale-[0.99] disabled:opacity-60"
+          className="flex h-[52px] w-full items-center justify-center rounded-[14px] text-[15px] font-semibold transition active:scale-[0.99] disabled:opacity-60"
           style={{ background: c.ctaBg, color: c.ctaText }}
         >
           {isLoading ? (
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
           ) : (
             <span style={{ color: c.ctaText }}>
-              {t.subscribe(plan === "pro" ? t.pro : t.max)}
+              {isAr ? "قم بالترقية الآن" : t.subscribe(plan === "pro" ? t.pro : t.max)}
             </span>
           )}
         </button>
+        <div className="mt-2.5 flex items-center justify-center gap-5 text-[11.5px]" style={{ color: c.textFaint }}>
+          <a href="/terms">{isAr ? "الشروط" : "Terms"}</a>
+          <a href="/privacy">{isAr ? "الخصوصية" : "Privacy"}</a>
+          <button type="button" onClick={() => onSubscribe(activeTier)}>
+            {isAr ? "استعادة" : "Restore"}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
+
