@@ -234,7 +234,7 @@ const ManusSettingsMobile = () => {
 const manusCss = `
 .ms-root {
   min-height: 100dvh;
-  background: #0d0d0d;
+  background: #1a1a1a;
   color: #e8e8e8;
   display: flex;
   justify-content: center;
@@ -245,7 +245,7 @@ const manusCss = `
   position: sticky; top: 0; z-index: 5;
   display: flex; align-items: center; justify-content: space-between;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px 10px;
-  background: #0d0d0d;
+  background: #1a1a1a;
 }
 .ms-hbtn {
   position: relative; width: 40px; height: 40px;
@@ -265,7 +265,7 @@ const manusCss = `
 .ms-body { padding: 6px 14px 0; display: flex; flex-direction: column; gap: 22px; }
 .ms-card {
   width: 100%;
-  background: #1c1c1c;
+  background: #262626;
   border-radius: 18px;
   overflow: hidden;
   border: 0;
