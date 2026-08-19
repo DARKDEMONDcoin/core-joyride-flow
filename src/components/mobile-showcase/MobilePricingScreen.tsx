@@ -88,18 +88,18 @@ export default function MobilePricingScreen({
         ctaText: "#ffffff",
       }
     : {
-        bg: "#0b0b0b",
+        bg: "#1a1a1a",
         text: "#f5f5f5",
-        muted: "#9b9b9b",
-        faint: "#6f6f6f",
+        muted: "#a3a3a3",
+        faint: "#737373",
         line: "rgba(255,255,255,0.10)",
-        card: "rgba(255,255,255,0.045)",
-        switchBg: "rgba(255,255,255,0.07)",
+        card: "rgba(255,255,255,0.055)",
+        switchBg: "rgba(255,255,255,0.08)",
         switchOn: "#f5f5f5",
-        switchOnText: "#0a0a0a",
+        switchOnText: "#1a1a1a",
         selBorder: "#f5f5f5",
         ctaBg: "#f5f5f5",
-        ctaText: "#0a0a0a",
+        ctaText: "#1a1a1a",
       };
 
   return (
