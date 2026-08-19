@@ -2471,6 +2471,24 @@ const ChatPage = () => {
 
   const hasConversation = messages.length > 0;
   const showDesktopEmptyVideo = messages.length === 0 && !loadingMessages;
+  // The desktop landing background is a 7 MB mp4. Mounting it during the first
+  // render makes the browser open that download while it is still painting the
+  // chat shell, which is the single biggest first-paint cost on this route.
+  // Mount it after the browser goes idle, and never on mobile (where it is
+  // display:none anyway but still fetched).
+  const [showLandingVideo, setShowLandingVideo] = useState(false);
+  useEffect(() => {
+    if (isMobileViewport) return;
+    const ric: typeof window.requestIdleCallback | undefined = window.requestIdleCallback;
+    let id = 0;
+    const start = () => setShowLandingVideo(true);
+    if (typeof ric === "function") id = ric(start, { timeout: 2500 }) as unknown as number;
+    else id = window.setTimeout(start, 800);
+    return () => {
+      if (typeof window.cancelIdleCallback === "function") window.cancelIdleCallback(id);
+      else window.clearTimeout(id);
+    };
+  }, [isMobileViewport]);
 
   const { integrationCategories, filteredIntegrations } = useIntegrationsFilter(
     integrationsQuery,
