@@ -329,7 +329,7 @@ const npgCss = `
   box-shadow: 0 2px 4px rgba(0,0,0,0.35);
   transition: transform 180ms ease;
 }
-.npg-switch.is-on .npg-switch-thumb { transform: translateX(20px); }
+.npg-switch.is-on .npg-switch-thumb { transform: translateX(20px); background: #1a1a1a; }
 `;
 
 export default NotificationsPage;
