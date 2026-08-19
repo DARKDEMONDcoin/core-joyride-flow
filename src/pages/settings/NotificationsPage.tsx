@@ -243,7 +243,7 @@ const Switch = ({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 const npgCss = `
 .npg-root {
   min-height: 100dvh;
-  background: #1a1a1a;
+  background: #1c1c1c;
   color: #e8e8e8;
   font-family: "Neue Haas Unica", "Helvetica Now Display", -apple-system, "SF Pro Display", Inter, "Segoe UI", Roboto, sans-serif;
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -253,7 +253,7 @@ const npgCss = `
   display: grid; grid-template-columns: 44px 1fr 44px;
   align-items: center;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 12px;
-  background: #1a1a1a;
+  background: #1c1c1c;
 }
 .npg-title {
   margin: 0; text-align: center;
@@ -280,7 +280,7 @@ const npgCss = `
   letter-spacing: -0.005em;
 }
 .npg-card {
-  background: #262626;
+  background: #292929;
   border: 1px solid rgba(255,255,255,0.07);
   border-radius: 18px;
   overflow: hidden;
@@ -329,7 +329,7 @@ const npgCss = `
   box-shadow: 0 2px 4px rgba(0,0,0,0.35);
   transition: transform 180ms ease;
 }
-.npg-switch.is-on .npg-switch-thumb { transform: translateX(20px); background: #1a1a1a; }
+.npg-switch.is-on .npg-switch-thumb { transform: translateX(20px); background: #1c1c1c; }
 `;
 
 export default NotificationsPage;
