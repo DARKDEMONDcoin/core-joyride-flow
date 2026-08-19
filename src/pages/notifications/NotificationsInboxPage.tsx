@@ -15,6 +15,15 @@ type Row = {
   metadata: Record<string, unknown> | null;
 };
 
+type UpdateRow = {
+  id: string;
+  title: string;
+  description: string | null;
+  media_url: string | null;
+  media_type: string;
+  published_at: string;
+};
+
 type TabKey = "all" | "updates" | "messages";
 
 const TABS: { key: TabKey; label: string }[] = [
@@ -30,30 +39,53 @@ function dayLabel(iso: string) {
   return d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
+type FeedItem = {
+  id: string;
+  kind: "update" | "message";
+  title: string;
+  body: string;
+  mediaUrl: string | null;
+  mediaType: "image" | "video" | null;
+  at: string;
+};
+
 const NotificationsInboxPage = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<TabKey>("all");
   const [rows, setRows] = useState<Row[]>([]);
+  const [updates, setUpdates] = useState<UpdateRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
+        const updatesReq = supabase
+          .from("app_updates")
+          .select("id,title,description,media_url,media_type,published_at")
+          .eq("published", true)
+          .order("published_at", { ascending: false })
+          .limit(50);
+
         const { data: auth } = await supabase.auth.getUser();
         const uid = auth.user?.id;
-        if (!uid) {
-          if (!cancelled) setLoading(false);
-          return;
-        }
-        const { data } = await supabase
-          .from("notifications")
-          .select("id,title,message,type,read,created_at,metadata")
-          .eq("user_id", uid)
-          .order("created_at", { ascending: false })
-          .limit(100);
+
+        const [{ data: upd }, msgRes] = await Promise.all([
+          updatesReq,
+          uid
+            ? supabase
+                .from("notifications")
+                .select("id,title,message,type,read,created_at,metadata")
+                .eq("user_id", uid)
+                .order("created_at", { ascending: false })
+                .limit(100)
+            : Promise.resolve({ data: [] as unknown[] }),
+        ]);
+
         if (cancelled) return;
-        setRows((data as unknown as Row[]) ?? []);
+        setUpdates((upd as unknown as UpdateRow[]) ?? []);
+        const data = (msgRes as { data: unknown[] | null }).data as Row[] | null;
+        setRows(data ?? []);
         setLoading(false);
         const unread = (data ?? []).filter((r) => !r.read).map((r) => r.id);
         if (unread.length) {
@@ -68,16 +100,46 @@ const NotificationsInboxPage = () => {
     };
   }, []);
 
+  const updateItems = useMemo<FeedItem[]>(
+    () =>
+      updates.map((u) => ({
+        id: `u-${u.id}`,
+        kind: "update" as const,
+        title: u.title,
+        body: u.description ?? "",
+        mediaUrl: u.media_url,
+        mediaType: u.media_type === "video" ? ("video" as const) : ("image" as const),
+        at: u.published_at,
+      })),
+    [updates],
+  );
+
+  const messageItems = useMemo<FeedItem[]>(
+    () =>
+      rows
+        .filter((r) => MESSAGE_TYPES.has(r.type))
+        .map((r) => ({
+          id: `n-${r.id}`,
+          kind: "message" as const,
+          title: r.title,
+          body: r.message ?? "",
+          mediaUrl: null,
+          mediaType: null,
+          at: r.created_at,
+        })),
+    [rows],
+  );
+
   const filtered = useMemo(() => {
-    if (tab === "all") return rows;
-    if (tab === "messages") return rows.filter((r) => MESSAGE_TYPES.has(r.type));
-    return rows.filter((r) => !MESSAGE_TYPES.has(r.type));
-  }, [rows, tab]);
+    const list =
+      tab === "updates" ? updateItems : tab === "messages" ? messageItems : [...updateItems, ...messageItems];
+    return list.sort((a, b) => (a.at < b.at ? 1 : -1));
+  }, [tab, updateItems, messageItems]);
 
   const groups = useMemo(() => {
-    const map = new Map<string, Row[]>();
+    const map = new Map<string, FeedItem[]>();
     for (const r of filtered) {
-      const k = dayLabel(r.created_at);
+      const k = dayLabel(r.at);
       const arr = map.get(k);
       if (arr) arr.push(r);
       else map.set(k, [r]);
@@ -129,23 +191,22 @@ const NotificationsInboxPage = () => {
           groups.map(([day, items], gi) => (
             <section key={day} className="nti-group" style={{ animationDelay: `${gi * 40}ms` }}>
               <h2 className="nti-day">{day}</h2>
-              {items.map((n) => {
-                const image =
-                  (n.metadata && typeof n.metadata["image_url"] === "string"
-                    ? (n.metadata["image_url"] as string)
-                    : null) ?? null;
-                return (
-                  <article key={n.id} className="nti-card">
-                    {image && (
-                      <div className="nti-media">
-                        <img src={image} alt="" loading="lazy" />
-                      </div>
-                    )}
-                    <h3 className="nti-card-title">{n.title}</h3>
-                    {n.message && <p className="nti-card-body">{n.message}</p>}
-                  </article>
-                );
-              })}
+              {items.map((n) => (
+                <article key={n.id} className="nti-card">
+                  {n.mediaUrl && n.mediaType === "image" && (
+                    <div className="nti-media">
+                      <img src={n.mediaUrl} alt={n.title} loading="lazy" />
+                    </div>
+                  )}
+                  {n.mediaUrl && n.mediaType === "video" && (
+                    <div className="nti-media">
+                      <video src={n.mediaUrl} controls playsInline preload="metadata" />
+                    </div>
+                  )}
+                  <h3 className="nti-card-title">{n.title}</h3>
+                  {n.body && <p className="nti-card-body">{n.body}</p>}
+                </article>
+              ))}
             </section>
           ))
         )}
@@ -223,7 +284,8 @@ const ntiCss = `
   margin-bottom: 12px; background: #1a1a1a;
   aspect-ratio: 16 / 10;
 }
-.nti-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nti-media img,
+.nti-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .nti-card-title {
   margin: 0 0 6px;
   font-size: 15.5px; font-weight: 600;

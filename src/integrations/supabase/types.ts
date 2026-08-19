@@ -1496,6 +1496,42 @@ export type Database = {
         }
         Relationships: []
       }
+      app_updates: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          media_type: string
+          media_url: string | null
+          published: boolean
+          published_at: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          media_type?: string
+          media_url?: string | null
+          published?: boolean
+          published_at?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          media_type?: string
+          media_url?: string | null
+          published?: boolean
+          published_at?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       appsumo_licenses: {
         Row: {
           activated_at: string | null
