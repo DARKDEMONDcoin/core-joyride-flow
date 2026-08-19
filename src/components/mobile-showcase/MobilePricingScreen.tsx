@@ -32,10 +32,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { MobileSidebarButton } from "@/components/shared/MobileSidebarButton";
-import { BrandIcon } from "@/components/chat/media/BrandIcon";
 import { useUserLang } from "@/lib/authI18n";
 import { type PlanTier } from "@/data/pricingData";
-import megsyLogo from "@/assets/megsy-project-logo.png";
 
 interface Props {
   isYearly: boolean;
@@ -44,17 +42,6 @@ interface Props {
   loadingTier?: PlanTier | null;
   onMenuClick?: () => void;
 }
-
-const MODELS = [
-  { name: "Claude Opus 4.8", brand: "claude" },
-  { name: "GPT-5.5", brand: "openai" },
-  { name: "Gemini 3.5", brand: "gemini" },
-  { name: "Qwen 3 Max", brand: "qwen" },
-  { name: "Grok 4", brand: "grok" },
-  { name: "Seedance Pro", brand: "seedance" },
-  { name: "Sora 2", brand: "sora" },
-  { name: "Flux Pro", brand: "flux" },
-];
 
 interface FeatureRow {
   title: string;
@@ -240,18 +227,14 @@ export default function MobilePricingScreen({
       className="relative flex h-[100dvh] w-full flex-col overflow-hidden"
       style={{
         background: isLight ? "#ffffff" : "#0b0b0b",
-        backgroundImage: isLight
-          ? "radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px)"
-          : "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)",
-        backgroundSize: "18px 18px",
         color: c.text,
         fontFamily: 'Inter, -apple-system, "SF Pro Text", system-ui, sans-serif',
       }}
     >
-      {/* Sidebar menu */}
+      {/* Header */}
       <header
-        className="flex items-center px-3"
-        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 10px)" }}
+        className="flex shrink-0 items-center px-3 pb-1"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)" }}
       >
         <MobileSidebarButton
           onClick={() => onMenuClick?.()}
@@ -260,172 +243,146 @@ export default function MobilePricingScreen({
         />
       </header>
 
-      {/* Logo + title */}
-      <div className="px-6 pt-5 text-center">
-        <img
-          loading="lazy"
-          decoding="async"
-          src={megsyLogo}
-          alt="Megsy"
-          draggable={false}
-          className="mx-auto h-8 w-auto select-none"
-          style={{ filter: c.logoFilter }}
-        />
-        <h1
-          className="mt-4 font-normal leading-[1.1]"
-          style={{
-            color: c.text,
-            fontFamily: '"Instrument Serif", "Fraunces", Georgia, serif',
-            fontSize: "clamp(28px, 8vw, 36px)",
-            letterSpacing: "-0.015em",
-          }}
-        >
-          Upgrade to Megsy {planLabel}
-        </h1>
-        <p className="mt-2 text-[13px]" style={{ color: c.textMuted }}>
-          Unlock flagship models, deep research and pro media.
-        </p>
+      {/* Scrollable content */}
+      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="text-center">
+          <h1
+            className="font-normal leading-[1.1]"
+            style={{
+              color: c.text,
+              fontFamily: '"Instrument Serif", "Fraunces", Georgia, serif',
+              fontSize: "clamp(24px, 7vw, 30px)",
+              letterSpacing: "-0.015em",
+            }}
+          >
+            Upgrade to Megsy {planLabel}
+          </h1>
+          <p className="mt-1 text-[12.5px]" style={{ color: c.textMuted }}>
+            Unlock flagship models, deep research and pro media.
+          </p>
 
-        {/* Plan segmented control */}
-        <div className="mt-5 flex justify-center">
-          <div className="flex items-center rounded-full p-1" style={{ background: c.toggleBg }}>
-            {(["pro", "max"] as const).map((p) => (
-              <button
-                key={p}
-                type="button"
-                onClick={() => setPlan(p)}
-                className="h-8 min-w-[76px] rounded-full px-4 text-[13px] font-medium transition-colors"
-                style={{
-                  background: plan === p ? c.toggleActiveBg : "transparent",
-                  color: plan === p ? c.toggleActiveText : c.toggleIdleText,
-                }}
-              >
-                {p === "pro" ? t.pro : t.max}
-              </button>
-            ))}
+          <div className="mt-3 flex justify-center">
+            <div className="flex items-center rounded-full p-1" style={{ background: c.toggleBg }}>
+              {(["pro", "max"] as const).map((p) => (
+                <button
+                  key={p}
+                  type="button"
+                  onClick={() => setPlan(p)}
+                  className="h-8 min-w-[80px] rounded-full px-4 text-[13px] font-medium transition-colors"
+                  style={{
+                    background: plan === p ? c.toggleActiveBg : "transparent",
+                    color: plan === p ? c.toggleActiveText : c.toggleIdleText,
+                  }}
+                >
+                  {p === "pro" ? t.pro : t.max}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-
-      {/* Benefits card */}
-      <div className="mx-4 mt-6">
+        {/* Benefits */}
         <div
-          className="rounded-[20px] px-5 py-4"
-          style={{ background: isLight ? "rgba(0,0,0,0.035)" : "#1c1c1c" }}
+          className="mt-4 rounded-[18px] px-4 py-3"
+          style={{ background: isLight ? "rgba(0,0,0,0.035)" : "#161616" }}
         >
-          <ul key={plan} className="flex flex-col gap-[14px]">
+          <ul className="flex flex-col gap-[11px]">
             {visibleFeatures.map((f, i) => {
               const Icon = f.icon;
               return (
-                <li
-                  key={i}
-                  className="flex items-center gap-3"
-                  style={{
-                    opacity: 0,
-                    animation: "pricing-row-in 320ms cubic-bezier(0.22,1,0.36,1) forwards",
-                    animationDelay: `${40 + i * 30}ms`,
-                  }}
-                >
-                  <Icon className="h-[21px] w-[21px] shrink-0" style={{ color: c.text }} strokeWidth={1.5} />
-                  <span className="min-w-0 truncate text-[14.5px] leading-tight" style={{ color: c.text }}>
+                <li key={i} className="flex items-center gap-3">
+                  <Icon className="h-[19px] w-[19px] shrink-0" style={{ color: c.textMuted }} strokeWidth={1.5} />
+                  <span className="min-w-0 flex-1 truncate text-[14px] leading-tight" style={{ color: c.text }}>
                     {f.title}
                   </span>
+                  {f.note && (
+                    <span className="shrink-0 text-[12px] tabular-nums" style={{ color: c.textFaint }}>
+                      {f.note}
+                    </span>
+                  )}
                 </li>
               );
             })}
           </ul>
-          <style>{`
-            @keyframes pricing-row-in {
-              from { opacity: 0; transform: translateY(6px); }
-              to   { opacity: 1; transform: translateY(0); }
-            }
-          `}</style>
+        </div>
+
+        {/* Billing options */}
+        <div className="mt-3">
+          {([
+            { yearly: false, label: t.monthly, block: currentPrices.monthly, unit: t.month },
+            { yearly: true, label: t.yearly, block: currentPrices.yearly, unit: t.year },
+          ] as const).map((opt) => {
+            const selected = isYearly === opt.yearly;
+            return (
+              <button
+                key={opt.label}
+                type="button"
+                onClick={() => onToggleYearly(opt.yearly)}
+                className="mb-2 flex w-full items-center gap-3 rounded-[16px] px-4 py-3 text-start transition-all duration-200"
+                style={{
+                  background: isLight ? "rgba(0,0,0,0.035)" : "#161616",
+                  border: `1.5px solid ${selected ? c.selectedBorder : "transparent"}`,
+                }}
+              >
+                <span
+                  className="flex h-[20px] w-[20px] shrink-0 items-center justify-center rounded-full"
+                  style={{ border: `2px solid ${selected ? c.text : c.textFaint}` }}
+                >
+                  {selected && <span className="h-[9px] w-[9px] rounded-full" style={{ background: c.text }} />}
+                </span>
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-center gap-2">
+                    <span className="text-[12px] uppercase tracking-wide" style={{ color: c.textMuted }}>
+                      {opt.label}
+                    </span>
+                    {!opt.yearly && (
+                      <span
+                        className="rounded-md px-2 py-[1px] text-[10.5px] font-medium"
+                        style={{ background: "rgba(255,255,255,0.10)", color: c.text }}
+                      >
+                        {isAr ? "خصم 50%" : "50% off"}
+                      </span>
+                    )}
+                  </span>
+                  <span className="mt-[2px] flex items-baseline gap-2 tabular-nums" dir="ltr">
+                    <span className="text-[17px] font-semibold" style={{ color: c.text }}>
+                      ${opt.block.price}
+                    </span>
+                    <span className="text-[12px] line-through" style={{ color: c.textFaint }}>
+                      ${opt.block.strike}
+                    </span>
+                    <span className="text-[12px]" style={{ color: c.textMuted }}>/{opt.unit}</span>
+                  </span>
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      <div className="flex-1 min-h-[8px]" />
-
-      {/* Billing options */}
-      <div className="px-4">
-        {([
-          { yearly: false, label: t.monthly, block: currentPrices.monthly, unit: t.month },
-          { yearly: true, label: t.yearly, block: currentPrices.yearly, unit: t.year },
-        ] as const).map((opt) => {
-          const selected = isYearly === opt.yearly;
-          return (
-            <button
-              key={opt.label}
-              type="button"
-              onClick={() => onToggleYearly(opt.yearly)}
-              className="mb-2.5 flex w-full items-center gap-3 rounded-[18px] px-4 py-3 text-start transition-all duration-200"
-              style={{
-                background: isLight ? "rgba(0,0,0,0.035)" : "#1c1c1c",
-                border: `2px solid ${selected ? c.selectedBorder : "transparent"}`,
-              }}
-            >
-              <span
-                className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full"
-                style={{ border: `2px solid ${selected ? c.text : c.textFaint}` }}
-              >
-                {selected && <span className="h-[10px] w-[10px] rounded-full" style={{ background: c.text }} />}
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="flex items-center gap-2">
-                  <span className="text-[13px]" style={{ color: c.textMuted }}>
-                    {opt.label}
-                  </span>
-                  {!opt.yearly && (
-                    <span
-                      className="rounded-md px-2 py-[2px] text-[11px] font-medium"
-                      style={{ background: "rgba(56,105,168,0.35)", color: "#cfe0f5" }}
-                    >
-                      {isAr ? "خصم 50% على الشهر الأول" : "50% off first month"}
-                    </span>
-                  )}
-                </span>
-                <span className="mt-1 flex items-baseline gap-2 tabular-nums" dir="ltr">
-                  <span className="text-[16px] font-semibold" style={{ color: c.text }}>
-                    ${opt.block.price}
-                  </span>
-                  <span className="text-[12.5px] line-through" style={{ color: c.textFaint }}>
-                    ${opt.block.strike}
-                  </span>
-                  <span className="text-[12px]" style={{ color: c.textMuted }}>/{opt.unit}</span>
-                </span>
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Footnote + CTA + legal links */}
+      {/* Sticky CTA */}
       <div
-        className="px-4 pt-1"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 10px)" }}
+        className="shrink-0 px-4 pt-2"
+        style={{
+          paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 10px)",
+          background: isLight ? "#ffffff" : "#0b0b0b",
+          borderTop: `1px solid ${c.divider}`,
+        }}
       >
-        <p className="mb-2.5 text-center text-[11.5px] leading-snug" style={{ color: c.textFaint }}>
-          {isAr
-            ? `‏$${currentPrices.monthly.price} للشهر الأول، ثم $${currentPrices.monthly.strike}/شهر. يمكن الإلغاء في أي وقت.`
-            : `$${currentPrices.monthly.price} for the first month, then $${currentPrices.monthly.strike}/mo. Cancel anytime.`}
-        </p>
         <button
-          key={plan}
           type="button"
           onClick={() => onSubscribe(activeTier)}
           disabled={isLoading}
-          className="flex h-[54px] w-full items-center justify-center rounded-[14px] text-[16px] font-medium transition active:scale-[0.99] disabled:opacity-60"
+          className="flex h-[50px] w-full items-center justify-center rounded-[14px] text-[16px] font-semibold transition active:scale-[0.99] disabled:opacity-60"
           style={{ background: c.ctaBg, color: c.ctaText }}
         >
           {isLoading ? (
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
           ) : (
-            <span style={{ color: c.ctaText }}>
-              {isAr ? "قم بالترقية الآن" : "Upgrade now"}
-            </span>
+            <span style={{ color: c.ctaText }}>{isAr ? "قم بالترقية الآن" : "Upgrade now"}</span>
           )}
         </button>
-        <div className="mt-3 flex items-center justify-center gap-6 text-[12px]" style={{ color: c.textFaint }}>
+        <div className="mt-2 flex items-center justify-center gap-6 text-[11.5px]" style={{ color: c.textFaint }}>
           <a href="/terms">{isAr ? "الشروط" : "Terms"}</a>
           <a href="/privacy">{isAr ? "الخصوصية" : "Privacy"}</a>
           <button type="button" onClick={() => onSubscribe(activeTier)}>
