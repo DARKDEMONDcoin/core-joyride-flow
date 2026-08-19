@@ -311,6 +311,7 @@ const stCss = `
   display: flex; align-items: center; justify-content: space-between;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 10px 10px;
 }
+.st-iconbtn:focus, .st-iconbtn:focus-visible { outline: none; box-shadow: none; background: transparent; }
 .st-iconbtn {
   width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center;
   background: transparent; border: 0; color: #e8e8e8; cursor: pointer; -webkit-tap-highlight-color: transparent;
@@ -368,14 +369,14 @@ const stCss = `
 .st-select option { background: #262626; color: #e8e8e8; }
 .st-time { background: #3a3a3a; border: 0; border-radius: 8px; color: #e8e8e8; font-size: 14px; padding: 6px 10px; font-family: inherit; }
 .st-switch {
-  appearance: none; width: 46px; height: 27px; border-radius: 999px; background: #4a4a4a;
+  appearance: none; -webkit-appearance: none; background-image: none; box-shadow: none; outline: none; width: 46px; height: 27px; border-radius: 999px; background: #4a4a4a;
   position: relative; cursor: pointer; transition: background .18s ease; flex: none;
 }
 .st-switch::after {
   content: ""; position: absolute; top: 3px; left: 3px; width: 21px; height: 21px;
   border-radius: 999px; background: #fff; transition: transform .18s ease;
 }
-.st-switch:checked { background: #2f6fed; }
+.st-switch:checked { background: #2f6fed !important; }
 .st-switch:checked::after { transform: translateX(19px); }
 .st-hint { margin: 8px 4px 0; font-size: 12px; color: #7d7d7d; }
 .st-sheet-foot { padding: 12px 14px calc(env(safe-area-inset-bottom, 0px) + 14px); border-top: 1px solid rgba(255,255,255,.06); }
