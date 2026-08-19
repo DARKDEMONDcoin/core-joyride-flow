@@ -231,141 +231,94 @@ export default function MobilePricingScreen({
         heroItalic: "#d4d4d4",
       };
 
+  const visibleFeatures = features.slice(0, 6);
+  const planLabel = plan === "pro" ? t.pro : t.max;
+
   return (
     <div
       dir={isAr ? "rtl" : "ltr"}
       className="relative flex h-[100dvh] w-full flex-col overflow-hidden"
       style={{
-        background: c.bg,
+        background: isLight ? "#ffffff" : "#0b0b0b",
+        backgroundImage: isLight
+          ? "radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1px)"
+          : "radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px)",
+        backgroundSize: "18px 18px",
         color: c.text,
         fontFamily: 'Inter, -apple-system, "SF Pro Text", system-ui, sans-serif',
       }}
     >
-      {/* Top bar — only menu button */}
+      {/* Close */}
       <header
-        className="flex items-center px-3"
-        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 10px)", paddingBottom: 4 }}
+        className="flex items-center px-4"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 10px)" }}
       >
-        <MobileSidebarButton
-          onClick={() => onMenuClick?.()}
-          ariaLabel={isAr ? "القائمة" : "Menu"}
-          className={isLight ? "!text-black" : "!text-white"}
-        />
+        <button
+          type="button"
+          aria-label={isAr ? "إغلاق" : "Close"}
+          onClick={() => (onMenuClick ? onMenuClick() : window.history.back())}
+          className="flex h-9 w-9 items-center justify-center rounded-full"
+          style={{ background: c.subtle, color: c.text }}
+        >
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
       </header>
 
-      {/* Hero copy with Megsy logo */}
-      <div className="px-6 pt-5 text-center">
+      {/* Sparkle + title */}
+      <div className="px-6 pt-6 text-center">
+        <Sparkles className="mx-auto h-9 w-9" style={{ color: c.text }} strokeWidth={1.4} />
         <h1
-          className="mx-auto font-normal leading-[1.02]"
+          className="mt-4 font-normal leading-tight"
           style={{
             color: c.text,
             fontFamily: '"Instrument Serif", "Fraunces", Georgia, serif',
-            fontSize: "clamp(28px, 7.6vw, 38px)",
-            letterSpacing: "-0.015em",
+            fontSize: "clamp(26px, 7.4vw, 34px)",
+            letterSpacing: "-0.01em",
           }}
         >
-          <span className="inline-flex items-center gap-2 whitespace-nowrap align-baseline">
-            <img loading="lazy" decoding="async"
-              src={megsyLogo}
-              alt="Megsy"
-              className="inline-block h-[0.92em] w-auto -translate-y-[2px] select-none"
-              style={{
-                filter: c.logoFilter,
-              }}
-              draggable={false}
-            />
-            <span>{t.heroA}</span>
-          </span>
-          <br />
-          <span className="italic" style={{ color: c.heroItalic }}>{t.heroB}</span>{" "}
-          <span>{t.heroC}</span>
+          {isAr ? `قم بالترقية إلى Megsy ${planLabel}` : `Upgrade to Megsy ${planLabel}`}
         </h1>
-      </div>
-
-      {/* Models marquee */}
-      <div className="relative mt-5 overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-y-0 start-0 z-10 w-10"
-          style={{ background: `linear-gradient(to right, ${c.marqueeEdge}, transparent)` }}
-        />
-        <div
-          className="pointer-events-none absolute inset-y-0 end-0 z-10 w-10"
-          style={{ background: `linear-gradient(to left, ${c.marqueeEdge}, transparent)` }}
-        />
-        <div
-          className="flex w-max items-center gap-6 whitespace-nowrap px-6"
-          style={{ animation: "pricing-marquee 22s linear infinite" }}
-        >
-          {[...MODELS, ...MODELS].map((m, i) => (
-            <div key={i} className="flex items-center gap-1.5 text-[13px] font-medium" style={{ color: c.textMuted }}>
-              <BrandIcon name={m.brand} size={16} variant="color" />
-              <span>{m.name}</span>
-            </div>
+        <div className="mt-3 flex items-center justify-center gap-4 text-[12.5px] font-medium">
+          {(["pro", "max"] as const).map((p) => (
+            <button
+              key={p}
+              type="button"
+              onClick={() => setPlan(p)}
+              style={{
+                color: plan === p ? c.text : c.textFaint,
+                borderBottom: `1.5px solid ${plan === p ? c.text : "transparent"}`,
+                paddingBottom: 2,
+              }}
+            >
+              {p === "pro" ? t.pro : t.max}
+            </button>
           ))}
         </div>
-        <style>{`
-          @keyframes pricing-marquee {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
-          }
-        `}</style>
       </div>
 
-      {/* Max / Pro toggle */}
-      <div className="mt-5 flex justify-center">
+      {/* Benefits card */}
+      <div className="mx-4 mt-6">
         <div
-          className="relative flex items-center rounded-full p-1"
-          style={{ background: c.toggleBg }}
+          className="rounded-[20px] px-5 py-4"
+          style={{ background: isLight ? "rgba(0,0,0,0.035)" : "#1c1c1c" }}
         >
-          <button
-            type="button"
-            onClick={() => setPlan("max")}
-            className="relative z-10 h-8 min-w-[64px] rounded-full px-4 text-[13px] font-medium transition-colors"
-            style={{
-              background: plan === "max" ? c.toggleActiveBg : "transparent",
-              color: plan === "max" ? c.toggleActiveText : c.toggleIdleText,
-            }}
-          >
-            {t.max}
-          </button>
-          <button
-            type="button"
-            onClick={() => setPlan("pro")}
-            className="relative z-10 h-8 min-w-[64px] rounded-full px-4 text-[13px] font-medium transition-colors"
-            style={{
-              background: plan === "pro" ? c.toggleActiveBg : "transparent",
-              color: plan === "pro" ? c.toggleActiveText : c.toggleIdleText,
-            }}
-          >
-            {t.pro}
-          </button>
-        </div>
-      </div>
-
-      {/* Benefits card — clean neutral list, icon + label (reference design) */}
-      <div className="mx-4 mt-5 flex-1 min-h-0 overflow-hidden">
-        <div
-          className="h-full overflow-hidden rounded-[22px] px-4 py-2"
-          style={{ background: c.cardBg, border: `1px solid ${c.border}` }}
-        >
-          <ul key={plan} className="flex h-full flex-col justify-between">
-            {features.map((f, i) => {
+          <ul key={plan} className="flex flex-col gap-[14px]">
+            {visibleFeatures.map((f, i) => {
               const Icon = f.icon;
               return (
                 <li
                   key={i}
-                  className="flex items-center gap-3 py-[5px]"
+                  className="flex items-center gap-3"
                   style={{
                     opacity: 0,
-                    animation: "pricing-row-in 340ms cubic-bezier(0.22,1,0.36,1) forwards",
-                    animationDelay: `${50 + i * 32}ms`,
+                    animation: "pricing-row-in 320ms cubic-bezier(0.22,1,0.36,1) forwards",
+                    animationDelay: `${40 + i * 30}ms`,
                   }}
                 >
-                  <Icon className="h-[18px] w-[18px] shrink-0" style={{ color: c.text }} strokeWidth={1.6} />
-                  <span
-                    className="min-w-0 truncate text-[13.5px] font-medium leading-tight"
-                    style={{ color: c.text }}
-                  >
+                  <Icon className="h-[21px] w-[21px] shrink-0" style={{ color: c.text }} strokeWidth={1.5} />
+                  <span className="min-w-0 truncate text-[14.5px] leading-tight" style={{ color: c.text }}>
                     {f.title}
                   </span>
                 </li>
@@ -381,8 +334,10 @@ export default function MobilePricingScreen({
         </div>
       </div>
 
-      {/* Billing options — stacked rows with radio (reference design) */}
-      <div className="px-4 pt-4">
+      <div className="flex-1 min-h-[8px]" />
+
+      {/* Billing options */}
+      <div className="px-4">
         {([
           { yearly: false, label: t.monthly, block: currentPrices.monthly, unit: t.month },
           { yearly: true, label: t.yearly, block: currentPrices.yearly, unit: t.year },
@@ -393,9 +348,9 @@ export default function MobilePricingScreen({
               key={opt.label}
               type="button"
               onClick={() => onToggleYearly(opt.yearly)}
-              className="mb-2 flex w-full items-center gap-3 rounded-[16px] px-3.5 py-2.5 text-start transition-all duration-200"
+              className="mb-2.5 flex w-full items-center gap-3 rounded-[18px] px-4 py-3 text-start transition-all duration-200"
               style={{
-                background: selected ? c.selectedBg : c.cardBg,
+                background: isLight ? "rgba(0,0,0,0.035)" : "#1c1c1c",
                 border: `2px solid ${selected ? c.selectedBorder : "transparent"}`,
               }}
             >
@@ -403,30 +358,30 @@ export default function MobilePricingScreen({
                 className="flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full"
                 style={{ border: `2px solid ${selected ? c.text : c.textFaint}` }}
               >
-                {selected && (
-                  <span className="h-[10px] w-[10px] rounded-full" style={{ background: c.text }} />
-                )}
+                {selected && <span className="h-[10px] w-[10px] rounded-full" style={{ background: c.text }} />}
               </span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center gap-2">
-                  <span className="text-[12.5px] font-medium" style={{ color: c.textMuted }}>
+                  <span className="text-[13px]" style={{ color: c.textMuted }}>
                     {opt.label}
                   </span>
-                  <span
-                    className="rounded-full px-2 py-[1px] text-[10.5px] font-semibold"
-                    style={{ background: c.subtle, color: c.textMuted }}
-                  >
-                    {opt.block.discount}
-                  </span>
+                  {!opt.yearly && (
+                    <span
+                      className="rounded-md px-2 py-[2px] text-[11px] font-medium"
+                      style={{ background: "rgba(56,105,168,0.35)", color: "#cfe0f5" }}
+                    >
+                      {isAr ? "خصم 50% على الشهر الأول" : "50% off first month"}
+                    </span>
+                  )}
                 </span>
                 <span className="mt-1 flex items-baseline gap-2 tabular-nums" dir="ltr">
-                  <span className="text-[15px] font-semibold" style={{ color: c.text }}>
+                  <span className="text-[16px] font-semibold" style={{ color: c.text }}>
                     ${opt.block.price}
                   </span>
-                  <span className="text-[12px] line-through" style={{ color: c.textFaint }}>
+                  <span className="text-[12.5px] line-through" style={{ color: c.textFaint }}>
                     ${opt.block.strike}
                   </span>
-                  <span className="text-[11px]" style={{ color: c.textMuted }}>/{opt.unit}</span>
+                  <span className="text-[12px]" style={{ color: c.textMuted }}>/{opt.unit}</span>
                 </span>
               </span>
             </button>
@@ -437,9 +392,9 @@ export default function MobilePricingScreen({
       {/* Footnote + CTA + legal links */}
       <div
         className="px-4 pt-1"
-        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 10px)" }}
       >
-        <p className="mb-2.5 text-center text-[11px] leading-snug" style={{ color: c.textFaint }}>
+        <p className="mb-2.5 text-center text-[11.5px] leading-snug" style={{ color: c.textFaint }}>
           {isAr
             ? `‏$${currentPrices.monthly.price} للشهر الأول، ثم $${currentPrices.monthly.strike}/شهر. يمكن الإلغاء في أي وقت.`
             : `$${currentPrices.monthly.price} for the first month, then $${currentPrices.monthly.strike}/mo. Cancel anytime.`}
@@ -449,18 +404,18 @@ export default function MobilePricingScreen({
           type="button"
           onClick={() => onSubscribe(activeTier)}
           disabled={isLoading}
-          className="flex h-[52px] w-full items-center justify-center rounded-[14px] text-[15px] font-semibold transition active:scale-[0.99] disabled:opacity-60"
+          className="flex h-[54px] w-full items-center justify-center rounded-[14px] text-[16px] font-medium transition active:scale-[0.99] disabled:opacity-60"
           style={{ background: c.ctaBg, color: c.ctaText }}
         >
           {isLoading ? (
             <span className="h-4 w-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
           ) : (
             <span style={{ color: c.ctaText }}>
-              {isAr ? "قم بالترقية الآن" : t.subscribe(plan === "pro" ? t.pro : t.max)}
+              {isAr ? "قم بالترقية الآن" : "Upgrade now"}
             </span>
           )}
         </button>
-        <div className="mt-2.5 flex items-center justify-center gap-5 text-[11.5px]" style={{ color: c.textFaint }}>
+        <div className="mt-3 flex items-center justify-center gap-6 text-[12px]" style={{ color: c.textFaint }}>
           <a href="/terms">{isAr ? "الشروط" : "Terms"}</a>
           <a href="/privacy">{isAr ? "الخصوصية" : "Privacy"}</a>
           <button type="button" onClick={() => onSubscribe(activeTier)}>
@@ -471,4 +426,5 @@ export default function MobilePricingScreen({
     </div>
   );
 }
+
 
