@@ -232,6 +232,8 @@ const ManusSettingsMobile = () => {
           </section>
 
           <section className="ms-card">{mainRows.map(renderRow)}</section>
+          <section className="ms-card">{advancedRows.map(renderRow)}</section>
+
           <section className="ms-card">{accountRows.map(renderRow)}</section>
           <section className="ms-card">{linkRows.map(renderRow)}</section>
 
