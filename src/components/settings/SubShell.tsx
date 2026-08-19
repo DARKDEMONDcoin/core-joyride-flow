@@ -108,12 +108,12 @@ export function SubSection({ title, description, children }: SubSectionProps) {
   if (isMobile) {
     return (
       <section>
-        <div className="px-1 mb-2.5">
-          <h2 className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[color:var(--mn-muted)]">
+        <div className="px-1 mb-2">
+          <h2 className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[color:var(--mn-muted)]">
             {title}
           </h2>
           {description && (
-            <p className="mt-1 text-[12.5px] text-[color:var(--mn-muted)] leading-relaxed">
+            <p className="mt-1 text-[11.5px] text-[color:var(--mn-muted)] leading-relaxed">
               {description}
             </p>
           )}
@@ -123,13 +123,13 @@ export function SubSection({ title, description, children }: SubSectionProps) {
     );
   }
   return (
-    <section className="py-6 border-t border-white/8 first:border-t-0 first:pt-2">
-      <div className="mb-3">
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/55">
+    <section className="py-5 border-t border-white/8 first:border-t-0 first:pt-2">
+      <div className="mb-2.5">
+        <h2 className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-white/55">
           {title}
         </h2>
         {description && (
-          <p className="mt-1.5 text-[12.5px] text-white/60 leading-relaxed">
+          <p className="mt-1.5 text-[11.5px] text-white/60 leading-relaxed">
             {description}
           </p>
         )}
@@ -150,8 +150,8 @@ export function SubCard({
   return (
     <div
       className={cn(
-        "rounded-[18px] overflow-hidden bg-[var(--mn-card)] text-[color:var(--mn-fg)]",
-        !flush && "p-5",
+        "rounded-[14px] overflow-hidden bg-[var(--mn-card)] text-[color:var(--mn-fg)]",
+        !flush && "p-4",
         className
       )}
     >
@@ -165,7 +165,7 @@ export function SubCard({
 // ============================================================================
 export function SubRowList({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-[18px] overflow-hidden bg-[var(--mn-card)] text-[color:var(--mn-fg)] divide-y divide-[color:var(--mn-sep)]">
+    <div className="rounded-[14px] overflow-hidden bg-[var(--mn-card)] text-[color:var(--mn-fg)] divide-y divide-[color:var(--mn-sep)]">
       {children}
     </div>
   );
@@ -192,7 +192,7 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
       onClick={isClickable ? onClick : undefined}
       disabled={disabled}
       className={cn(
-        "w-full flex items-center gap-3 px-4 py-3.5 text-left transition-colors",
+        "w-full flex items-center gap-3 px-4 py-3 text-left transition-colors",
         isClickable && "hover:bg-[color:var(--mn-press)] active:bg-[color:var(--mn-press)]",
         disabled && "opacity-50 cursor-not-allowed"
       )}
@@ -200,7 +200,7 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
       {Icon && (
         <Icon
           className={cn(
-            "w-[18px] h-[18px] shrink-0",
+            "w-[16px] h-[16px] shrink-0",
             danger ? "text-[color:var(--mn-danger)]" : "text-[color:var(--mn-fg)]"
           )}
           strokeWidth={1.8}
@@ -209,14 +209,14 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
       <div className="flex-1 min-w-0">
         <p
           className={cn(
-            "text-[14.5px] font-medium truncate",
+            "text-[13.5px] font-medium truncate",
             danger ? "text-[color:var(--mn-danger)]" : "text-[color:var(--mn-fg)]"
           )}
         >
           {label}
         </p>
         {hint && (
-          <p className="text-[12.5px] text-[color:var(--mn-muted)] truncate mt-0.5">{hint}</p>
+          <p className="text-[11.5px] text-[color:var(--mn-muted)] truncate mt-0.5">{hint}</p>
         )}
       </div>
       {trailing !== undefined ? (
@@ -224,7 +224,7 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
           {trailing}
         </div>
       ) : isClickable ? (
-        <ChevronRight className="w-4 h-4 text-[color:var(--mn-faint)] shrink-0" />
+        <ChevronRight className="w-3.5 h-3.5 text-[color:var(--mn-faint)] shrink-0" />
       ) : null}
     </Comp>
   );
@@ -235,20 +235,20 @@ export function SubRow({ label, hint, icon: Icon, trailing, onClick, danger, dis
 // ============================================================================
 export function SubStatStrip({ items }: { items: { label: string; value: string; sub?: string }[] }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
       {items.map((it) => (
         <div
           key={it.label}
-          className="rounded-[14px] bg-[var(--mn-card)] px-4 py-3.5"
+          className="rounded-[12px] bg-[var(--mn-card)] px-3.5 py-3"
         >
-          <p className="text-[10.5px] uppercase tracking-[0.14em] text-[color:var(--mn-muted)] font-medium">
+          <p className="text-[10px] uppercase tracking-[0.14em] text-[color:var(--mn-muted)] font-medium">
             {it.label}
           </p>
-          <p className="mt-1.5 text-[18px] font-semibold tabular-nums text-[color:var(--mn-fg-strong)] leading-none">
+          <p className="mt-1.5 text-[16px] font-semibold tabular-nums text-[color:var(--mn-fg-strong)] leading-none">
             {it.value}
           </p>
           {it.sub && (
-            <p className="mt-1 text-[11.5px] text-[color:var(--mn-muted)]">{it.sub}</p>
+            <p className="mt-1 text-[10.5px] text-[color:var(--mn-muted)]">{it.sub}</p>
           )}
         </div>
       ))}
@@ -265,11 +265,11 @@ export function DangerCallout({
   action,
 }: { title: string; description?: string; action: ReactNode }) {
   return (
-    <div className="rounded-[18px] bg-[var(--mn-card)] p-5 flex items-start gap-4">
+    <div className="rounded-[14px] bg-[var(--mn-card)] p-4 flex items-start gap-3">
       <div className="flex-1 min-w-0">
-        <p className="text-[14.5px] font-semibold text-[color:var(--mn-danger)]">{title}</p>
+        <p className="text-[13.5px] font-semibold text-[color:var(--mn-danger)]">{title}</p>
         {description && (
-          <p className="mt-1 text-[12.5px] text-muted-foreground leading-relaxed">
+          <p className="mt-1 text-[11.5px] text-muted-foreground leading-relaxed">
             {description}
           </p>
         )}
