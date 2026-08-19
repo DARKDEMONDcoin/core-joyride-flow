@@ -173,7 +173,7 @@ const ManusSettingsMobile = () => {
       <style>{manusCss}</style>
       <div className="ms-screen">
         <header className="ms-header">
-          <button type="button" className="ms-hbtn" aria-label={isAr ? "الإشعارات" : "Notifications"} onClick={() => navigate("/settings/notifications")}>
+          <button type="button" className="ms-hbtn" aria-label={isAr ? "الإشعارات" : "Notifications"} onClick={() => navigate("/notifications")}>
             <Bell className="ms-hicon" />
             <span className="ms-dot" />
           </button>
