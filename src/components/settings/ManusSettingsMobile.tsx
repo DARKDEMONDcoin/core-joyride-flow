@@ -22,6 +22,7 @@ import {
   Asterisk,
   LogOut,
   ChevronsUpDown,
+  Sparkles,
   Coins,
   ShieldCheck,
   Store,
