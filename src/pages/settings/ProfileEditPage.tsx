@@ -131,6 +131,7 @@ const ProfileEditPage = () => {
 
   // ============================== MOBILE ==============================
   if (isMobile) {
+    const initial = (nickname || fullName || email || "U").trim().charAt(0).toUpperCase();
     return (
       <div className="pep-root">
         <style>{pepCss}</style>
@@ -142,21 +143,19 @@ const ProfileEditPage = () => {
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <h1 className="pep-title">Profile</h1>
-          <button className="pep-icon-btn" aria-label="Done" onClick={goBack}>
-            {statusIcon || (
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-            )}
-          </button>
+          <h1 className="pep-title">Account</h1>
+          <span className="pep-icon-btn" aria-live="polite">{statusIcon}</span>
         </header>
 
         <main className="pep-main">
-          {/* Names group */}
+          <div className="pep-avatar-wrap">
+            <span className="pep-avatar">{initial}</span>
+            <p className="pep-avatar-hint">Tap to change avatar</p>
+          </div>
+
           <section className="pep-card">
             <div className="pep-row">
-              <label htmlFor="pep-full" className="pep-row-label">Full name</label>
+              <label htmlFor="pep-full" className="pep-row-label">Name</label>
               <input
                 id="pep-full"
                 className="pep-row-input"
@@ -168,38 +167,22 @@ const ProfileEditPage = () => {
             </div>
             <div className="pep-divider" />
             <div className="pep-row">
-              <label htmlFor="pep-nick" className="pep-row-label">Nickname</label>
-              <input
-                id="pep-nick"
-                className="pep-row-input"
-                value={nickname}
-                onChange={(e) => setNickname(e.target.value)}
-                placeholder="Nickname"
-                autoComplete="nickname"
-              />
+              <span className="pep-row-label">Email</span>
+              <span className="pep-row-value">{email || "—"}</span>
+            </div>
+            <div className="pep-divider" />
+            <div className="pep-row">
+              <span className="pep-row-label">User ID</span>
+              <span className="pep-row-value pep-row-value-mono">{userId ?? "—"}</span>
             </div>
           </section>
-          <p className="pep-hint">Megsy calls you by your nickname in chat.</p>
 
-          {/* Instructions */}
-          <h2 className="pep-section-title">Instructions</h2>
-          <section className="pep-card pep-card-tight">
-            <textarea
-              className="pep-textarea"
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              placeholder="How you'd like Megsy to respond"
-              rows={4}
-            />
-          </section>
-          <p className="pep-hint">
-            Your instructions will apply to all conversations.
-          </p>
+          <button className="pep-flat" type="button" onClick={handleLogout}>
+            Log out
+          </button>
 
-          {/* Delete account */}
-          <button className="pep-danger" onClick={openDelete} type="button">
-            <Trash2 className="w-[18px] h-[18px]" />
-            <span>Delete account</span>
+          <button className="pep-flat pep-flat-danger" onClick={openDelete} type="button">
+            Delete account
           </button>
 
           <div className="pep-spacer" />
@@ -231,6 +214,7 @@ const ProfileEditPage = () => {
       </div>
     );
   }
+
 
   // ============================== DESKTOP ==============================
   return (
