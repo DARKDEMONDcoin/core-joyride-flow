@@ -82,7 +82,7 @@ export function SkillsAddMenu({
       <Drawer.Root open={open} onOpenChange={setOpen}>
         <Drawer.Trigger asChild>
           <button
-            aria-label="إضافة مهارة"
+            aria-label="Add skill"
             className="inline-flex items-center gap-1.5 h-9 px-4 rounded-full text-[13px] font-semibold transition-colors"
             style={{
               background: "hsl(var(--foreground))",
@@ -90,7 +90,7 @@ export function SkillsAddMenu({
             }}
           >
             <Plus className="w-3.5 h-3.5" strokeWidth={2.4} />
-            إضافة
+            Add
           </button>
         </Drawer.Trigger>
         <Drawer.Portal>
@@ -102,7 +102,7 @@ export function SkillsAddMenu({
             }}
             dir="rtl"
           >
-            <Drawer.Title className="sr-only">إضافة مهارة</Drawer.Title>
+            <Drawer.Title className="sr-only">Add skill</Drawer.Title>
             <Drawer.Description className="sr-only">
               اختر طريقة إنشاء المهارة
             </Drawer.Description>
@@ -112,7 +112,7 @@ export function SkillsAddMenu({
             />
             <div className="px-4 pt-3 pb-[calc(env(safe-area-inset-bottom,0px)+20px)]">
               <p className="text-[15px] font-semibold mb-3 text-right">
-                إضافة مهارة
+                Add skill
               </p>
 
               <button
