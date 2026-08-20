@@ -23,3 +23,26 @@ export function toggleThemeMode(): ThemeMode {
   setThemeMode(next);
   return next;
 }
+
+// Appearance preference: "system" | "light" | "dark".
+export type Appearance = "system" | ThemeMode;
+
+const APPEARANCE_KEY = "appearance";
+
+export function getAppearance(): Appearance {
+  if (typeof window === "undefined") return "system";
+  const v = localStorage.getItem(APPEARANCE_KEY);
+  return v === "light" || v === "dark" ? v : "system";
+}
+
+export function setAppearance(mode: Appearance) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(APPEARANCE_KEY, mode);
+  const resolved: ThemeMode =
+    mode === "system"
+      ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : mode;
+  setThemeMode(resolved);
+}

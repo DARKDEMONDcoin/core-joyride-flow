@@ -1,5 +1,5 @@
 /** @doc Mobile settings — manus-style dark grouped list (matches reference design). */
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Bell,
@@ -14,29 +14,30 @@ import {
   Cable,
   Plug,
   UserRound,
-  Globe,
   Moon,
-  Eraser,
+  Sun,
+  Contrast,
+  Check,
   Heart,
   HelpCircle,
   Asterisk,
   LogOut,
   ChevronsUpDown,
-  Sparkles,
   Coins,
-  ShieldCheck,
-  Store,
-  KeyRound,
   Gift,
-  Lock,
-  Activity,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useActiveAccount } from "@/hooks/useActiveAccount";
 import { useCredits } from "@/hooks/useCredits";
-import { t as authT, useUserLang, AVAILABLE_LANGS } from "@/lib/authI18n";
+import { t as authT, useUserLang } from "@/lib/authI18n";
 import { goBackOr } from "@/lib/navigation";
-import { getThemeMode } from "@/lib/appTheme";
+import { getAppearance, setAppearance, type Appearance } from "@/lib/appTheme";
+
+const THEME_OPTIONS = [
+  { id: "system" as Appearance, en: "Follow system", ar: "اتّباع النظام", icon: Contrast },
+  { id: "light" as Appearance, en: "Light mode", ar: "الوضع الفاتح", icon: Sun },
+  { id: "dark" as Appearance, en: "Dark mode", ar: "الوضع الداكن", icon: Moon },
+];
 
 type Row = {
   icon: React.ComponentType<{ className?: string }>;
@@ -66,8 +67,8 @@ const ManusSettingsMobile = () => {
   const isAr = lang === "ar" || lang === "ar-eg" || lang === "he" || lang === "fa";
   const { plan, credits } = useCredits();
   const [userEmail, setUserEmail] = useState("");
-  const [cacheSize, setCacheSize] = useState("0 KB");
-  const themeMode = getThemeMode();
+  const [themeMenu, setThemeMenu] = useState(false);
+  const [appearance, setAppearanceState] = useState<Appearance>(() => getAppearance());
 
   const userName = account.name || userEmail.split("@")[0] || "User";
 
@@ -83,41 +84,11 @@ const ManusSettingsMobile = () => {
     };
   }, []);
 
-  useEffect(() => {
-    try {
-      let bytes = 0;
-      for (let i = 0; i < localStorage.length; i += 1) {
-        const k = localStorage.key(i) ?? "";
-        bytes += (k.length + (localStorage.getItem(k)?.length ?? 0)) * 2;
-      }
-      setCacheSize(bytes > 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(0)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`);
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
-  const langLabel = useMemo(
-    () => AVAILABLE_LANGS.find((l) => l.code === lang)?.native ?? "English",
-    [lang],
-  );
-
   const planLabel = (plan || "free").toLowerCase() === "free" ? "Free" : (plan || "").toUpperCase();
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/auth");
-  };
-
-  const clearCache = () => {
-    try {
-      const keep = Object.keys(localStorage).filter((k) => k.startsWith("sb-"));
-      const saved = keep.map((k) => [k, localStorage.getItem(k)] as const);
-      localStorage.clear();
-      saved.forEach(([k, v]) => v != null && localStorage.setItem(k, v));
-      setCacheSize("0 KB");
-    } catch {
-      /* ignore */
-    }
   };
 
   const mainRows: Row[] = [
@@ -132,33 +103,26 @@ const ManusSettingsMobile = () => {
   ];
 
   const advancedRows: Row[] = [
-    { icon: Sparkles, label: isAr ? "لوحة التكاليف" : "Cost dashboard", path: "/settings/costs" },
-    { icon: ShieldCheck, label: isAr ? "الموافقات" : "Approvals", path: "/settings/approvals" },
-    { icon: Store, label: isAr ? "المتجر" : "Marketplace", path: "/settings/marketplace" },
-    { icon: KeyRound, label: isAr ? "مفاتيح API" : "API keys", path: "/settings/api-keys" },
     { icon: Gift, label: isAr ? "الإحالات" : "Referrals", path: "/settings/referrals" },
   ];
 
   const accountRows: Row[] = [
     { icon: UserRound, label: isAr ? "الحساب" : "Account", path: "/settings/profile/edit" },
-    { icon: Lock, label: isAr ? "الأمان" : "Security", path: "/settings/security" },
-    { icon: Globe, label: isAr ? "اللغة" : "Language", trailing: langLabel, path: "/settings/language" },
     {
       icon: Moon,
       label: isAr ? "المظهر" : "Appearance",
-      trailing: themeMode === "dark" ? (isAr ? "داكن" : "Dark") : isAr ? "فاتح" : "Light",
-      path: "/settings/customization",
+      trailing: THEME_OPTIONS.find((o) => o.id === appearance)?.[isAr ? "ar" : "en"],
+      onClick: () => setThemeMenu(true),
       chevron: "stepper",
     },
-    { icon: Eraser, label: isAr ? "مسح ذاكرة التخزين المؤقت" : "Clear cache", trailing: cacheSize, onClick: clearCache },
   ];
 
   const linkRows: Row[] = [
-    { icon: Heart, label: isAr ? "قيّم هذا التطبيق" : "Rate this app", external: true, onClick: () => window.open("https://megsyai.com", "_blank", "noopener") },
-    { icon: HelpCircle, label: isAr ? "الحصول على مساعدة" : "Get help", path: "/settings/support" },
-    { icon: Activity, label: isAr ? "حالة النظام" : "System status", path: "/settings/system-status" },
+    { icon: Heart, label: isAr ? "قيّم هذا التطبيق" : "Rate this app", external: true, onClick: () => window.open("https://www.trustpilot.com/review/megsyai.com", "_blank", "noopener") },
+    { icon: HelpCircle, label: isAr ? "الحصول على مساعدة" : "Get help", external: true, onClick: () => window.open("https://help.megsyai.com", "_blank", "noopener") },
     { icon: Asterisk, label: isAr ? "الإصدار" : "Version", trailing: APP_VERSION, chevron: "none" },
   ];
+
 
 
   const renderRow = (row: Row, idx: number) => {
@@ -245,6 +209,35 @@ const ManusSettingsMobile = () => {
 
           <div className="ms-spacer" />
         </div>
+
+        {themeMenu && (
+          <div className="ms-menu-scrim" role="presentation" onClick={() => setThemeMenu(false)}>
+            <div className="ms-menu" role="menu" onClick={(e) => e.stopPropagation()}>
+              {THEME_OPTIONS.map((o) => {
+                const OIcon = o.icon;
+                const active = o.id === appearance;
+                return (
+                  <button
+                    key={o.id}
+                    type="button"
+                    role="menuitemradio"
+                    aria-checked={active}
+                    className={`ms-menu-item${active ? " is-active" : ""}`}
+                    onClick={() => {
+                      setAppearance(o.id);
+                      setAppearanceState(o.id);
+                      setThemeMenu(false);
+                    }}
+                  >
+                    <OIcon className="ms-menu-icon" />
+                    <span className="ms-menu-label">{isAr ? o.ar : o.en}</span>
+                    {active && <Check className="ms-menu-check" />}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -326,6 +319,32 @@ button.ms-card { cursor: pointer; }
 .ms-row-chev { width: 15px; height: 15px; flex-shrink: 0; color: rgba(232,232,232,0.4); }
 .ms-row-ext { font-size: 13px; line-height: 1; }
 .ms-spacer { height: calc(env(safe-area-inset-bottom, 0px) + 28px); }
+.ms-menu-scrim {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 0 12px calc(env(safe-area-inset-bottom, 0px) + 16px);
+  background: rgba(0, 0, 0, 0.35);
+  animation: ms-fade 140ms ease;
+}
+.ms-menu {
+  width: 100%; max-width: 396px;
+  background: var(--mn-card-2);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  animation: ms-rise 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.ms-menu-item {
+  width: 100%; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; background: transparent; border: 0;
+  color: var(--mn-fg); font: inherit; font-size: 14px; text-align: start; cursor: pointer;
+}
+.ms-menu-item + .ms-menu-item { box-shadow: inset 0 1px 0 var(--mn-sep); }
+.ms-menu-item:active { background: var(--mn-press); }
+.ms-menu-icon { width: 18px; height: 18px; flex-shrink: 0; opacity: 0.9; }
+.ms-menu-label { flex: 1; }
+.ms-menu-check { width: 16px; height: 16px; flex-shrink: 0; }
+@keyframes ms-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes ms-rise { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
 
 `;
 
