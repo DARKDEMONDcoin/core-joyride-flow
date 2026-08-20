@@ -37,7 +37,11 @@ const AppLayout = ({
     root.dataset.section = s.name;
     root.style.setProperty("--section-accent", s.hsl);
   }, [pathname]);
-  const isSettings = pathname.startsWith("/settings");
+  const isSettings =
+    pathname.startsWith("/settings") ||
+    pathname.startsWith("/usage") ||
+    pathname.startsWith("/notifications") ||
+    pathname.startsWith("/profile");
   useEffect(() => {
     const root = document.documentElement;
     if (isSettings) {
