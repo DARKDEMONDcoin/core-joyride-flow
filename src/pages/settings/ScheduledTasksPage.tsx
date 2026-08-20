@@ -166,11 +166,11 @@ export default function ScheduledTasksPage() {
         <div className="st-overlay" role="dialog" aria-modal="true" aria-label="New scheduled task">
           <div className="st-sheet">
             <header className="st-sheet-top">
-              <button type="button" className="st-iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
-                <X className="w-5 h-5" />
-              </button>
-              <h2 className="st-sheet-title">New scheduled task</h2>
               <span className="st-iconbtn st-ghost" />
+              <h2 className="st-sheet-title">New scheduled task</h2>
+              <button type="button" className="st-iconbtn" aria-label="Close" onClick={() => setOpen(false)}>
+                <X className="w-5 h-5" strokeWidth={2} />
+              </button>
             </header>
 
             <div className="st-sheet-body">
@@ -343,9 +343,11 @@ const stCss = `
   border-radius: 18px 18px 0 0; display: flex; flex-direction: column; overflow: hidden;
   animation: st-up .28s cubic-bezier(.22,.61,.36,1) both;
 }
-.st-sheet-top { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-bottom: 1px solid var(--mn-sep); }
-.st-sheet-body { flex: 1; overflow-y: auto; padding: 6px 12px 16px; }
-.st-label { margin: 14px 4px 6px; font-size: 11.5px; color: var(--mn-muted); }
+.st-sheet-top { display: flex; align-items: center; justify-content: space-between; padding: 14px 10px 10px; }
+.st-sheet-top .st-iconbtn { width: 30px; height: 30px; }
+.st-sheet-title { flex: 1; text-align: center; }
+.st-sheet-body { flex: 1; overflow-y: auto; padding: 4px 12px 20px; }
+.st-label { margin: 18px 4px 7px; font-size: 11.5px; color: var(--mn-muted); }
 .st-input, .st-textarea {
   width: 100%; background: var(--mn-card); border: 0; border-radius: 12px; color: var(--mn-fg);
   font-size: 13.5px; padding: 12px; outline: none; font-family: inherit; resize: none;
@@ -379,7 +381,7 @@ const stCss = `
 .st-switch:checked { background: var(--mn-accent) !important; }
 .st-switch:checked::after { transform: translateX(17px); }
 .st-hint { margin: 6px 4px 0; font-size: 11px; color: var(--mn-faint); }
-.st-sheet-foot { padding: 10px 12px calc(env(safe-area-inset-bottom, 0px) + 12px); border-top: 1px solid var(--mn-sep); }
+.st-sheet-foot { padding: 10px 12px calc(env(safe-area-inset-bottom, 0px) + 12px); background: var(--mn-bg); }
 .st-save {
   width: 100%; height: 44px; border: 0; border-radius: 12px; background: var(--mn-cta-bg); color: var(--mn-cta-fg);
   font-size: 14px; font-weight: 600; cursor: pointer;
