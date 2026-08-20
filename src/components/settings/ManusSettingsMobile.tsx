@@ -132,33 +132,26 @@ const ManusSettingsMobile = () => {
   ];
 
   const advancedRows: Row[] = [
-    { icon: Sparkles, label: isAr ? "لوحة التكاليف" : "Cost dashboard", path: "/settings/costs" },
-    { icon: ShieldCheck, label: isAr ? "الموافقات" : "Approvals", path: "/settings/approvals" },
-    { icon: Store, label: isAr ? "المتجر" : "Marketplace", path: "/settings/marketplace" },
-    { icon: KeyRound, label: isAr ? "مفاتيح API" : "API keys", path: "/settings/api-keys" },
     { icon: Gift, label: isAr ? "الإحالات" : "Referrals", path: "/settings/referrals" },
   ];
 
   const accountRows: Row[] = [
     { icon: UserRound, label: isAr ? "الحساب" : "Account", path: "/settings/profile/edit" },
-    { icon: Lock, label: isAr ? "الأمان" : "Security", path: "/settings/security" },
-    { icon: Globe, label: isAr ? "اللغة" : "Language", trailing: langLabel, path: "/settings/language" },
     {
       icon: Moon,
       label: isAr ? "المظهر" : "Appearance",
-      trailing: themeMode === "dark" ? (isAr ? "داكن" : "Dark") : isAr ? "فاتح" : "Light",
-      path: "/settings/customization",
+      trailing: THEME_OPTIONS.find((o) => o.id === appearance)?.[isAr ? "ar" : "en"],
+      onClick: () => setThemeMenu(true),
       chevron: "stepper",
     },
-    { icon: Eraser, label: isAr ? "مسح ذاكرة التخزين المؤقت" : "Clear cache", trailing: cacheSize, onClick: clearCache },
   ];
 
   const linkRows: Row[] = [
-    { icon: Heart, label: isAr ? "قيّم هذا التطبيق" : "Rate this app", external: true, onClick: () => window.open("https://megsyai.com", "_blank", "noopener") },
-    { icon: HelpCircle, label: isAr ? "الحصول على مساعدة" : "Get help", path: "/settings/support" },
-    { icon: Activity, label: isAr ? "حالة النظام" : "System status", path: "/settings/system-status" },
+    { icon: Heart, label: isAr ? "قيّم هذا التطبيق" : "Rate this app", external: true, onClick: () => window.open("https://www.trustpilot.com/review/megsyai.com", "_blank", "noopener") },
+    { icon: HelpCircle, label: isAr ? "الحصول على مساعدة" : "Get help", external: true, onClick: () => window.open("https://help.megsyai.com", "_blank", "noopener") },
     { icon: Asterisk, label: isAr ? "الإصدار" : "Version", trailing: APP_VERSION, chevron: "none" },
   ];
+
 
 
   const renderRow = (row: Row, idx: number) => {
